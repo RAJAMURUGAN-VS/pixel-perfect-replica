@@ -29,11 +29,11 @@ const Header = ({ onNavigate }: HeaderProps) => {
           className="font-stranger text-xl md:text-2xl glow-text tracking-[0.2em] cursor-pointer"
           onClick={() => handleNavClick('home')}
         >
-          STRANGER<br />THINGS
+          RENDEZVOUS<br />2026
         </motion.div>
         
-        <nav className="flex items-center gap-4">
-          {['home', 'about', 'anomalies'].map((section, index) => (
+        <nav className="flex items-center gap-6">
+          {['home', 'events', 'about', 'transport', 'contact'].map((section, index) => (
             <motion.button
               key={section}
               initial={{ opacity: 0, x: 20 }}
@@ -41,22 +41,13 @@ const Header = ({ onNavigate }: HeaderProps) => {
               transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
               whileHover={{ scale: 1.05, color: 'hsl(var(--accent))' }}
               onClick={() => handleNavClick(section)}
-              className="font-terminal text-base md:text-lg text-foreground/80 tracking-wider transition-colors capitalize hidden md:block"
+              className="font-terminal text-sm md:text-base text-foreground/80 tracking-wider transition-colors capitalize hidden md:block hover:text-accent"
             >
-              {section === 'anomalies' ? 'UPCOMING' : section.toUpperCase()}
+              {section === 'about' ? 'ABOUT US' : 
+               section === 'contact' ? 'CONTACT US' : 
+               section.toUpperCase()}
             </motion.button>
           ))}
-          
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="tech-border px-4 py-2 bg-card/80 backdrop-blur-sm"
-          >
-            <span className="font-terminal text-lg md:text-xl text-foreground tracking-wider cursor-pointer hover:text-accent transition-colors">
-              THE LATEST
-            </span>
-          </motion.div>
         </nav>
       </div>
     </motion.header>

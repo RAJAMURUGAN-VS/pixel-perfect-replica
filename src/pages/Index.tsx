@@ -1,21 +1,23 @@
 import { useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import ParticleBackground from '@/components/ParticleBackground';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import AboutSlider from '@/components/AboutSlider';
 import AnomaliesSection from '@/components/AnomaliesSection';
-import EventCards from '@/components/EventCards';
-import { useInvestigateSequence } from '@/hooks/useInvestigateSequence';
 
 const Index = () => {
-  const { phase, elapsedTime, isVideoEnded, startSequence, onSecondVideoEnd } = useInvestigateSequence();
-  const isComplete = phase === 'complete';
-
   const handleNavigate = useCallback((section: string) => {
     const element = document.getElementById(section);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
+  const handleExploreEvents = useCallback(() => {
+    const eventsElement = document.getElementById('events');
+    if (eventsElement) {
+      eventsElement.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
 
@@ -26,60 +28,75 @@ const Index = () => {
       
       {/* Main Content */}
       <div className="relative z-10">
-        <AnimatePresence mode="wait">
-          {!isComplete && (
-            <motion.div
-              key="main-content"
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <Header onNavigate={handleNavigate} />
-              
-              <div id="home">
-                <HeroSection 
-                  phase={phase}
-                  elapsedTime={elapsedTime}
-                  onInvestigate={startSequence}
-                />
-              </div>
-              
-              {phase === 'idle' && (
-                <>
-                  <motion.div
-                    id="about"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  >
-                    <AboutSlider />
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  >
-                    <AnomaliesSection />
-                  </motion.div>
-                </>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Event Cards - Show after sequence completes */}
-        <AnimatePresence>
-          {isComplete && (
-            <EventCards 
-              isVisible={isComplete} 
-              isVideoEnded={isVideoEnded}
-              onVideoEnd={onSecondVideoEnd}
-            />
-          )}
-        </AnimatePresence>
+        <Header onNavigate={handleNavigate} />
+        
+        <div id="home">
+          <HeroSection onExploreEvents={handleExploreEvents} />
+        </div>
+        
+        <motion.div
+          id="events"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="min-h-screen flex items-center justify-center"
+        >
+          <div className="text-center">
+            <h2 className="font-stranger text-3xl md:text-4xl glow-text mb-8 tracking-wider">
+              EVENTS
+            </h2>
+            <p className="font-terminal text-lg text-muted-foreground tracking-wider">
+              Coming Soon...
+            </p>
+          </div>
+        </motion.div>
+        
+        <motion.div
+          id="about"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <AboutSlider />
+        </motion.div>
+        
+        <motion.div
+          id="transport"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="min-h-screen flex items-center justify-center"
+        >
+          <div className="text-center">
+            <h2 className="font-stranger text-3xl md:text-4xl glow-text mb-8 tracking-wider">
+              TRANSPORT
+            </h2>
+            <p className="font-terminal text-lg text-muted-foreground tracking-wider">
+              Coming Soon...
+            </p>
+          </div>
+        </motion.div>
+        
+        <motion.div
+          id="contact"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="min-h-screen flex items-center justify-center"
+        >
+          <div className="text-center">
+            <h2 className="font-stranger text-3xl md:text-4xl glow-text mb-8 tracking-wider">
+              CONTACT US
+            </h2>
+            <p className="font-terminal text-lg text-muted-foreground tracking-wider">
+              Coming Soon...
+            </p>
+          </div>
+        </motion.div>
       </div>
 
       {/* Bottom Gradient */}

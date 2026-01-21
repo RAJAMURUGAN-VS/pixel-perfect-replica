@@ -11,21 +11,21 @@ interface SlideData {
 
 const slides: SlideData[] = [
   {
-    title: 'THE PARTY',
-    subtitle: 'Friends Don\'t Lie',
-    description: 'Join the party and uncover the secrets of Hawkins. Together, we face the darkness.',
+    title: 'RENDEZVOUS 2026',
+    subtitle: 'Innovation Unleashed',
+    description: 'Experience the future of technology through competitions, workshops, and exhibitions.',
     image: partyImage,
   },
   {
-    title: 'THE UPSIDE DOWN',
-    subtitle: 'A World Within',
-    description: 'A dark reflection of our world, filled with creatures from your worst nightmares.',
+    title: 'TECH COMPETITIONS',
+    subtitle: 'Code. Create. Conquer.',
+    description: 'Participate in hackathons, coding contests, and technical challenges.',
     image: partyImage,
   },
   {
-    title: 'HAWKINS LAB',
-    subtitle: 'Where It All Began',
-    description: 'The experiments that opened the gate. The truth they tried to hide.',
+    title: 'CULTURAL EVENTS',
+    subtitle: 'Art Meets Technology',
+    description: 'Witness the perfect blend of creativity and innovation in our cultural programs.',
     image: partyImage,
   },
 ];
@@ -55,7 +55,7 @@ const AboutSlider = () => {
     <section className="relative py-20 px-4 md:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <h2 className="font-stranger text-2xl md:text-3xl glow-text mb-12 tracking-wider text-center">
-          ABOUT
+          ABOUT RENDEZVOUS
         </h2>
 
         <div
