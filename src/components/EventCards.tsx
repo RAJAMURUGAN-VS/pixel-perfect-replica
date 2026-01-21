@@ -1,24 +1,17 @@
 import { motion } from 'framer-motion';
+import VideoBackground from './VideoBackground';
 
 interface EventCardsProps {
   isVisible: boolean;
+  isVideoEnded: boolean;
+  onVideoEnd: () => void;
 }
 
-const EventCards = ({ isVisible }: EventCardsProps) => {
-  if (!isVisible) return null;
+const VIDEO_2 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1768999844/WhatsApp_Video_2026-01-21_at_6.07.22_PM_gsczzx.mp4';
+const FINAL_IMAGE = 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769003462/Gemini_Generated_Image_8a86wr8a86wr8a86_wd9xyu.png';
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.2,
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
-      },
-    }),
-  };
+const EventCards = ({ isVisible, isVideoEnded, onVideoEnd }: EventCardsProps) => {
+  if (!isVisible) return null;
 
   const cards = [
     { title: 'TECH', description: 'Explore the technological anomalies of Hawkins Lab' },
@@ -29,14 +22,35 @@ const EventCards = ({ isVisible }: EventCardsProps) => {
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      className="min-h-screen flex items-center justify-center px-4 md:px-8"
+      transition={{ duration: 0.8 }}
+      className="fixed inset-0 min-h-screen flex items-center justify-center px-4 md:px-8 z-10"
     >
-      <div className="max-w-4xl mx-auto w-full">
+      {/* Second Video Background */}
+      <div className={`absolute inset-0 transition-opacity duration-1000 ${isVideoEnded ? 'opacity-0' : 'opacity-100'}`}>
+        <VideoBackground 
+          src={VIDEO_2}
+          isActive={isVisible}
+          onEnded={onVideoEnd}
+        />
+      </div>
+
+      {/* Final Background Image */}
+      <div 
+        className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+          isVideoEnded ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{ backgroundImage: `url(${FINAL_IMAGE})` }}
+      />
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background/60 z-[1]" />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-4xl mx-auto w-full">
         <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="font-stranger text-2xl md:text-3xl glow-text mb-12 text-center tracking-wider"
         >
           CHOOSE YOUR PATH
@@ -46,15 +60,18 @@ const EventCards = ({ isVisible }: EventCardsProps) => {
           {cards.map((card, index) => (
             <motion.div
               key={card.title}
-              custom={index}
-              initial="hidden"
-              animate="visible"
-              variants={cardVariants}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.4 + index * 0.2,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
               whileHover={{ 
                 scale: 1.02,
                 boxShadow: '0 0 30px hsl(var(--neon-cyan) / 0.5)',
               }}
-              className="tech-border bg-card/80 backdrop-blur-sm p-8 cursor-pointer transition-all duration-300 group"
+              className="tech-border bg-card/80 backdrop-blur-sm p-8 cursor-pointer transition-all duration-300 group relative"
             >
               <h3 className="font-stranger text-2xl md:text-3xl text-accent mb-4 tracking-wider group-hover:glow-text transition-all duration-300">
                 {card.title}

@@ -13,20 +13,51 @@ interface HeroSectionProps {
 const VIDEO_1 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1768999824/WhatsApp_Video_2026-01-21_at_6.00.55_PM_bhc5rj.mp4';
 const VIDEO_2 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1768999844/WhatsApp_Video_2026-01-21_at_6.07.22_PM_gsczzx.mp4';
 
+// Element animation config with subtle random delays for organic feel
+const elementConfigs = [
+  { id: 'title', delay: 0 },
+  { id: 'mission', delay: 0.15 },
+  { id: 'countdown', delay: 0.3 },
+  { id: 'warning', delay: 0.45 },
+  { id: 'button', delay: 0.6 },
+  { id: 'waveform', delay: 0.75 },
+];
+
 const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) => {
   const isAnimating = phase !== 'idle';
   
-  // Calculate animation progress (0-1) for the 8 second phase
-  const rotationProgress = Math.min(elapsedTime / 8, 1);
-  const rotation = rotationProgress * 360;
-  const translateY = -rotationProgress * 100;
-  
-  // Fade out progress for phase 2-3 (8s-10s)
-  const fadeProgress = phase === 'phase2' || phase === 'phase3' 
-    ? Math.min((elapsedTime - 8) / 2, 1) 
-    : 0;
-  const elementOpacity = 1 - fadeProgress;
-  const elementBlur = fadeProgress * 10;
+  // Calculate animation progress for each element (0-1 over 8 seconds)
+  const getElementStyle = (delay: number) => {
+    if (!isAnimating) return {};
+    
+    // Adjust elapsed time by element's delay for staggered effect
+    const adjustedTime = Math.max(0, elapsedTime - delay);
+    const progress = Math.min(adjustedTime / 7.5, 1); // Complete before 8s
+    
+    // 180 degree rotation with rotateX for flip effect
+    const rotation = progress * 180;
+    
+    // Moon gravity - slow, floaty upward movement
+    // Use cubic-bezier-like easing manually for moon gravity feel
+    const easedProgress = 1 - Math.pow(1 - progress, 2); // ease-out
+    const translateY = -easedProgress * 80; // Move up 80vh
+    
+    // Fade out during phase 2-3
+    let opacity = 1;
+    let blur = 0;
+    if (phase === 'phase2' || phase === 'phase3') {
+      const fadeProgress = Math.min((elapsedTime - 8) / 2, 1);
+      opacity = 1 - fadeProgress;
+      blur = fadeProgress * 8;
+    }
+    
+    return {
+      transform: `perspective(1000px) rotateX(${rotation}deg) translateY(${translateY}vh)`,
+      opacity,
+      filter: blur > 0 ? `blur(${blur}px)` : 'none',
+      transition: 'filter 0.3s ease-out',
+    };
+  };
 
   // Hide entirely when complete
   if (phase === 'complete') return null;
@@ -58,24 +89,15 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
         <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background/50 z-[1]" />
       )}
 
-      {/* Content */}
-      <motion.div 
-        className="relative z-10 text-center px-4 mt-20"
-        style={{
-          transform: isAnimating 
-            ? `rotate(${rotation}deg) translateY(${translateY}vh)` 
-            : 'none',
-          opacity: elementOpacity,
-          filter: elementBlur > 0 ? `blur(${elementBlur}px)` : 'none',
-          transition: 'filter 0.5s ease-out',
-        }}
-      >
+      {/* Content - Each element animates independently */}
+      <div className="relative z-10 text-center px-4 mt-20">
         {/* Title Box */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="tech-border bg-card/80 backdrop-blur-sm px-6 py-3 mb-8 inline-block"
+          style={getElementStyle(elementConfigs[0].delay)}
+          className="tech-border bg-card/80 backdrop-blur-sm px-6 py-3 mb-8 inline-block origin-center"
         >
           <span className="font-terminal text-sm md:text-base text-muted-foreground">TITLE</span>
         </motion.div>
@@ -85,7 +107,8 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="tech-border bg-card/90 backdrop-blur-sm px-8 py-4 mb-8 max-w-xl mx-auto"
+          style={getElementStyle(elementConfigs[1].delay)}
+          className="tech-border bg-card/90 backdrop-blur-sm px-8 py-4 mb-8 max-w-xl mx-auto origin-center"
         >
           <h1 className="font-terminal text-xl md:text-2xl text-foreground tracking-wider">
             CURRENT MISSION: FIND 011
@@ -97,7 +120,8 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="tech-border bg-card/80 backdrop-blur-sm px-8 py-6 mb-6 inline-block"
+          style={getElementStyle(elementConfigs[2].delay)}
+          className="tech-border bg-card/80 backdrop-blur-sm px-8 py-6 mb-6 inline-block origin-center"
         >
           <CountdownTimer />
         </motion.div>
@@ -107,7 +131,8 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="font-terminal text-base md:text-lg text-foreground/90 mb-8 tracking-wider max-w-md mx-auto"
+          style={getElementStyle(elementConfigs[3].delay)}
+          className="font-terminal text-base md:text-lg text-foreground/90 mb-8 tracking-wider max-w-md mx-auto origin-center"
         >
           GATE OPENING IMMINENT.<br />
           HAWKINS LAB UNDER ATTACK. PROTECT THE PARTY.
@@ -118,10 +143,12 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
+          style={getElementStyle(elementConfigs[4].delay)}
+          whileHover={!isAnimating ? { scale: 1.05 } : {}}
+          whileTap={!isAnimating ? { scale: 0.98 } : {}}
           onClick={onInvestigate}
-          className="btn-investigate"
+          disabled={isAnimating}
+          className="btn-investigate origin-center"
         >
           INVESTIGATE
         </motion.button>
@@ -131,7 +158,8 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="mt-12 max-w-2xl mx-auto"
+          style={getElementStyle(elementConfigs[5].delay)}
+          className="mt-12 max-w-2xl mx-auto origin-center"
         >
           <svg className="w-full h-12" viewBox="0 0 400 50" fill="none">
             <path 
@@ -143,7 +171,7 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
             />
           </svg>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 };
