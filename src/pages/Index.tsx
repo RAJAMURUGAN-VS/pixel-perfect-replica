@@ -4,7 +4,7 @@ import ParticleBackground from '@/components/ParticleBackground';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import AboutSlider from '@/components/AboutSlider';
-import AnomaliesSection from '@/components/AnomaliesSection';
+import EventsSection from '@/components/EventsSection';
 
 const Index = () => {
   const handleNavigate = useCallback((section: string) => {
@@ -40,16 +40,8 @@ const Index = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="min-h-screen flex items-center justify-center"
         >
-          <div className="text-center">
-            <h2 className="font-stranger text-3xl md:text-4xl glow-text mb-8 tracking-wider">
-              EVENTS
-            </h2>
-            <p className="font-terminal text-lg text-muted-foreground tracking-wider">
-              Coming Soon...
-            </p>
-          </div>
+          <EventsSection />
         </motion.div>
         
         <motion.div

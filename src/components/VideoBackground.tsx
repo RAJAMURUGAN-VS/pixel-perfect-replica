@@ -23,13 +23,24 @@ const VideoBackground = ({ src, isActive, onEnded }: VideoBackgroundProps) => {
   return (
     <video
       ref={videoRef}
-      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+      className={`transition-opacity duration-700 ${
         isActive ? 'opacity-100' : 'opacity-0'
       }`}
-      style={{ zIndex: 0 }}
+      style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: -1,
+        objectFit: 'cover',
+        margin: 0,
+        padding: 0
+      }}
       src={src}
       muted
       playsInline
+      loop
       onEnded={onEnded}
     />
   );

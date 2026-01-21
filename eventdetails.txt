@@ -1,0 +1,123 @@
+🚀 Vibeathon
+
+Code. Create. Innovate.
+
+Description:
+Vibeathon is a fast-paced innovation challenge where teams brainstorm, design, and build solutions within a limited time. Participants are judged on creativity, feasibility, and presentation.
+
+Rules:
+
+Team size: 2–4 members
+
+Problem statements will be revealed on the spot
+
+Internet access may be restricted
+
+Plagiarism will lead to disqualification
+
+Judges’ decision is final
+
+🛡️ Capture The Flag (CTF)
+
+Hack the system. Capture the flag.
+
+Description:
+A cybersecurity challenge where participants solve puzzles related to cryptography, web security, networking, and logic to capture hidden flags.
+
+Rules:
+
+Individual or team participation (max 2 per team)
+
+Use of external tools is allowed unless specified
+
+Sharing answers between teams is prohibited
+
+Flags must be submitted within the given time
+
+📄 Paper Presentation
+
+Ideas that Inspire Innovation
+
+Description:
+Present your research ideas or technical concepts in front of a panel of judges. This event encourages analytical thinking and effective communication.
+
+Rules:
+
+Team size: 1–3 members
+
+Presentation time: 6–8 minutes + Q&A
+
+PPT format preferred
+
+Topics must be technical and original
+
+Plagiarism is strictly prohibited
+
+🎭 Non-Technical Events
+🎶 Stranger Tunes
+
+Connect through music
+
+Description:
+Participants are paired with strangers and must identify or vibe with each other through music-based challenges. Fun, energy, and creativity guaranteed!
+
+Rules:
+
+Individual participation
+
+No offensive content allowed
+
+Decisions by coordinators are final
+
+Follow the time limits strictly
+
+🧩 Da Vinci Code
+
+Crack the clues. Unlock the mystery.
+
+Description:
+A thrilling puzzle-based event where participants solve interconnected clues and riddles to reach the final solution.
+
+Rules:
+
+Team size: 2–3 members
+
+Use of mobile phones is not allowed
+
+Skipping clues is not permitted
+
+Time-based scoring system
+
+🎯 Fun Fiesta (Non-Technical 3)
+
+Pure fun, zero stress
+
+Description:
+A collection of exciting mini-games designed to test coordination, presence of mind, and teamwork — all while having fun.
+
+Rules:
+
+Open for all
+
+Games will be explained on-spot
+
+Time limits apply
+
+Fair play is mandatory
+
+😂 Meme Royale (Non-Technical 4)
+
+Creativity meets humor
+
+Description:
+Participants create or respond to situations using memes. Creativity, humor, and relevance are key judging criteria.
+
+Rules:
+
+Individual participation
+
+Offensive or political content is not allowed
+
+Templates will be provided (or announced)
+
+Judges’ decision is final

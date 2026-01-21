@@ -11,26 +11,18 @@ const ATMOSPHERIC_VIDEO = 'https://res.cloudinary.com/dydplsxdj/video/upload/v17
 
 const HeroSection = ({ onExploreEvents }: HeroSectionProps) => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Static Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background/80" />
-      </div>
-
-      {/* Atmospheric Video Background */}
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
+      {/* Atmospheric Video Background - Full Screen Only */}
       <VideoBackground 
         src={ATMOSPHERIC_VIDEO} 
         isActive={true}
       />
 
-      {/* Dark overlay for video */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60 z-[1]" />
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-background/50 via-transparent to-background/70 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 mt-20">
+      <div className="relative z-10 text-center px-4 mt-20 w-full">
         {/* Event Name */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
