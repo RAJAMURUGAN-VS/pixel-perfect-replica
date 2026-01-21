@@ -9,7 +9,7 @@ import EventCards from '@/components/EventCards';
 import { useInvestigateSequence } from '@/hooks/useInvestigateSequence';
 
 const Index = () => {
-  const { phase, elapsedTime, startSequence } = useInvestigateSequence();
+  const { phase, elapsedTime, isVideoEnded, startSequence, onSecondVideoEnd } = useInvestigateSequence();
   const isComplete = phase === 'complete';
 
   const handleNavigate = useCallback((section: string) => {
@@ -72,7 +72,13 @@ const Index = () => {
 
         {/* Event Cards - Show after sequence completes */}
         <AnimatePresence>
-          {isComplete && <EventCards isVisible={isComplete} />}
+          {isComplete && (
+            <EventCards 
+              isVisible={isComplete} 
+              isVideoEnded={isVideoEnded}
+              onVideoEnd={onSecondVideoEnd}
+            />
+          )}
         </AnimatePresence>
       </div>
 
