@@ -26,7 +26,7 @@ const Index = () => {
     <div className="min-h-screen bg-background relative overflow-x-hidden scanlines">
       {/* Particle Effect */}
       <ParticleBackground />
-      
+
       {/* Main Content */}
       <div className="relative z-10">
         {/* Header - visible on all sections except during events cinematic */}
@@ -83,8 +83,8 @@ const Index = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <EventsSectionWrapper 
-                isActive={currentSection === 'events'} 
+              <EventsSectionWrapper
+                isActive={currentSection === 'events'}
                 onNavigate={handleNavigate}
               />
             </motion.div>

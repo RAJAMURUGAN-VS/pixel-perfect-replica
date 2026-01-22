@@ -11,7 +11,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Static Background Image */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
@@ -21,7 +21,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
       {/* Content */}
       <div className="relative z-10 text-center px-4 mt-20">
         {/* Title Box */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -37,7 +37,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         </motion.div>
 
         {/* Mission Text */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -49,7 +49,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         </motion.div>
 
         {/* Countdown Timer */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -59,7 +59,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         </motion.div>
 
         {/* Warning Message */}
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -71,7 +71,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         </motion.p>
 
         {/* CTA Button - Navigate to Events */}
-        <motion.button 
+        <motion.button
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -84,16 +84,16 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         </motion.button>
 
         {/* Decorative Line */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
           transition={{ duration: 1, delay: 1.2 }}
           className="mt-12 max-w-2xl mx-auto origin-center"
         >
           <svg className="w-full h-12" viewBox="0 0 400 50" fill="none">
-            <path 
-              d="M0 25 Q 50 10, 100 25 T 200 25 T 300 25 T 400 25" 
-              stroke="hsl(var(--neon-cyan))" 
+            <path
+              d="M0 25 Q 50 10, 100 25 T 200 25 T 300 25 T 400 25"
+              stroke="hsl(var(--neon-cyan))"
               strokeWidth="1"
               fill="none"
               className="animate-pulse"

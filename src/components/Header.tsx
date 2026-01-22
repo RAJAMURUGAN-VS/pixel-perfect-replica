@@ -29,7 +29,7 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
       className="fixed top-0 left-0 right-0 z-50 px-4 py-4 md:px-8"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        
+
         {/* Left Side: Logo & College Text */}
         <div
           className="flex items-center gap-3 cursor-pointer"
@@ -60,11 +60,10 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
               transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
               whileHover={{ scale: 1.05, color: 'hsl(var(--accent))' }}
               onClick={() => handleNavClick(item.key)}
-              className={`font-terminal text-base md:text-lg tracking-wider transition-colors hidden md:block ${
-                currentSection === item.key 
-                  ? 'text-accent' 
+              className={`font-terminal text-base md:text-lg tracking-wider transition-colors hidden md:block ${currentSection === item.key
+                  ? 'text-accent'
                   : 'text-foreground/80 hover:text-foreground'
-              }`}
+                }`}
             >
               {item.label}
             </motion.button>

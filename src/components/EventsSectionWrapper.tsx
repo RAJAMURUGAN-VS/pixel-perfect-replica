@@ -41,7 +41,7 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
   // Handle audio fade out
   const fadeOutAudio = useCallback(() => {
     if (!audioRef.current) return;
-    
+
     const audio = audioRef.current;
     const fadeInterval = setInterval(() => {
       if (audio.volume > 0.1) {
@@ -77,7 +77,7 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
       }, 100);
       return () => clearTimeout(timeout);
     }
-    
+
     if (!isActive) {
       hasStartedRef.current = false;
       setPhase('idle');
@@ -137,15 +137,15 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
             className="fixed inset-0 z-40"
           >
             {/* Phase 1 Video Background */}
-            <VideoBackground 
-              src={VIDEO_1} 
-              isActive={phase === 'phase1'} 
+            <VideoBackground
+              src={VIDEO_1}
+              isActive={phase === 'phase1'}
             />
-            
+
             {/* Phase 2 Video Background */}
-            <VideoBackground 
-              src={VIDEO_2} 
-              isActive={phase === 'phase2' || phase === 'phase3'} 
+            <VideoBackground
+              src={VIDEO_2}
+              isActive={phase === 'phase2' || phase === 'phase3'}
             />
 
             {/* Dark overlay */}
@@ -155,8 +155,8 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
             <div className="absolute inset-0 flex items-center justify-center z-10">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ 
-                  opacity: elapsedTime < 8 ? 1 : 0, 
+                animate={{
+                  opacity: elapsedTime < 8 ? 1 : 0,
                   scale: 1,
                   rotateX: Math.min(elapsedTime / 7.5, 1) * 180,
                   y: -Math.min(elapsedTime / 7.5, 1) * 80 + 'vh'
@@ -190,7 +190,7 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
       <AnimatePresence>
         {showEventCards && (
           <EventCards
-            isVisible={showEventCards} 
+            isVisible={showEventCards}
             isVideoEnded={isVideoEnded}
             onVideoEnd={onSecondVideoEnd}
             onNavigate={onNavigate}

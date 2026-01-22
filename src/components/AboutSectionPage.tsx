@@ -6,7 +6,7 @@ const AboutSection = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Background */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
@@ -35,11 +35,11 @@ const AboutSection = () => {
               THE STORY
             </h3>
             <p className="font-terminal text-base md:text-lg text-muted-foreground tracking-wider leading-relaxed mb-6">
-              In the depths of Hawkins Lab, something extraordinary awaits. The Department of Information Technology 
+              In the depths of Hawkins Lab, something extraordinary awaits. The Department of Information Technology
               presents an immersive tech symposium that bridges the gap between the known and unknown.
             </p>
             <p className="font-terminal text-base md:text-lg text-muted-foreground tracking-wider leading-relaxed">
-              Step through the gate and discover a world of innovation, creativity, and technological marvels. 
+              Step through the gate and discover a world of innovation, creativity, and technological marvels.
               The Upside Down holds secrets waiting to be uncovered by those brave enough to investigate.
             </p>
           </div>

@@ -27,13 +27,13 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
   if (!isVisible) return null;
 
   const cards = [
-    { 
-      title: 'TECH', 
+    {
+      title: 'TECH',
       description: 'Explore the technological anomalies of Hawkins Lab',
       category: 'technical' as const
     },
-    { 
-      title: 'NON-TECH', 
+    {
+      title: 'NON-TECH',
       description: 'Discover the mysteries beyond the machines',
       category: 'non-technical' as const
     },
@@ -81,7 +81,7 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
       >
         {/* Second Video Background */}
         <div className={`absolute inset-0 transition-opacity duration-1000 ${isVideoEnded ? 'opacity-0' : 'opacity-100'}`}>
-          <VideoBackground 
+          <VideoBackground
             src={VIDEO_2}
             isActive={isVisible}
             onEnded={onVideoEnd}
@@ -89,10 +89,9 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
         </div>
 
         {/* Final Background Image */}
-        <div 
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
-            isVideoEnded ? 'opacity-100' : 'opacity-0'
-          }`}
+        <div
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${isVideoEnded ? 'opacity-100' : 'opacity-0'
+            }`}
           style={{ backgroundImage: `url(${FINAL_IMAGE})` }}
         />
 
@@ -126,12 +125,12 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
                       key={card.title}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ 
-                        duration: 0.8, 
+                      transition={{
+                        duration: 0.8,
                         delay: 0.4 + index * 0.2,
                         ease: [0.25, 0.46, 0.45, 0.94] as const,
                       }}
-                      whileHover={{ 
+                      whileHover={{
                         scale: 1.02,
                         boxShadow: '0 0 30px hsl(var(--neon-cyan) / 0.5)',
                       }}
@@ -144,7 +143,7 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
                       <p className="font-terminal text-base md:text-lg text-muted-foreground tracking-wider">
                         {card.description}
                       </p>
-                      
+
                       {/* Decorative corner elements */}
                       <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-neon-cyan opacity-50 group-hover:opacity-100 transition-opacity" />
                       <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-neon-cyan opacity-50 group-hover:opacity-100 transition-opacity" />

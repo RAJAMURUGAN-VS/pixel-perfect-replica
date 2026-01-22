@@ -20,14 +20,14 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
     setIsSubmitting(false);
     setSubmitStatus('success');
     setFormData({ name: '', email: '', subject: '', message: '' });
-    
+
     setTimeout(() => setSubmitStatus('idle'), 3000);
   };
 
@@ -52,7 +52,7 @@ const ContactSection = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Background */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
@@ -82,7 +82,7 @@ const ContactSection = () => {
                 <h3 className="font-stranger text-xl text-accent mb-6 tracking-wider">
                   SEND A MESSAGE
                 </h3>
-                
+
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label className="font-terminal text-sm text-muted-foreground tracking-wider block mb-2">
@@ -178,7 +178,7 @@ const ContactSection = () => {
                 <h3 className="font-stranger text-xl text-accent mb-6 tracking-wider">
                   COORDINATES
                 </h3>
-                
+
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => (
                     <motion.div
