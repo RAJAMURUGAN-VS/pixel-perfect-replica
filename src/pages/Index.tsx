@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleBackground from '@/components/ParticleBackground';
 import Header from '@/components/Header';
@@ -6,9 +6,11 @@ import HomeSection from '@/components/HomeSection';
 import AboutSectionPage from '@/components/AboutSectionPage';
 import ContactSection from '@/components/ContactSection';
 import EventsSectionWrapper from '@/components/EventsSectionWrapper';
+import VideoIntro from '@/components/VideoIntro';
 import { useNavigation, NavigationSection } from '@/hooks/useNavigation';
 
 const Index = () => {
+  const [showIntro, setShowIntro] = useState(true);
   const { currentSection, navigateTo } = useNavigation('home');
 
   const handleNavigate = useCallback((section: NavigationSection) => {
@@ -21,6 +23,11 @@ const Index = () => {
 
   // Determine if we should show the header (not during events transition)
   const showHeader = currentSection !== 'events';
+
+  // Show intro video first
+  if (showIntro) {
+    return <VideoIntro onComplete={() => setShowIntro(false)} />;
+  }
 
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden scanlines">

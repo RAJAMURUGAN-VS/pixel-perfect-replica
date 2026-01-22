@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import logo from '@/assets/RMDEC.png';
+import acmLogo from '@/assets/acm.png';
 import { NavigationSection } from '@/hooks/useNavigation';
 
 interface HeaderProps {
@@ -73,11 +74,14 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="tech-border px-4 py-2 bg-card/80 backdrop-blur-sm"
+            className="tech-border bg-card/80 backdrop-blur-sm flex items-center justify-center"
+            style={{ padding: '2px' }}
           >
-            <span className="font-terminal text-lg md:text-xl text-foreground tracking-wider cursor-pointer hover:text-accent transition-colors">
-              THE LATEST
-            </span>
+            <img
+              src={acmLogo}
+              alt="ACM Logo"
+              className="h-10 md:h-12 w-auto object-contain cursor-pointer hover:opacity-80 transition-opacity"
+            />
           </motion.div>
         </nav>
       </div>

@@ -11,8 +11,8 @@ interface HeroSectionProps {
   onInvestigate: () => void;
 }
 
-const VIDEO_1 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1769014668/vid-1_afm49t.mp4';
-const VIDEO_2 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1769014708/vid-2_slwuts.mp4';
+const VIDEO_1 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1769104411/WhatsApp_Video_2026-01-22_at_10.15.31_AM_fgai4j.mp4';
+const VIDEO_2 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1769104462/WhatsApp_Video_2026-01-22_at_10.15.32_AM_hwlvb7.mp4';
 
 // Element animation config with subtle random delays for organic feel
 const elementConfigs = [
