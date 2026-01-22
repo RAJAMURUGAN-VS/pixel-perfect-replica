@@ -1,3 +1,10 @@
+import clawctfImage from '@/assets/clawctf.png';
+import paperPresentationImage from '@/assets/paper-presentation.png';
+import vibeAThonImage from '@/assets/vibe-a-thon.png';
+import strangerTunesImage from '@/assets/stranger-tunes.png';
+import daVinciCodeImage from '@/assets/the-da-vinci-code.png';
+import iplAuctionImage from '@/assets/ipl-auction.png';
+
 export interface Event {
   id: string;
   title: string;
@@ -11,91 +18,47 @@ export interface Event {
 export const technicalEvents: Event[] = [
   {
     id: 'tech-1',
-    title: 'Code Wars',
-    description: 'Battle it out in an intense coding competition. Solve complex algorithmic challenges under time pressure and prove your programming prowess.',
+    title: 'ClawCTF',
+    description: 'ClawCTF is a 2-hour Capture The Flag competition open to students from all colleges. Compete solo or in teams of up to 2, solve challenges across multiple cybersecurity categories, and earn points by capturing flags. Beginner to intermediate friendly, with static and dynamic scoring and AI tools allowed.',
     rules: [
-      'Individual participation only',
+      'Solo or team participation (max 2 members)',
       'Duration: 2 hours',
-      'Languages: C, C++, Java, Python',
-      'No external libraries allowed',
-      'Plagiarism leads to disqualification'
+      'Open to students from all colleges',
+      'Multiple cybersecurity categories',
+      'AI tools allowed',
+      'Static and dynamic scoring system'
     ],
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=300&fit=crop',
+    image: clawctfImage,
     registrationLink: '#register',
     category: 'technical'
   },
   {
     id: 'tech-2',
-    title: 'Hackathon',
-    description: 'A 24-hour marathon of innovation. Build something extraordinary from scratch and present your solution to industry experts.',
+    title: 'Paper Presentation',
+    description: 'Paper Presentation provides a platform for participants to showcase research ideas, technical concepts, or innovative solutions. It evaluates analytical skills, depth of knowledge, and presentation clarity. Participants defend their work through structured explanation and Q&A. The event promotes research aptitude and technical communication. It fosters confidence and academic excellence.',
     rules: [
-      'Team size: 2-4 members',
-      'Duration: 24 hours',
-      'Any tech stack allowed',
-      'Must present a working prototype',
-      'Judging based on innovation, feasibility, and presentation'
+      'Individual or team participation',
+      'Research ideas, technical concepts, or innovative solutions',
+      'Structured explanation and Q&A required',
+      'Evaluates analytical skills and presentation clarity',
+      'Promotes research aptitude and technical communication'
     ],
-    image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=300&fit=crop',
+    image: paperPresentationImage,
     registrationLink: '#register',
     category: 'technical'
   },
   {
     id: 'tech-3',
-    title: 'Debug the Matrix',
-    description: 'Find and fix bugs in the given code snippets. Race against time to debug complex programs and emerge victorious.',
+    title: 'Vibe-a-Thon',
+    description: 'Vibe-a-Thon is a competitive event where participants design precise and effective prompts to guide AI systems toward accurate, optimized outputs. It tests logical thinking, clarity of instruction, and problem-solving ability. Participants must balance creativity with technical precision. The event emphasizes understanding AI behavior and prompt engineering strategies. It encourages innovative thinking in human–AI interaction.',
     rules: [
-      'Individual participation',
-      'Duration: 1.5 hours',
-      '15 bugs to find and fix',
-      'Partial marking available',
-      'Fastest correct submission wins'
+      'Design precise and effective AI prompts',
+      'Tests logical thinking and problem-solving ability',
+      'Balance creativity with technical precision',
+      'Understanding AI behavior and prompt engineering',
+      'Encourages innovative thinking in human–AI interaction'
     ],
-    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&h=300&fit=crop',
-    registrationLink: '#register',
-    category: 'technical'
-  },
-  {
-    id: 'tech-4',
-    title: 'UI/UX Challenge',
-    description: 'Design stunning user interfaces and experiences. Create prototypes that blend aesthetics with functionality.',
-    rules: [
-      'Individual or team (max 2)',
-      'Duration: 3 hours',
-      'Tools: Figma, Adobe XD, or similar',
-      'Must include mobile responsive design',
-      'Presentation required'
-    ],
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
-    registrationLink: '#register',
-    category: 'technical'
-  },
-  {
-    id: 'tech-5',
-    title: 'ML Quest',
-    description: 'Apply machine learning to solve real-world problems. Build models that predict, classify, and amaze.',
-    rules: [
-      'Team size: 1-3 members',
-      'Duration: 4 hours',
-      'Dataset provided',
-      'Python/R only',
-      'Accuracy metrics for scoring'
-    ],
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop',
-    registrationLink: '#register',
-    category: 'technical'
-  },
-  {
-    id: 'tech-6',
-    title: 'Circuit Breaker',
-    description: 'Design and simulate electronic circuits. From basic logic gates to complex microcontroller systems.',
-    rules: [
-      'Individual participation',
-      'Duration: 2 hours',
-      'Simulation software provided',
-      'Hardware components available',
-      'Efficiency and correctness judged'
-    ],
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop',
+    image: vibeAThonImage,
     registrationLink: '#register',
     category: 'technical'
   }
@@ -104,91 +67,46 @@ export const technicalEvents: Event[] = [
 export const nonTechnicalEvents: Event[] = [
   {
     id: 'non-tech-1',
-    title: 'Treasure Hunt',
-    description: 'Embark on an adventure across the campus. Solve riddles, find clues, and discover hidden treasures.',
+    title: '🎬✨ Stranger Tunes',
+    description: 'What happens when movies, music, and a touch of the Upside Down collide? Stranger Tunes is a high-energy, non-technical team event blending visual clues, iconic sounds, lyrical twists, and unexpected challenges inspired by pop culture and Kollywood. If you love guessing before others do, vibing to BGMs, and decoding surprises, this is your Hawkins moment.',
     rules: [
-      'Team size: 3-4 members',
-      'Duration: 2 hours',
-      'All clues must be found in order',
-      'No mobile phones allowed',
-      'Physical fitness required'
+      'Team event',
+      'High-energy non-technical competition',
+      'Visual clues, iconic sounds, and lyrical twists',
+      'Inspired by pop culture and Kollywood',
+      'Decode surprises and guess before others'
     ],
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
+    image: strangerTunesImage,
     registrationLink: '#register',
     category: 'non-technical'
   },
   {
     id: 'non-tech-2',
-    title: 'Quiz Master',
-    description: 'Test your knowledge across various domains. From science to pop culture, prove you are the ultimate quiz champion.',
+    title: 'The DA VINCI CODE',
+    description: 'Ready to crack clues and chase the treasure? 🗺️ Treasure Hunt is an interactive hybrid event where teams solve online challenges and complete physical tasks to move ahead. Sharp thinking, teamwork, and speed are the keys to victory!',
     rules: [
-      'Team size: 2 members',
-      'Multiple rounds',
-      'Negative marking in finals',
-      'Topics: General Knowledge, Science, Tech, Entertainment',
-      'Tie-breaker rounds possible'
+      'Team participation required',
+      'Interactive hybrid event',
+      'Solve online challenges and complete physical tasks',
+      'Sharp thinking, teamwork, and speed essential',
+      'Move ahead by solving clues in sequence'
     ],
-    image: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=400&h=300&fit=crop',
+    image: daVinciCodeImage,
     registrationLink: '#register',
     category: 'non-technical'
   },
   {
     id: 'non-tech-3',
-    title: 'Photography Walk',
-    description: 'Capture the beauty around you. A photography competition that celebrates creativity and perspective.',
+    title: '🔥 IPL Auction 🔥',
+    description: 'Experience the thrill of a real IPL-style auction where strategy meets excitement. Build your dream team, manage budgets, and outbid rivals in a high-energy showdown. Join us for an unforgettable mix of cricket, competition, and campus fun! 🏏💥',
     rules: [
-      'Individual participation',
-      'Duration: 3 hours',
-      'Theme revealed on spot',
-      'DSLR or smartphone allowed',
-      'Basic editing permitted'
+      'IPL-style auction format',
+      'Build your dream team',
+      'Manage budgets strategically',
+      'Outbid rivals in high-energy showdown',
+      'Mix of cricket, competition, and campus fun'
     ],
-    image: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=400&h=300&fit=crop',
-    registrationLink: '#register',
-    category: 'non-technical'
-  },
-  {
-    id: 'non-tech-4',
-    title: 'Short Film Festival',
-    description: 'Create and showcase your filmmaking skills. Tell stories that move, inspire, and entertain.',
-    rules: [
-      'Team size: up to 6 members',
-      'Duration: 5-10 minutes',
-      'Any genre accepted',
-      'Original content only',
-      'Submit 48 hours before event'
-    ],
-    image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
-    registrationLink: '#register',
-    category: 'non-technical'
-  },
-  {
-    id: 'non-tech-5',
-    title: 'Dance Battle',
-    description: 'Express yourself through movement. Solo or crew, bring your best moves to the dance floor.',
-    rules: [
-      'Solo or group (max 8)',
-      'Duration: 3-5 minutes per act',
-      'Any dance style',
-      'Own music required',
-      'Props allowed'
-    ],
-    image: 'https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?w=400&h=300&fit=crop',
-    registrationLink: '#register',
-    category: 'non-technical'
-  },
-  {
-    id: 'non-tech-6',
-    title: 'Stand-Up Comedy',
-    description: 'Make the audience laugh with your wit and humor. A platform for budding comedians to shine.',
-    rules: [
-      'Individual participation',
-      'Duration: 5-7 minutes',
-      'Clean humor only',
-      'No offensive content',
-      'Original material preferred'
-    ],
-    image: 'https://images.unsplash.com/photo-1527224538127-2104bb71c51b?w=400&h=300&fit=crop',
+    image: iplAuctionImage,
     registrationLink: '#register',
     category: 'non-technical'
   }

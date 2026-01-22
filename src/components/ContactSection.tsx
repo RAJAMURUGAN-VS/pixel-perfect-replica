@@ -20,16 +20,23 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
+  
+    const mailTo = "rendezvous@rmd.ac.in";
+    const subject = encodeURIComponent(formData.subject);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+  
+    // Open user's email client
+    window.location.href = `mailto:${mailTo}?subject=${subject}&body=${body}`;
+  
     setIsSubmitting(false);
     setSubmitStatus('success');
     setFormData({ name: '', email: '', subject: '', message: '' });
-
+  
     setTimeout(() => setSubmitStatus('idle'), 3000);
   };
+  
 
   const contactInfo = [
     {
@@ -40,12 +47,22 @@ const ContactSection = () => {
     {
       icon: '📧',
       title: 'EMAIL',
-      content: 'it@rmd.ac.in',
+      content: 'rendezvous@rmd.ac.in',
+    },
+  ];
+
+  const contactPersons = [
+    {
+      name: 'Lakshmi Sri',
+      phone: '+91 73057 55115',
     },
     {
-      icon: '📱',
-      title: 'PHONE',
-      content: '+91 44 2790 1905',
+      name: 'Yeswanth Raj',
+      phone: '+91 96558 99020',
+    },
+    {
+      name: 'Rakesh S',
+      phone: '+91 90252 30709',
     },
   ];
 
@@ -203,17 +220,54 @@ const ContactSection = () => {
               </div>
 
               {/* Map Placeholder */}
+              {/* Map */}
+<div className="tech-border bg-card/80 backdrop-blur-sm p-8">
+  <h3 className="font-stranger text-xl text-accent mb-6 tracking-wider">
+    DIMENSIONAL RIFT LOCATION
+  </h3>
+
+  <div className="aspect-video rounded overflow-hidden border border-border/30">
+    <iframe
+      title="RMD Engineering College Location"
+      src="https://www.google.com/maps?q=13.359259,80.142094&z=15&output=embed"
+      width="100%"
+      height="100%"
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      className="w-full h-full"
+    />
+  </div>
+</div>
+
+
+              {/* Contact Persons */}
               <div className="tech-border bg-card/80 backdrop-blur-sm p-8">
                 <h3 className="font-stranger text-xl text-accent mb-6 tracking-wider">
-                  DIMENSIONAL RIFT LOCATION
+                  CONTACT PERSONS
                 </h3>
-                <div className="aspect-video bg-background/50 rounded flex items-center justify-center border border-border/30">
-                  <div className="text-center">
-                    <div className="font-stranger text-4xl text-accent mb-2">📍</div>
-                    <p className="font-terminal text-sm text-muted-foreground">
-                      Chennai, Tamil Nadu
-                    </p>
-                  </div>
+                <div className="space-y-4">
+                  {contactPersons.map((person, index) => (
+                    <motion.div
+                      key={person.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                      className="flex items-start gap-4"
+                    >
+                      <span className="text-2xl">📱</span>
+                      <div>
+                        <h4 className="font-terminal text-sm text-accent tracking-wider mb-1">
+                          {person.name}
+                        </h4>
+                        <a
+                          href={`tel:${person.phone.replace(/\s/g, '')}`}
+                          className="font-terminal text-base text-muted-foreground hover:text-accent transition-colors"
+                        >
+                          {person.phone}
+                        </a>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
 
@@ -223,16 +277,15 @@ const ContactSection = () => {
                   TRANSMISSION CHANNELS
                 </h3>
                 <div className="flex gap-4">
-                  {['Instagram', 'LinkedIn', 'Twitter'].map((social) => (
-                    <motion.a
-                      key={social}
-                      href="#"
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      className="flex-1 tech-border bg-background/50 py-3 text-center font-terminal text-sm text-muted-foreground hover:text-accent transition-colors"
-                    >
-                      {social.toUpperCase()}
-                    </motion.a>
-                  ))}
+                  <motion.a
+                    href="https://www.instagram.com/rendezvous_2k26"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className="flex-1 tech-border bg-background/50 py-3 text-center font-terminal text-sm text-muted-foreground hover:text-accent transition-colors"
+                  >
+                    INSTAGRAM
+                  </motion.a>
                 </div>
               </div>
             </motion.div>
