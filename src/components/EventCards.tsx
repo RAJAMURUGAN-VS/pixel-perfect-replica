@@ -5,11 +5,13 @@ import Header from './Header';
 import EventCategorySection from './EventCategorySection';
 import EventModal from './EventModal';
 import { Event } from '@/data/events';
+import { NavigationSection } from '@/hooks/useNavigation';
 
 interface EventCardsProps {
   isVisible: boolean;
   isVideoEnded: boolean;
   onVideoEnd: () => void;
+  onNavigate?: (section: NavigationSection) => void;
 }
 
 const VIDEO_2 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1768999844/WhatsApp_Video_2026-01-21_at_6.07.22_PM_gsczzx.mp4';
@@ -17,7 +19,7 @@ const FINAL_IMAGE = 'https://res.cloudinary.com/dydplsxdj/image/upload/v17690034
 
 type ViewState = 'categories' | 'technical' | 'non-technical';
 
-const EventCards = ({ isVisible, isVideoEnded, onVideoEnd }: EventCardsProps) => {
+const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCardsProps) => {
   const [currentView, setCurrentView] = useState<ViewState>('categories');
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,20 +57,20 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd }: EventCardsProps) =>
     setTimeout(() => setSelectedEvent(null), 300);
   };
 
-  const handleNavigate = (section: string) => {
+  const handleNavigate = (section: NavigationSection) => {
     if (section === 'events') {
       setCurrentView('categories');
+      return;
     }
-    const element = document.getElementById(section);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (onNavigate) {
+      onNavigate(section);
     }
   };
 
   return (
     <>
       {/* Header - Always visible in events section */}
-      <Header onNavigate={handleNavigate} />
+      <Header onNavigate={handleNavigate} currentSection="events" />
 
       <motion.section
         id="events"

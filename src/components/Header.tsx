@@ -1,21 +1,25 @@
 import { motion } from 'framer-motion'
 import logo from '@/assets/RMDEC.png';
+import { NavigationSection } from '@/hooks/useNavigation';
 
 interface HeaderProps {
-  onNavigate?: (section: string) => void
+  onNavigate?: (section: NavigationSection) => void;
+  currentSection?: NavigationSection;
 }
 
-const Header = ({ onNavigate }: HeaderProps) => {
-  const handleNavClick = (section: string) => {
+const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
+  const handleNavClick = (section: NavigationSection) => {
     if (onNavigate) {
-      onNavigate(section)
-    } else {
-      const element = document.getElementById(section)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
+      onNavigate(section);
     }
-  }
+  };
+
+  const navItems: { key: NavigationSection; label: string }[] = [
+    { key: 'home', label: 'HOME' },
+    { key: 'about', label: 'ABOUT' },
+    { key: 'events', label: 'EVENTS' },
+    { key: 'contact', label: 'CONTACT US' },
+  ];
 
   return (
     <motion.header
@@ -48,24 +52,28 @@ const Header = ({ onNavigate }: HeaderProps) => {
 
         {/* Navigation */}
         <nav className="flex items-center gap-4">
-          {['home', 'about', 'events'].map((section, index) => (
+          {navItems.map((item, index) => (
             <motion.button
-              key={section}
+              key={item.key}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
               whileHover={{ scale: 1.05, color: 'hsl(var(--accent))' }}
-              onClick={() => handleNavClick(section)}
-              className="font-terminal text-base md:text-lg text-foreground/80 tracking-wider transition-colors capitalize hidden md:block"
+              onClick={() => handleNavClick(item.key)}
+              className={`font-terminal text-base md:text-lg tracking-wider transition-colors hidden md:block ${
+                currentSection === item.key 
+                  ? 'text-accent' 
+                  : 'text-foreground/80 hover:text-foreground'
+              }`}
             >
-              {section.toUpperCase()}
+              {item.label}
             </motion.button>
           ))}
 
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
             className="tech-border px-4 py-2 bg-card/80 backdrop-blur-sm"
           >
             <span className="font-terminal text-lg md:text-xl text-foreground tracking-wider cursor-pointer hover:text-accent transition-colors">

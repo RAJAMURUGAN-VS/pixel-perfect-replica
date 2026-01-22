@@ -2,22 +2,25 @@ import { useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleBackground from '@/components/ParticleBackground';
 import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import AboutSlider from '@/components/AboutSlider';
-import EventCards from '@/components/EventCards';
-import { useInvestigateSequence } from '@/hooks/useInvestigateSequence';
-import AboutDetails from '@/components/AboutDetails';
+import HomeSection from '@/components/HomeSection';
+import AboutSectionPage from '@/components/AboutSectionPage';
+import ContactSection from '@/components/ContactSection';
+import EventsSectionWrapper from '@/components/EventsSectionWrapper';
+import { useNavigation, NavigationSection } from '@/hooks/useNavigation';
 
 const Index = () => {
-  const { phase, elapsedTime, isVideoEnded, startSequence, onSecondVideoEnd } = useInvestigateSequence();
-  const isComplete = phase === 'complete';
+  const { currentSection, navigateTo } = useNavigation('home');
 
-  const handleNavigate = useCallback((section: string) => {
-    const element = document.getElementById(section);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, []);
+  const handleNavigate = useCallback((section: NavigationSection) => {
+    navigateTo(section);
+  }, [navigateTo]);
+
+  const handleNavigateToEvents = useCallback(() => {
+    navigateTo('events');
+  }, [navigateTo]);
+
+  // Determine if we should show the header (not during events transition)
+  const showHeader = currentSection !== 'events';
 
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden scanlines">
@@ -26,58 +29,65 @@ const Index = () => {
       
       {/* Main Content */}
       <div className="relative z-10">
+        {/* Header - visible on all sections except during events cinematic */}
+        {showHeader && (
+          <Header onNavigate={handleNavigate} currentSection={currentSection} />
+        )}
+
         <AnimatePresence mode="wait">
-          {!isComplete && (
+          {/* Home Section */}
+          {currentSection === 'home' && (
             <motion.div
-              key="main-content"
-              initial={{ opacity: 1 }}
+              key="home"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5 }}
             >
-              <Header onNavigate={handleNavigate} />
-              
-              <div id="home">
-                <HeroSection 
-                  phase={phase}
-                  elapsedTime={elapsedTime}
-                  onInvestigate={startSequence}
-                />
-              </div>
-              
-              {phase === 'idle' && (
-                <>
-                  <motion.div
-                    id="about"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  >
-                    <AboutSlider />
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  >
-                    <AboutDetails />
-                  </motion.div>
-                </>
-              )}
+              <HomeSection onNavigateToEvents={handleNavigateToEvents} />
             </motion.div>
           )}
-        </AnimatePresence>
 
-        {/* Event Cards - Show after sequence completes */}
-        <AnimatePresence>
-          {isComplete && (
-            <EventCards 
-              isVisible={isComplete} 
-              isVideoEnded={isVideoEnded}
-              onVideoEnd={onSecondVideoEnd}
-            />
+          {/* About Section */}
+          {currentSection === 'about' && (
+            <motion.div
+              key="about"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              <AboutSectionPage />
+            </motion.div>
+          )}
+
+          {/* Contact Section */}
+          {currentSection === 'contact' && (
+            <motion.div
+              key="contact"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              <ContactSection />
+            </motion.div>
+          )}
+
+          {/* Events Section - with cinematic transition */}
+          {currentSection === 'events' && (
+            <motion.div
+              key="events"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <EventsSectionWrapper 
+                isActive={currentSection === 'events'} 
+                onNavigate={handleNavigate}
+              />
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
