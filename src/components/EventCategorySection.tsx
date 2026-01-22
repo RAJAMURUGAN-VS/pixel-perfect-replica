@@ -1,6 +1,16 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { Event, getEventsByCategory } from '@/data/events';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 interface EventCategorySectionProps {
   category: 'technical' | 'non-technical';
@@ -79,39 +89,51 @@ const EventCategorySection = ({ category, onBack, onEventClick }: EventCategoryS
             variants={cardVariants}
             whileHover={{ 
               scale: 1.03,
-              boxShadow: '0 0 30px hsl(var(--accent) / 0.4)',
+              y: -5,
             }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => onEventClick(event)}
-            className="tech-border bg-card/80 backdrop-blur-sm cursor-pointer transition-all duration-300 group relative overflow-hidden"
           >
-            {/* Event Image */}
-            <div className="relative h-40 md:h-48 overflow-hidden">
-              <img
-                src={event.image}
-                alt={event.title}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-            </div>
-
-            {/* Content */}
-            <div className="p-5">
-              <h3 className="font-stranger text-lg md:text-xl text-accent mb-2 tracking-wider group-hover:glow-text transition-all duration-300">
-                {event.title}
-              </h3>
-              <p className="font-terminal text-xs md:text-sm text-muted-foreground tracking-wider line-clamp-2">
-                {event.description}
-              </p>
-            </div>
-
-            {/* Decorative corner elements */}
-            <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-neon-cyan opacity-30 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-neon-cyan opacity-30 group-hover:opacity-100 transition-opacity" />
-            
-            {/* Hover glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <Card className="relative mx-auto w-full pt-0 overflow-hidden tech-border bg-card/90 backdrop-blur-sm hover:shadow-[0_0_30px_hsl(var(--accent)/0.4)] transition-all duration-300 group cursor-pointer"
+              onClick={() => onEventClick(event)}
+            >
+              {/* Image with overlay */}
+              <div className="relative aspect-video w-full overflow-hidden">
+                <div className="absolute inset-0 z-30 bg-black/35" />
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  loading="lazy"
+                  className="relative z-20 aspect-video w-full object-cover brightness-60 group-hover:brightness-75 transition-all duration-500 group-hover:scale-110"
+                />
+              </div>
+              
+              <CardHeader className="relative z-40">
+                <CardAction>
+                  <Badge 
+                    variant="secondary" 
+                    className="font-terminal tracking-wider bg-accent/20 text-accent border-accent/30 hover:bg-accent/30"
+                  >
+                    {category === 'technical' ? 'TECH' : 'NON-TECH'}
+                  </Badge>
+                </CardAction>
+                <CardTitle className="font-stranger text-xl md:text-2xl text-accent tracking-wider group-hover:glow-text transition-all duration-300">
+                  {event.title}
+                </CardTitle>
+                <CardDescription className="font-terminal text-sm md:text-base text-muted-foreground tracking-wider line-clamp-2">
+                  {event.description}
+                </CardDescription>
+              </CardHeader>
+              
+              <CardFooter>
+                <Button className="w-full font-terminal tracking-wider bg-accent/20 text-accent border border-accent/30 hover:bg-accent hover:text-background transition-all duration-300">
+                  View Event
+                </Button>
+              </CardFooter>
+              
+              {/* Decorative corner elements */}
+              <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-neon-cyan opacity-30 group-hover:opacity-100 transition-opacity z-50" />
+              <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-neon-cyan opacity-30 group-hover:opacity-100 transition-opacity z-50" />
+            </Card>
           </motion.div>
         ))}
       </motion.div>
