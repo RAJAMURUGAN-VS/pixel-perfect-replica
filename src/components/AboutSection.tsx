@@ -5,17 +5,9 @@ const AboutSection = () => {
   return (
     <section className="relative py-20 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
-        {/* Section Title */}
-        <h2 className="font-stranger text-2xl md:text-3xl glow-text mb-12 tracking-wider">
-          ABOUT
-        </h2>
-
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Left Card - Small Preview */}
           <div className="tech-border bg-card/80 backdrop-blur-sm p-4">
-            <div className="text-sm font-terminal text-muted-foreground mb-3 tracking-wider">
-              ABOUT
-            </div>
             <div className="relative aspect-video mb-4 overflow-hidden">
               <img 
                 src={partyImage} 
@@ -39,9 +31,6 @@ const AboutSection = () => {
 
           {/* Right Card - Large Image */}
           <div className="relative">
-            <h3 className="font-stranger text-xl md:text-2xl text-foreground mb-4 text-center tracking-wider">
-              ABOUT
-            </h3>
             <div className="tech-border overflow-hidden">
               <div className="relative aspect-video">
                 <img 
