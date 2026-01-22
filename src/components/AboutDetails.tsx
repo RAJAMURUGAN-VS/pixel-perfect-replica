@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 const AboutDetails = () => {
   return (
-    <section id="anomalies" className="relative py-20 px-4 md:px-8">
+    <section id="events" className="relative py-20 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
 
         {/* Main Content Box */}
@@ -101,14 +101,14 @@ const AboutDetails = () => {
               </thead>
               <tbody>
                 {[
-                  '--',
-                  '--',
-                  '--',
-                  '--',
-                  '--',
-                  '--',
-                ].map(event => (
-                  <tr key={event} className="border-b border-foreground/10">
+                  'Event 1',
+                  'Event 2',
+                  'Event 3',
+                  'Event 4',
+                  'Event 5',
+                  'Event 6',
+                ].map((event, index) => (
+                  <tr key={index} className="border-b border-foreground/10">
                     <td className="p-3">{event}</td>
                     <td className="p-3">--</td>
                     <td className="p-3">--</td>
