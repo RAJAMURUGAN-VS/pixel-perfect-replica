@@ -48,7 +48,7 @@ const Header = ({ onNavigate }: HeaderProps) => {
 
         {/* Navigation */}
         <nav className="flex items-center gap-4">
-          {['home', 'about', 'anomalies'].map((section, index) => (
+          {['home', 'about', 'events'].map((section, index) => (
             <motion.button
               key={section}
               initial={{ opacity: 0, x: 20 }}
@@ -58,7 +58,7 @@ const Header = ({ onNavigate }: HeaderProps) => {
               onClick={() => handleNavClick(section)}
               className="font-terminal text-base md:text-lg text-foreground/80 tracking-wider transition-colors capitalize hidden md:block"
             >
-              {section === 'anomalies' ? 'UPCOMING' : section.toUpperCase()}
+              {section.toUpperCase()}
             </motion.button>
           ))}
 

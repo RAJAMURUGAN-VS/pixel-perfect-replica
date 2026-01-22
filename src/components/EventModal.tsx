@@ -1,19 +1,32 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { Event } from '@/data/events';
+import { useEffect } from 'react';
 
 interface EventModalProps {
   isOpen: boolean;
   onClose: () => void;
-  event: {
-    title: string;
-    subtitle: string;
-    description: string;
-    rules: string[];
-    category: 'technical' | 'non-technical';
-  } | null;
+  event: Event | null;
 }
 
 const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    
+    if (isOpen) {
+      document.addEventListener('keydown', handleEsc);
+      document.body.style.overflow = 'hidden';
+    }
+    
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
   if (!event) return null;
 
   return (
@@ -58,6 +71,17 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   transition={{ delay: 0.2, duration: 0.6 }}
                   className="mb-8"
                 >
+                  {/* Event Image */}
+                  <div className="relative h-48 md:h-64 overflow-hidden tech-border mb-6">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+                  </div>
+
                   {/* Category Badge */}
                   <div className="mb-4">
                     <div className={`tech-border px-4 py-2 inline-block text-sm font-terminal tracking-wider ${
@@ -73,11 +97,6 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   <h2 className="font-stranger text-3xl md:text-4xl lg:text-5xl glow-text tracking-wider mb-4">
                     {event.title}
                   </h2>
-
-                  {/* Subtitle */}
-                  <p className="font-terminal text-lg md:text-xl text-accent tracking-wider">
-                    {event.subtitle}
-                  </p>
                 </motion.div>
 
                 {/* Description */}
@@ -122,6 +141,25 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                       ))}
                     </ul>
                   </div>
+                </motion.div>
+
+                {/* Apply Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.6 }}
+                  className="mt-8"
+                >
+                  <motion.a
+                    href={event.registrationLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.02, boxShadow: '0 0 30px hsl(var(--accent) / 0.5)' }}
+                    whileTap={{ scale: 0.98 }}
+                    className="block w-full text-center py-4 tech-border bg-accent/20 hover:bg-accent/30 text-accent font-terminal text-lg tracking-wider transition-all duration-300"
+                  >
+                    APPLY NOW
+                  </motion.a>
                 </motion.div>
 
                 {/* Decorative Elements */}
