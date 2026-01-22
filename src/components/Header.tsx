@@ -1,37 +1,52 @@
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
+import logo from '@/assets/RMDEC.png';
 
 interface HeaderProps {
-  onNavigate?: (section: string) => void;
+  onNavigate?: (section: string) => void
 }
 
 const Header = ({ onNavigate }: HeaderProps) => {
   const handleNavClick = (section: string) => {
     if (onNavigate) {
-      onNavigate(section);
+      onNavigate(section)
     } else {
-      const element = document.getElementById(section);
+      const element = document.getElementById(section)
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: 'smooth' })
       }
     }
-  };
+  }
 
   return (
-    <motion.header 
+    <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="fixed top-0 left-0 right-0 z-50 px-4 py-4 md:px-8"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <motion.div 
-          whileHover={{ scale: 1.02 }}
-          className="font-stranger text-xl md:text-2xl glow-text tracking-[0.2em] cursor-pointer"
+        
+        {/* Left Side: Logo & College Text */}
+        <div
+          className="flex items-center gap-3 cursor-pointer"
           onClick={() => handleNavClick('home')}
         >
-          STRANGER<br />THINGS
-        </motion.div>
-        
+          <img
+            src={logo}
+            alt="College Logo"
+            className="h-10 w-10 object-contain"
+          />
+          <div className="leading-tight">
+            <h1 className="font-terminal text-sm md:text-base text-foreground tracking-wide">
+              R.M.D. Engineering College
+            </h1>
+            <p className="font-terminal text-xs text-muted-foreground">
+              (An Autonomous Institution)
+            </p>
+          </div>
+        </div>
+
+        {/* Navigation */}
         <nav className="flex items-center gap-4">
           {['home', 'about', 'anomalies'].map((section, index) => (
             <motion.button
@@ -46,8 +61,8 @@ const Header = ({ onNavigate }: HeaderProps) => {
               {section === 'anomalies' ? 'UPCOMING' : section.toUpperCase()}
             </motion.button>
           ))}
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
@@ -60,7 +75,7 @@ const Header = ({ onNavigate }: HeaderProps) => {
         </nav>
       </div>
     </motion.header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

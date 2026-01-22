@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import partyImage from '@/assets/party-bikes.jpg';
+import partyImage from '@/assets/con-1.jpg';
 
 interface SlideData {
   title: string;
@@ -52,7 +52,7 @@ const AboutSlider = () => {
   };
 
   return (
-    <section className="relative py-20 px-4 md:px-8 overflow-hidden">
+    <section className="relative pt-20 pb-[5px] px-4 md:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <h2 className="font-stranger text-2xl md:text-3xl glow-text mb-12 tracking-wider text-center">
           ABOUT
@@ -81,7 +81,7 @@ const AboutSlider = () => {
                   <img
                     src={slides[currentIndex].image}
                     alt={slides[currentIndex].title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
                   

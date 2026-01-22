@@ -4,9 +4,9 @@ import ParticleBackground from '@/components/ParticleBackground';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import AboutSlider from '@/components/AboutSlider';
-import AnomaliesSection from '@/components/AnomaliesSection';
 import EventCards from '@/components/EventCards';
 import { useInvestigateSequence } from '@/hooks/useInvestigateSequence';
+import AboutDetails from '@/components/AboutDetails';
 
 const Index = () => {
   const { phase, elapsedTime, isVideoEnded, startSequence, onSecondVideoEnd } = useInvestigateSequence();
@@ -62,7 +62,7 @@ const Index = () => {
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
                   >
-                    <AnomaliesSection />
+                    <AboutDetails />
                   </motion.div>
                 </>
               )}

@@ -1,42 +1,40 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react'
+
+const target = new Date('2026-02-09T00:00:00').getTime()
 
 const CountdownTimer = () => {
-  const [time, setTime] = useState({ hours: 23, minutes: 59, seconds: 59 });
+  const [time, setTime] = useState({days: 0, hours: 0, minutes: 0, seconds: 0})
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime((prev) => {
-        let { hours, minutes, seconds } = prev;
-        
-        if (seconds > 0) {
-          seconds--;
-        } else if (minutes > 0) {
-          minutes--;
-          seconds = 59;
-        } else if (hours > 0) {
-          hours--;
-          minutes = 59;
-          seconds = 59;
-        } else {
-          hours = 23;
-          minutes = 59;
-          seconds = 59;
-        }
+      const now = new Date().getTime()
+      const diff = target - now
 
-        return { hours, minutes, seconds };
-      });
-    }, 1000);
+      if (diff <= 0) {
+        clearInterval(interval)
+        setTime({days: 0, hours: 0, minutes: 0, seconds: 0})
+        return
+      }
 
-    return () => clearInterval(interval);
-  }, []);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+      const hours = Math.floor(diff / (1000 * 60 * 60)) % 24
+      const minutes = Math.floor(diff / (1000 * 60)) % 60
+      const seconds = Math.floor(diff / 1000) % 60
 
-  const formatNumber = (num: number) => num.toString().padStart(2, '0');
+      setTime({days, hours, minutes, seconds})
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const formatNumber = (num: number) => num.toString().padStart(2, '0')
 
   return (
     <div className="font-tech text-5xl md:text-6xl tracking-widest glow-amber animate-flicker">
-      {formatNumber(time.hours)}:{formatNumber(time.minutes)}:{formatNumber(time.seconds)}
+      {formatNumber(time.days)}:{formatNumber(time.hours)}:
+      {formatNumber(time.minutes)}:{formatNumber(time.seconds)}
     </div>
-  );
-};
+  )
+}
 
-export default CountdownTimer;
+export default CountdownTimer
