@@ -125,17 +125,47 @@ const AboutSection = () => {
                 </thead>
                 <tbody>
                   {[
-                    '--',
-                    '--',
-                    '--',
-                    '--',
-                    '--',
-                    '--',
+                    {
+                      name: "Paper Presentation",
+                      studentCoordinator: "JAYA KUMAR S",
+                      contact: "9123540151",
+                      venue: "CSE DEPARTMENT",
+                    },
+                    {
+                      name: "Claw CTF",
+                      studentCoordinator: "KEERTHI K P",
+                      contact: "9360174225",
+                      venue: "CSE DEPARTMENT",
+                    },
+                    {
+                      name: "Vibe Coding",
+                      studentCoordinator: "RAJAMURUGAN V S",
+                      contact: "8015766399",
+                      venue: "CSE DEPARTMENT",
+                    },
+                    {
+                      name: "The da vinci code",
+                      studentCoordinator: "KRUTHIKA S T",
+                      contact: "9360308572",
+                      venue: "CSE DEPARTMENT",
+                    },
+                    {
+                      name: "Stranger Tunes",
+                      studentCoordinator: "NIVEDHITA J",
+                      contact: "6380388354",
+                      venue: "CSE DEPARTMENT",
+                    },
+                    {
+                      name: "Ipl Auction",
+                      studentCoordinator: "KARUNAMOORTHI R",
+                      contact: "9025681889",
+                      venue: "CSE DEPARTMENT",
+                    },
                   ].map(event => (
-                    <tr key={event} className="border-b border-foreground/10">
-                      <td className="p-3">{event}</td>
-                      <td className="p-3">--</td>
-                      <td className="p-3">--</td>
+                    <tr key={event.name} className="border-b border-foreground/10">
+                      <td className="p-3">{event.name}</td>
+                      <td className="p-3">{event.studentCoordinator}</td>
+                      <td className="p-3">{event.contact}</td>
                       <td className="p-3">CSE DEPARTMENT</td>
                     </tr>
                   ))}
