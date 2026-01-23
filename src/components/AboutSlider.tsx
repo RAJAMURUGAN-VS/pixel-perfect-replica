@@ -11,22 +11,28 @@ interface SlideData {
 
 const slides: SlideData[] = [
   {
-    title: 'THE PARTY',
-    subtitle: 'Friends Don\'t Lie',
-    description: 'Join the party and uncover the secrets of Hawkins. Together, we face the darkness.',
+    title: '',
+    subtitle: '',
+    description: '',
     image: partyImage,
   },
   {
-    title: 'THE UPSIDE DOWN',
-    subtitle: 'A World Within',
-    description: 'A dark reflection of our world, filled with creatures from your worst nightmares.',
-    image: partyImage,
+    title: '',
+    subtitle: '',
+    description: '',
+    image: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137598/card-1_eln5kv.jpg',
   },
   {
-    title: 'HAWKINS LAB',
-    subtitle: 'Where It All Began',
-    description: 'The experiments that opened the gate. The truth they tried to hide.',
-    image: partyImage,
+    title: '',
+    subtitle: '',
+    description: '',
+    image: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137613/card-3_ucz5hr.jpg',
+  },
+  {
+    title: '',
+    subtitle: '',
+    description: '',
+    image: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137605/card-2_yvk7hr.jpg',
   },
 ];
 

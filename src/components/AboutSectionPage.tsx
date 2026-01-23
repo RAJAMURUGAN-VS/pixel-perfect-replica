@@ -174,38 +174,6 @@ const AboutSection = () => {
             </div>
           </div>
         </motion.div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="max-w-5xl mx-auto px-4 md:px-8 pb-24"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { value: '20+', label: 'Events' },
-              { value: '500+', label: 'Participants' },
-              { value: '50K+', label: 'Prize Pool' },
-              { value: '2', label: 'Days' },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-                className="tech-border bg-card/60 backdrop-blur-sm p-6 text-center"
-              >
-                <div className="font-stranger text-2xl md:text-3xl text-accent mb-2">
-                  {stat.value}
-                </div>
-                <div className="font-terminal text-sm text-muted-foreground tracking-wider">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
