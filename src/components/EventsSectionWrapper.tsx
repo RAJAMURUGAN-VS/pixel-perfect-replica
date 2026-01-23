@@ -11,8 +11,8 @@ interface EventsSectionWrapperProps {
 
 export type EventsPhase = 'idle' | 'phase1' | 'phase2' | 'phase3' | 'complete';
 
-const VIDEO_1 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1769014668/vid-1_afm49t.mp4';
-const VIDEO_2 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1769014708/vid-2_slwuts.mp4';
+const VIDEO_1 = 'https://res.cloudinary.com/dop49krua/video/upload/v1769185955/upscaled-video_2_rcviw0.mp4';
+const VIDEO_2 = 'https://res.cloudinary.com/dop49krua/video/upload/v1769185551/upscaled-video_1_vwbj6j.mp4';
 
 const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProps) => {
   const [phase, setPhase] = useState<EventsPhase>('idle');
@@ -133,7 +133,7 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
             <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background/50 z-[1]" />
 
             {/* Animated transition elements */}
-            <div className="absolute inset-0 flex items-center justify-center z-10">
+            <div className="absolute inset-0 flex items-center justify-center z-10 px-4">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{
@@ -147,7 +147,7 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
                 style={{ perspective: '1000px' }}
               >
                 <motion.div
-                  className="tech-border bg-card/30 backdrop-blur-sm px-8 py-4"
+                  className="tech-border bg-card/30 backdrop-blur-sm px-4 sm:px-8 py-3 sm:py-4"
                   animate={{
                     boxShadow: [
                       '0 0 20px hsl(var(--neon-cyan) / 0.3)',
@@ -157,7 +157,7 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <h2 className="font-stranger text-2xl md:text-4xl glow-text tracking-wider">
+                  <h2 className="font-stranger text-lg sm:text-2xl md:text-4xl glow-text tracking-wider">
                     ENTERING THE UPSIDE DOWN
                   </h2>
                 </motion.div>
@@ -170,9 +170,9 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
               onClick={handleSkip}
-              className="absolute bottom-8 right-8 z-50 tech-border px-6 py-3 bg-card/80 backdrop-blur-sm hover:bg-card transition-all"
+              className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 tech-border px-4 py-2 sm:px-6 sm:py-3 bg-card/80 backdrop-blur-sm hover:bg-card transition-all"
             >
-              <span className="font-terminal text-sm md:text-base text-foreground tracking-wider hover:text-accent transition-colors">
+              <span className="font-terminal text-xs sm:text-sm md:text-base text-foreground tracking-wider hover:text-accent transition-colors">
                 SKIP
               </span>
             </motion.button>

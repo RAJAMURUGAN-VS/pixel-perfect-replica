@@ -14,7 +14,7 @@ interface EventCardsProps {
   onNavigate?: (section: NavigationSection) => void;
 }
 
-const VIDEO_2 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1768999844/WhatsApp_Video_2026-01-21_at_6.07.22_PM_gsczzx.mp4';
+const VIDEO_2 = 'https://res.cloudinary.com/dop49krua/video/upload/v1769185551/upscaled-video_1_vwbj6j.mp4';
 const FINAL_IMAGE = 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769003462/Gemini_Generated_Image_8a86wr8a86wr8a86_wd9xyu.png';
 
 type ViewState = 'categories' | 'technical' | 'non-technical';
@@ -78,7 +78,7 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="fixed inset-0 min-h-screen flex items-start justify-center px-4 md:px-8 z-10 pt-5"
+        className="fixed inset-0 min-h-screen flex items-start justify-center px-3 sm:px-4 md:px-8 z-10 pt-14 sm:pt-16 md:pt-5"
       >
         {/* Second Video Background */}
         <div className={`absolute inset-0 transition-opacity duration-1000 ${isVideoEnded ? 'opacity-0' : 'opacity-100'}`}>
@@ -115,12 +115,12 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="font-stranger text-2xl md:text-3xl glow-text mb-12 text-center tracking-wider"
+                  className="font-stranger text-xl sm:text-2xl md:text-3xl glow-text mb-6 sm:mb-12 text-center tracking-wider"
                 >
                   CHOOSE YOUR PATH
                 </motion.h2>
 
-                <div className="grid md:grid-cols-2 gap-8 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 w-full px-2 sm:px-0">
                   {cards.map((card, index) => (
                     <motion.div
                       key={card.title}
@@ -135,13 +135,14 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
                         scale: 1.02,
                         boxShadow: '0 0 30px hsl(var(--neon-cyan) / 0.5)',
                       }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => handleCategoryClick(card.category)}
-                      className="tech-border bg-card/80 backdrop-blur-sm p-8 cursor-pointer transition-all duration-300 group relative"
+                      className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8 cursor-pointer transition-all duration-300 group relative"
                     >
-                      <h3 className="font-stranger text-2xl md:text-3xl text-accent mb-4 tracking-wider group-hover:glow-text transition-all duration-300">
+                      <h3 className="font-stranger text-xl sm:text-2xl md:text-3xl text-accent mb-2 sm:mb-4 tracking-wider group-hover:glow-text transition-all duration-300">
                         {card.title}
                       </h3>
-                      <p className="font-terminal text-base md:text-lg text-muted-foreground tracking-wider">
+                      <p className="font-terminal text-sm sm:text-base md:text-lg text-muted-foreground tracking-wider">
                         {card.description}
                       </p>
 

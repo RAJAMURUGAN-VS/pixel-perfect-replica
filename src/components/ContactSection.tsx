@@ -77,32 +77,32 @@ const ContactSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 pt-24 pb-12 px-4 md:px-8">
+      <div className="relative z-10 pt-20 sm:pt-24 pb-8 sm:pb-12 px-3 sm:px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="max-w-6xl mx-auto"
         >
-          <h2 className="font-stranger text-2xl md:text-3xl glow-text mb-12 tracking-wider text-center">
+          <h2 className="font-stranger text-xl sm:text-2xl md:text-3xl glow-text mb-6 sm:mb-12 tracking-wider text-center">
             CONTACT US
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-12">
             {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <div className="tech-border bg-card/80 backdrop-blur-sm p-8">
-                <h3 className="font-stranger text-xl text-accent mb-6 tracking-wider">
+              <div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8">
+                <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider">
                   SEND A MESSAGE
                 </h3>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div>
-                    <label className="font-terminal text-sm text-muted-foreground tracking-wider block mb-2">
+                    <label className="font-terminal text-xs sm:text-sm text-muted-foreground tracking-wider block mb-1.5 sm:mb-2">
                       NAME
                     </label>
                     <input
@@ -111,13 +111,13 @@ const ContactSection = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full bg-background/50 border border-border/50 rounded px-4 py-3 font-terminal text-foreground focus:border-accent focus:outline-none transition-colors"
+                      className="w-full bg-background/50 border border-border/50 rounded px-3 sm:px-4 py-2 sm:py-3 font-terminal text-sm sm:text-base text-foreground focus:border-accent focus:outline-none transition-colors"
                       placeholder="Enter your name"
                     />
                   </div>
 
                   <div>
-                    <label className="font-terminal text-sm text-muted-foreground tracking-wider block mb-2">
+                    <label className="font-terminal text-xs sm:text-sm text-muted-foreground tracking-wider block mb-1.5 sm:mb-2">
                       EMAIL
                     </label>
                     <input
@@ -126,13 +126,13 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full bg-background/50 border border-border/50 rounded px-4 py-3 font-terminal text-foreground focus:border-accent focus:outline-none transition-colors"
+                      className="w-full bg-background/50 border border-border/50 rounded px-3 sm:px-4 py-2 sm:py-3 font-terminal text-sm sm:text-base text-foreground focus:border-accent focus:outline-none transition-colors"
                       placeholder="Enter your email"
                     />
                   </div>
 
                   <div>
-                    <label className="font-terminal text-sm text-muted-foreground tracking-wider block mb-2">
+                    <label className="font-terminal text-xs sm:text-sm text-muted-foreground tracking-wider block mb-1.5 sm:mb-2">
                       SUBJECT
                     </label>
                     <input
@@ -141,13 +141,13 @@ const ContactSection = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full bg-background/50 border border-border/50 rounded px-4 py-3 font-terminal text-foreground focus:border-accent focus:outline-none transition-colors"
+                      className="w-full bg-background/50 border border-border/50 rounded px-3 sm:px-4 py-2 sm:py-3 font-terminal text-sm sm:text-base text-foreground focus:border-accent focus:outline-none transition-colors"
                       placeholder="Enter subject"
                     />
                   </div>
 
                   <div>
-                    <label className="font-terminal text-sm text-muted-foreground tracking-wider block mb-2">
+                    <label className="font-terminal text-xs sm:text-sm text-muted-foreground tracking-wider block mb-1.5 sm:mb-2">
                       MESSAGE
                     </label>
                     <textarea
@@ -155,8 +155,8 @@ const ContactSection = () => {
                       value={formData.message}
                       onChange={handleChange}
                       required
-                      rows={5}
-                      className="w-full bg-background/50 border border-border/50 rounded px-4 py-3 font-terminal text-foreground focus:border-accent focus:outline-none transition-colors resize-none"
+                      rows={4}
+                      className="w-full bg-background/50 border border-border/50 rounded px-3 sm:px-4 py-2 sm:py-3 font-terminal text-sm sm:text-base text-foreground focus:border-accent focus:outline-none transition-colors resize-none"
                       placeholder="Enter your message"
                     />
                   </div>
@@ -189,28 +189,28 @@ const ContactSection = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
-              <div className="tech-border bg-card/80 backdrop-blur-sm p-8">
-                <h3 className="font-stranger text-xl text-accent mb-6 tracking-wider">
+              <div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8">
+                <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider">
                   COORDINATES
                 </h3>
 
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   {contactInfo.map((info, index) => (
                     <motion.div
                       key={info.title}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                      className="flex items-start gap-4"
+                      className="flex items-start gap-3 sm:gap-4"
                     >
-                      <span className="text-2xl">{info.icon}</span>
+                      <span className="text-xl sm:text-2xl">{info.icon}</span>
                       <div>
-                        <h4 className="font-terminal text-sm text-accent tracking-wider mb-1">
+                        <h4 className="font-terminal text-xs sm:text-sm text-accent tracking-wider mb-1">
                           {info.title}
                         </h4>
-                        <p className="font-terminal text-base text-muted-foreground">
+                        <p className="font-terminal text-sm sm:text-base text-muted-foreground">
                           {info.content}
                         </p>
                       </div>
@@ -221,8 +221,8 @@ const ContactSection = () => {
 
               {/* Map Placeholder */}
               {/* Map */}
-<div className="tech-border bg-card/80 backdrop-blur-sm p-8">
-  <h3 className="font-stranger text-xl text-accent mb-6 tracking-wider">
+<div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8">
+  <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider">
     DIMENSIONAL RIFT LOCATION
   </h3>
 
@@ -241,27 +241,27 @@ const ContactSection = () => {
 
 
               {/* Contact Persons */}
-              <div className="tech-border bg-card/80 backdrop-blur-sm p-8">
-                <h3 className="font-stranger text-xl text-accent mb-6 tracking-wider">
+              <div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8">
+                <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider">
                   CONTACT PERSONS
                 </h3>
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {contactPersons.map((person, index) => (
                     <motion.div
                       key={person.name}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                      className="flex items-start gap-4"
+                      className="flex items-start gap-3 sm:gap-4"
                     >
-                      <span className="text-2xl">📱</span>
+                      <span className="text-xl sm:text-2xl">📱</span>
                       <div>
-                        <h4 className="font-terminal text-sm text-accent tracking-wider mb-1">
+                        <h4 className="font-terminal text-xs sm:text-sm text-accent tracking-wider mb-1">
                           {person.name}
                         </h4>
                         <a
                           href={`tel:${person.phone.replace(/\s/g, '')}`}
-                          className="font-terminal text-base text-muted-foreground hover:text-accent transition-colors"
+                          className="font-terminal text-sm sm:text-base text-muted-foreground hover:text-accent transition-colors"
                         >
                           {person.phone}
                         </a>
@@ -272,17 +272,17 @@ const ContactSection = () => {
               </div>
 
               {/* Social Links */}
-              <div className="tech-border bg-card/80 backdrop-blur-sm p-8">
-                <h3 className="font-stranger text-xl text-accent mb-6 tracking-wider">
+              <div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8">
+                <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider">
                   TRANSMISSION CHANNELS
                 </h3>
-                <div className="flex gap-4">
+                <div className="flex gap-3 sm:gap-4">
                   <motion.a
                     href="https://www.instagram.com/rendezvous_2k26"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05, y: -2 }}
-                    className="flex-1 tech-border bg-background/50 py-3 text-center font-terminal text-sm text-muted-foreground hover:text-accent transition-colors"
+                    className="flex-1 tech-border bg-background/50 py-2 sm:py-3 text-center font-terminal text-xs sm:text-sm text-muted-foreground hover:text-accent transition-colors"
                   >
                     INSTAGRAM
                   </motion.a>

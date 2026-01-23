@@ -30,7 +30,7 @@ const CountdownTimer = () => {
   const formatNumber = (num: number) => num.toString().padStart(2, '0')
 
   return (
-    <div className="font-tech text-5xl md:text-6xl tracking-widest glow-amber animate-flicker">
+    <div className="font-tech text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-widest glow-amber animate-flicker">
       {formatNumber(time.days)}:{formatNumber(time.hours)}:
       {formatNumber(time.minutes)}:{formatNumber(time.seconds)}
     </div>

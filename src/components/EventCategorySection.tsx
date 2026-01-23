@@ -52,7 +52,7 @@ const EventCategorySection = ({ category, onBack, onEventClick }: EventCategoryS
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="w-full max-w-6xl mx-auto px-4 py-8"
+      className="w-full max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-8 mt-12 sm:mt-0"
     >
       {/* Back Button */}
       <motion.button
@@ -62,9 +62,9 @@ const EventCategorySection = ({ category, onBack, onEventClick }: EventCategoryS
         whileHover={{ scale: 1.05, x: -5 }}
         whileTap={{ scale: 0.95 }}
         onClick={onBack}
-        className="flex items-center gap-2 mb-8 tech-border px-4 py-2 bg-card/80 backdrop-blur-sm text-accent font-terminal tracking-wider hover:bg-accent/10 transition-colors"
+        className="flex items-center gap-2 mb-4 sm:mb-8 tech-border px-3 sm:px-4 py-1.5 sm:py-2 bg-card/80 backdrop-blur-sm text-accent font-terminal text-sm sm:text-base tracking-wider hover:bg-accent/10 transition-colors"
       >
-        <ArrowLeft className="w-4 h-4" />
+        <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
         BACK
       </motion.button>
  
@@ -73,14 +73,14 @@ const EventCategorySection = ({ category, onBack, onEventClick }: EventCategoryS
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="font-stranger text-2xl md:text-4xl glow-text mb-8 text-center tracking-wider"
+        className="font-stranger text-lg sm:text-2xl md:text-4xl glow-text mb-4 sm:mb-8 text-center tracking-wider"
       >
         {categoryTitle}
       </motion.h2>
 
       {/* Events Grid */}
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         variants={containerVariants}
       >
         {events.map((event) => (
@@ -107,26 +107,26 @@ const EventCategorySection = ({ category, onBack, onEventClick }: EventCategoryS
                 />
               </div>
               
-              <CardHeader className="relative z-40">
+              <CardHeader className="relative z-40 p-3 sm:p-6">
                 <CardAction>
                   <Badge 
                     variant="secondary" 
-                    className="font-terminal tracking-wider bg-accent/20 text-accent border-accent/30 hover:bg-accent/30"
+                    className="font-terminal text-xs sm:text-sm tracking-wider bg-accent/20 text-accent border-accent/30 hover:bg-accent/30"
                   >
                     {category === 'technical' ? 'TECH' : 'NON-TECH'}
                   </Badge>
                 </CardAction>
-                <CardTitle className="font-stranger text-xl md:text-2xl text-accent tracking-wider group-hover:glow-text transition-all duration-300">
+                <CardTitle className="font-stranger text-base sm:text-xl md:text-2xl text-accent tracking-wider group-hover:glow-text transition-all duration-300">
                   {event.title}
                 </CardTitle>
-                <CardDescription className="font-terminal text-sm md:text-base text-muted-foreground tracking-wider line-clamp-2">
+                <CardDescription className="font-terminal text-xs sm:text-sm md:text-base text-muted-foreground tracking-wider line-clamp-2">
                   {event.description}
                 </CardDescription>
               </CardHeader>
               
-              <CardFooter>
+              <CardFooter className="p-3 sm:p-6 pt-0">
                 <Button 
-                  className="w-full font-terminal tracking-wider bg-accent/20 text-accent border border-accent/30 hover:bg-accent hover:text-background transition-all duration-300"
+                  className="w-full font-terminal text-xs sm:text-sm tracking-wider bg-accent/20 text-accent border border-accent/30 hover:bg-accent hover:text-background transition-all duration-300"
                   onClick={(e) => {
                     e.stopPropagation();
                     window.open(event.registrationLink, '_blank', 'noopener,noreferrer');
