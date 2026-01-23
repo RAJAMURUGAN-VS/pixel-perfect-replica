@@ -67,7 +67,7 @@ const EventCategorySection = ({ category, onBack, onEventClick }: EventCategoryS
         <ArrowLeft className="w-4 h-4" />
         BACK
       </motion.button>
-
+ 
       {/* Category Title */}
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
@@ -125,8 +125,14 @@ const EventCategorySection = ({ category, onBack, onEventClick }: EventCategoryS
               </CardHeader>
               
               <CardFooter>
-                <Button className="w-full font-terminal tracking-wider bg-accent/20 text-accent border border-accent/30 hover:bg-accent hover:text-background transition-all duration-300">
-                  View Event
+                <Button 
+                  className="w-full font-terminal tracking-wider bg-accent/20 text-accent border border-accent/30 hover:bg-accent hover:text-background transition-all duration-300"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(event.registrationLink, '_blank', 'noopener,noreferrer');
+                  }}
+                >
+                  Register Now
                 </Button>
               </CardFooter>
               

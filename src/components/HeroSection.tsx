@@ -119,7 +119,7 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
           className="tech-border bg-card/30 backdrop-blur-sm px-8 py-4 mb-8 max-w-xl mx-auto origin-center"
         >
           <h1 className="font-terminal text-xl md:text-2xl text-foreground tracking-wider">
-            CURRENT MISSION: FIND 011
+            Organized By CSE DEPARTMENT
           </h1>
         </motion.div>
 

@@ -69,6 +69,7 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
 
   return (
     <>
+
       {/* Header - Always visible in events section */}
       <Header onNavigate={handleNavigate} currentSection="events" />
 
@@ -77,7 +78,7 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="fixed inset-0 min-h-screen flex items-center justify-center px-4 md:px-8 z-10 pt-20"
+        className="fixed inset-0 min-h-screen flex items-start justify-center px-4 md:px-8 z-10 pt-5"
       >
         {/* Second Video Background */}
         <div className={`absolute inset-0 transition-opacity duration-1000 ${isVideoEnded ? 'opacity-0' : 'opacity-100'}`}>
@@ -94,7 +95,7 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
             }`}
           style={{ backgroundImage: `url(${FINAL_IMAGE})` }}
         />
-
+ 
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background/60 z-[1]" />
 

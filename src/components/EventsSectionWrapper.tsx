@@ -13,7 +13,6 @@ export type EventsPhase = 'idle' | 'phase1' | 'phase2' | 'phase3' | 'complete';
 
 const VIDEO_1 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1769014668/vid-1_afm49t.mp4';
 const VIDEO_2 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1769014708/vid-2_slwuts.mp4';
-const AUDIO_URL = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1768999824/WhatsApp_Video_2026-01-21_at_6.00.55_PM_bhc5rj.mp4';
 
 const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProps) => {
   const [phase, setPhase] = useState<EventsPhase>('idle');
@@ -21,37 +20,21 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isVideoEnded, setIsVideoEnded] = useState(false);
   const [showEventCards, setShowEventCards] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const hasStartedRef = useRef(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Setup audio element
-  useEffect(() => {
-    const audio = new Audio(AUDIO_URL);
-    audio.preload = 'auto';
-    audioRef.current = audio;
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
-  }, []);
-
-  // Handle audio fade out
-  const fadeOutAudio = useCallback(() => {
-    if (!audioRef.current) return;
-
-    const audio = audioRef.current;
-    const fadeInterval = setInterval(() => {
-      if (audio.volume > 0.1) {
-        audio.volume = Math.max(0, audio.volume - 0.1);
-      } else {
-        audio.volume = 0;
-        audio.pause();
-        clearInterval(fadeInterval);
-      }
-    }, 100);
+  // Skip function to immediately go to Events page
+  const handleSkip = useCallback(() => {
+    // Clear any running interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    // Immediately complete the animation and show event cards
+    setPhase('complete');
+    setShowEventCards(true);
+    setIsAnimating(false);
+    setIsVideoEnded(true);
   }, []);
 
   // Start sequence when section becomes active
@@ -65,15 +48,6 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
         setPhase('phase1');
         setIsVideoEnded(false);
         setShowEventCards(false);
-
-        // Start audio playback
-        if (audioRef.current) {
-          audioRef.current.currentTime = 0;
-          audioRef.current.volume = 1;
-          audioRef.current.play().catch(() => {
-            console.log('Audio autoplay blocked');
-          });
-        }
       }, 100);
       return () => clearTimeout(timeout);
     }
@@ -85,9 +59,9 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
       setElapsedTime(0);
       setIsVideoEnded(false);
       setShowEventCards(false);
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
     }
   }, [isActive]);
@@ -97,7 +71,7 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
     if (!isAnimating) return;
 
     const startTime = Date.now();
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       const elapsed = (Date.now() - startTime) / 1000;
       setElapsedTime(elapsed);
 
@@ -109,17 +83,24 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
         setPhase('complete');
         setShowEventCards(true);
         setIsAnimating(false);
-        clearInterval(interval);
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
       }
     }, 16);
 
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [isAnimating]);
 
   const onSecondVideoEnd = useCallback(() => {
     setIsVideoEnded(true);
-    fadeOutAudio();
-  }, [fadeOutAudio]);
+  }, []);
 
   if (!isActive) return null;
 
@@ -182,6 +163,19 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
                 </motion.div>
               </motion.div>
             </div>
+
+            {/* Skip Button */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              onClick={handleSkip}
+              className="absolute bottom-8 right-8 z-50 tech-border px-6 py-3 bg-card/80 backdrop-blur-sm hover:bg-card transition-all"
+            >
+              <span className="font-terminal text-sm md:text-base text-foreground tracking-wider hover:text-accent transition-colors">
+                SKIP
+              </span>
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>

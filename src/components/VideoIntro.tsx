@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import frameImage from '@/assets/frame.png';
 
 interface VideoIntroProps {
   onComplete: () => void;
@@ -71,16 +72,8 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
     };
   }, [onComplete]);
 
-  const handleUnmute = () => {
-    const video = videoRef.current;
-    if (video) {
-      video.muted = false;
-      video.volume = 1;
-      setIsMuted(false);
-    }
-  };
-
-  const handleSkip = () => {
+  const handleSkip = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering the frame click
     const video = videoRef.current;
     if (video) {
       video.pause();
@@ -109,23 +102,40 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
               </div>
             </div>
           )}
-
-          {/* Start button - appears when loaded but not started */}
+ 
+          {/* Clickable static frame/poster - appears when loaded but not started */}
           {isLoaded && !hasStarted && (
-            <motion.button
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
               onClick={startPlayback}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 tech-border px-12 py-6 bg-card/95 backdrop-blur-sm hover:bg-card transition-all z-10"
+              className="absolute inset-0 cursor-pointer z-20"
             >
-              <div className="flex flex-col items-center gap-3">
-                <span className="text-5xl">▶️</span>
-                <span className="font-terminal text-xl md:text-2xl text-[hsl(var(--neon-cyan))] glow-text tracking-wider">
-                  CLICK TO START
-                </span>
+              {/* Static frame image */}
+              <img
+                src={frameImage}
+                alt="Click to play"
+                className="w-full h-full object-cover"
+              />
+              
+              {/* Play overlay */}
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                <motion.div
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="flex flex-col items-center gap-4"
+                >
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center tech-border">
+                    <span className="text-5xl md:text-6xl ml-2">▶</span>
+                  </div>
+                  <span className="font-terminal text-lg md:text-2xl text-[hsl(var(--neon-cyan))] glow-text tracking-wider">
+                    CLICK ANYWHERE TO PLAY
+                  </span>
+                </motion.div>
               </div>
-            </motion.button>
+            </motion.div>
           )}
           
           <video
@@ -134,7 +144,7 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
             playsInline
             muted={true}
             preload="auto"
-            style={{ opacity: isLoaded ? 1 : 0 }}
+            style={{ opacity: hasStarted ? 1 : 0 }}
           >
             <source
               src="https://res.cloudinary.com/dydplsxdj/video/upload/v1769103515/upscaled-video_hqh9wj.mp4"
@@ -142,18 +152,20 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
             />
           </video>
 
-          {/* Skip button */}
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            onClick={handleSkip}
-            className="absolute bottom-8 right-8 tech-border px-6 py-3 bg-card/80 backdrop-blur-sm hover:bg-card transition-all"
-          >
-            <span className="font-terminal text-sm md:text-base text-foreground tracking-wider hover:text-accent transition-colors">
-              SKIP INTRO
-            </span>
-          </motion.button>
+          {/* Skip button - only show after video has started */}
+          {hasStarted && (
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              onClick={handleSkip}
+              className="absolute bottom-8 right-8 tech-border px-6 py-3 bg-card/80 backdrop-blur-sm hover:bg-card transition-all z-30"
+            >
+              <span className="font-terminal text-sm md:text-base text-foreground tracking-wider hover:text-accent transition-colors">
+                SKIP INTRO
+              </span>
+            </motion.button>
+          )}
         </motion.div>
       )}
     </AnimatePresence>

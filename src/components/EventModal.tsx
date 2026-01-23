@@ -51,7 +51,7 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
             transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="fixed inset-4 md:inset-8 lg:inset-16 z-50 flex items-center justify-center"
           >
-            <div className="tech-border bg-card/95 backdrop-blur-md w-full max-w-4xl max-h-full overflow-hidden relative">
+            <div className="tech-border bg-card/95 backdrop-blur-md w-full max-w-4xl h-full max-h-[90vh] overflow-hidden relative flex flex-col">
               {/* Close Button */}
               <motion.button
                 whileHover={{ scale: 1.1, rotate: 90 }}

@@ -151,7 +151,7 @@ const AboutSection = () => {
                     },
                     {
                       name: "Stranger Tunes",
-                      studentCoordinator: "NIVEDHITA J",
+                      studentCoordinator: "NIVETHA J",
                       contact: "6380388354",
                       venue: "CSE DEPARTMENT",
                     },

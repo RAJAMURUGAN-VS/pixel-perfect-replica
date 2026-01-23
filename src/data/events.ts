@@ -1,9 +1,10 @@
-import clawctfImage from '@/assets/clawctf.png';
-import paperPresentationImage from '@/assets/paper-presentation.png';
-import vibeAThonImage from '@/assets/vibe-a-thon.png';
-import strangerTunesImage from '@/assets/stranger-tunes.png';
-import daVinciCodeImage from '@/assets/the-da-vinci-code.png';
-import iplAuctionImage from '@/assets/ipl-auction.png';
+// Cloudinary image URLs
+const clawctfImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174649/clawctf_jnmzry.png';
+const paperPresentationImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174651/paper-presentation_n5uxau.png';
+const vibeAThonImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174649/vibe-a-thon_nfgt48.png';
+const strangerTunesImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174649/stranger-tunes_zwgzkm.png';
+const daVinciCodeImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174648/the-da-vinci-code_ufwzmk.jpg';
+const iplAuctionImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174648/ipl-auction_hq8q1r.jpg';
 
 export interface Event {
   id: string;
@@ -14,7 +15,7 @@ export interface Event {
   registrationLink: string;
   category: 'technical' | 'non-technical';
 }
-
+ 
 export const technicalEvents: Event[] = [
   {
     id: 'tech-1',
@@ -29,7 +30,7 @@ export const technicalEvents: Event[] = [
       'Static and dynamic scoring system'
     ],
     image: clawctfImage,
-    registrationLink: '#register',
+    registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLScPPhCodPBith9xpblxAMF5oGPuMMDcH8eiCyCBz9kn7MaV6A/viewform',
     category: 'technical'
   },
   {
@@ -44,7 +45,7 @@ export const technicalEvents: Event[] = [
       'Promotes research aptitude and technical communication'
     ],
     image: paperPresentationImage,
-    registrationLink: '#register',
+    registrationLink: 'https://forms.gle/9yLSVw8iXFDCXrnS8',
     category: 'technical'
   },
   {
@@ -59,7 +60,7 @@ export const technicalEvents: Event[] = [
       'Encourages innovative thinking in human–AI interaction'
     ],
     image: vibeAThonImage,
-    registrationLink: '#register',
+    registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLSdbowx9oRuvTa31clxxQUlliuXdY6i4z0Atjs5N1G9ddkgzb/viewform',
     category: 'technical'
   }
 ];
@@ -77,7 +78,7 @@ export const nonTechnicalEvents: Event[] = [
       'Decode surprises and guess before others'
     ],
     image: strangerTunesImage,
-    registrationLink: '#register',
+    registrationLink: 'https://forms.gle/SZcb7r1XyrjcKWTF6',
     category: 'non-technical'
   },
   {
@@ -92,7 +93,7 @@ export const nonTechnicalEvents: Event[] = [
       'Move ahead by solving clues in sequence'
     ],
     image: daVinciCodeImage,
-    registrationLink: '#register',
+    registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLScol5ECjW8Sc2-Jz5QxwOyFSZlaxp-867MIwTKoHeSHTMQSvA/viewform',
     category: 'non-technical'
   },
   {
@@ -107,7 +108,7 @@ export const nonTechnicalEvents: Event[] = [
       'Mix of cricket, competition, and campus fun'
     ],
     image: iplAuctionImage,
-    registrationLink: '#register',
+    registrationLink: 'https://forms.gle/zf7i4VAfcVc82NKa7',
     category: 'non-technical'
   }
 ];
