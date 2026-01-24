@@ -86,8 +86,8 @@ export const nonTechnicalEvents: Event[] = [
     image: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769259227/STRANGER_TUNES_LISTENING_TO_SONGS_okmpuc.png',
     registrationLink: 'https://forms.gle/SZcb7r1XyrjcKWTF6',
     category: 'non-technical',
-    studentCoordinator: "NIVETHA J",
-    contact: "6380388354",
+    studentCoordinator: "VISHNU PRIYA P G",
+    contact: "790452518",
   },
   {
     id: 'non-tech-2',
