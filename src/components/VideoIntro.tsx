@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Hls from 'hls.js';
 import frameImage from '@/assets/frame.png';
 
 interface VideoIntroProps {
@@ -11,19 +12,37 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const hlsRef = useRef<Hls | null>(null);
 
   useEffect(() => {
-    // Setup separate audio element
-    const audio = new Audio('https://res.cloudinary.com/dydplsxdj/video/upload/v1769103515/upscaled-video_hqh9wj.mp4');
-    audio.preload = 'auto';
-    audio.volume = 1;
-    audioRef.current = audio;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const src = '/hls/output.m3u8';
+
+    // Check if browser supports HLS natively (Safari)
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = src;
+    } else if (Hls.isSupported()) {
+      // Use HLS.js for other browsers
+      const hls = new Hls();
+      hls.loadSource(src);
+      hls.attachMedia(video);
+      hlsRef.current = hls;
+
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        setIsLoaded(true);
+      });
+
+      hls.on(Hls.Events.ERROR, (event, data) => {
+        console.error('HLS Error:', data);
+      });
+    }
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
+      if (hlsRef.current) {
+        hlsRef.current.destroy();
+        hlsRef.current = null;
       }
     };
   }, []);
@@ -32,17 +51,12 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
     const video = videoRef.current;
     if (!video) return;
     
-    // Play video muted
-    video.muted = true;
-    video.play();
-    
-    // Play audio separately
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.play().catch((err) => {
-        console.log('Audio play failed:', err);
-      });
-    }
+    // Play video with audio
+    video.muted = false;
+    video.volume = 1;
+    video.play().catch((err) => {
+      console.log('Video play failed:', err);
+    });
     
     setHasStarted(true);
   };
@@ -52,9 +66,6 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
     if (!video) return;
 
     const handleEnded = () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
       setIsPlaying(false);
       setTimeout(onComplete, 500);
     };
@@ -77,9 +88,6 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
     const video = videoRef.current;
     if (video) {
       video.pause();
-    }
-    if (audioRef.current) {
-      audioRef.current.pause();
     }
     setIsPlaying(false);
     setTimeout(onComplete, 300);
@@ -145,12 +153,7 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
             muted={true}
             preload="auto"
             style={{ opacity: hasStarted ? 1 : 0 }}
-          >
-            <source
-              src="https://res.cloudinary.com/dydplsxdj/video/upload/v1769103515/upscaled-video_hqh9wj.mp4"
-              type="video/mp4"
-            />
-          </video>
+          />
 
           {/* Skip button - only show after video has started */}
           {hasStarted && (
