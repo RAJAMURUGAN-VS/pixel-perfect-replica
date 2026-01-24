@@ -49,30 +49,31 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 50 }}
             transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="fixed inset-4 md:inset-8 lg:inset-16 z-50 flex items-center justify-center"
+            className="fixed inset-2 sm:inset-4 md:inset-8 lg:inset-16 z-50 flex items-center justify-center"
           >
-            <div className="tech-border bg-card/95 backdrop-blur-md w-full max-w-4xl h-full max-h-[90vh] overflow-hidden relative flex flex-col">
+            <div className="tech-border bg-card/95 backdrop-blur-md w-full max-w-4xl h-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden relative flex flex-col">
               {/* Close Button */}
               <motion.button
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={onClose}
-                className="absolute top-4 right-4 z-10 tech-border bg-background/80 p-2 text-foreground hover:text-accent transition-colors"
+                className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 tech-border bg-background/80 p-1.5 sm:p-2 text-foreground hover:text-accent transition-colors"
               >
-                <X size={20} />
+                <X size={16} className="sm:hidden" />
+                <X size={20} className="hidden sm:block" />
               </motion.button>
 
               {/* Content */}
-              <div className="p-6 md:p-8 lg:p-12 overflow-y-auto max-h-full">
+              <div className="p-4 sm:p-6 md:p-8 lg:p-12 overflow-y-auto max-h-full">
                 {/* Header */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.6 }}
-                  className="mb-8"
+                  className="mb-4 sm:mb-8"
                 >
                   {/* Event Image */}
-                  <div className="relative h-48 md:h-64 overflow-hidden tech-border mb-6">
+                  <div className="relative h-32 sm:h-48 md:h-64 overflow-hidden tech-border mb-4 sm:mb-6">
                     <img
                       src={event.image}
                       alt={event.title}
@@ -83,8 +84,8 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   </div>
 
                   {/* Category Badge */}
-                  <div className="mb-4">
-                    <div className={`tech-border px-4 py-2 inline-block text-sm font-terminal tracking-wider ${
+                  <div className="mb-2 sm:mb-4">
+                    <div className={`tech-border px-2 sm:px-4 py-1 sm:py-2 inline-block text-xs sm:text-sm font-terminal tracking-wider ${
                       event.category === 'technical' 
                         ? 'bg-accent/20 text-accent' 
                         : 'bg-primary/20 text-primary'
@@ -94,7 +95,7 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   </div>
 
                   {/* Title */}
-                  <h2 className="font-stranger text-3xl md:text-4xl lg:text-5xl glow-text tracking-wider mb-4">
+                  <h2 className="font-stranger text-xl sm:text-3xl md:text-4xl lg:text-5xl glow-text tracking-wider mb-2 sm:mb-4">
                     {event.title}
                   </h2>
                 </motion.div>
@@ -104,13 +105,13 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="mb-8"
+                  className="mb-4 sm:mb-8"
                 >
-                  <h3 className="font-stranger text-xl md:text-2xl text-foreground mb-4 tracking-wider">
+                  <h3 className="font-stranger text-base sm:text-xl md:text-2xl text-foreground mb-2 sm:mb-4 tracking-wider">
                     DESCRIPTION
                   </h3>
-                  <div className="tech-border bg-background/50 p-6">
-                    <p className="font-terminal text-base md:text-lg text-muted-foreground leading-relaxed tracking-wider">
+                  <div className="tech-border bg-background/50 p-3 sm:p-6">
+                    <p className="font-terminal text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed tracking-wider">
                       {event.description}
                     </p>
                   </div>
@@ -122,20 +123,20 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.6 }}
                 >
-                  <h3 className="font-stranger text-xl md:text-2xl text-foreground mb-4 tracking-wider">
+                  <h3 className="font-stranger text-base sm:text-xl md:text-2xl text-foreground mb-2 sm:mb-4 tracking-wider">
                     RULES & REGULATIONS
                   </h3>
-                  <div className="tech-border bg-background/50 p-6">
-                    <ul className="space-y-3">
+                  <div className="tech-border bg-background/50 p-3 sm:p-6">
+                    <ul className="space-y-2 sm:space-y-3">
                       {event.rules.map((rule, index) => (
                         <motion.li
                           key={index}
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
-                          className="font-terminal text-base md:text-lg text-muted-foreground tracking-wider flex items-start"
+                          className="font-terminal text-sm sm:text-base md:text-lg text-muted-foreground tracking-wider flex items-start"
                         >
-                          <span className="text-accent mr-3 mt-1">▶</span>
+                          <span className="text-accent mr-2 sm:mr-3 mt-0.5 sm:mt-1 text-sm">▶</span>
                           {rule}
                         </motion.li>
                       ))}
@@ -163,7 +164,7 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8, duration: 0.6 }}
-                  className="mt-8"
+                  className="mt-4 sm:mt-8"
                 >
                   <motion.a
                     href={event.registrationLink}
@@ -171,7 +172,7 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.02, boxShadow: '0 0 30px hsl(var(--accent) / 0.5)' }}
                     whileTap={{ scale: 0.98 }}
-                    className="block w-full text-center py-4 tech-border bg-accent/20 hover:bg-accent/30 text-accent font-terminal text-lg tracking-wider transition-all duration-300"
+                    className="block w-full text-center py-3 sm:py-4 tech-border bg-accent/20 hover:bg-accent/30 text-accent font-terminal text-base sm:text-lg tracking-wider transition-all duration-300"
                   >
                     APPLY NOW
                   </motion.a>
@@ -182,7 +183,7 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0.3 }}
                   transition={{ delay: 1, duration: 1 }}
-                  className="mt-8"
+                  className="mt-4 sm:mt-8 hidden sm:block"
                 >
                   <svg className="w-full h-8" viewBox="0 0 400 30" fill="none">
                     <path 
@@ -196,11 +197,11 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                 </motion.div>
               </div>
 
-              {/* Corner decorations */}
-              <div className="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-neon-cyan opacity-70" />
-              <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-neon-cyan opacity-70" />
-              <div className="absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 border-neon-cyan opacity-70" />
-              <div className="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-neon-cyan opacity-70" />
+              {/* Corner decorations - hidden on very small screens */}
+              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-4 h-4 sm:w-8 sm:h-8 border-t-2 border-l-2 border-neon-cyan opacity-70 hidden sm:block" />
+              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 w-4 h-4 sm:w-8 sm:h-8 border-t-2 border-r-2 border-neon-cyan opacity-70 hidden sm:block" />
+              <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 w-4 h-4 sm:w-8 sm:h-8 border-b-2 border-l-2 border-neon-cyan opacity-70 hidden sm:block" />
+              <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 w-4 h-4 sm:w-8 sm:h-8 border-b-2 border-r-2 border-neon-cyan opacity-70 hidden sm:block" />
             </div>
           </motion.div>
         </>

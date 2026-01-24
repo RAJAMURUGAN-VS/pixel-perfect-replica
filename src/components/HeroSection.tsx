@@ -11,8 +11,8 @@ interface HeroSectionProps {
   onInvestigate: () => void;
 }
 
-const VIDEO_1 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1769104411/WhatsApp_Video_2026-01-22_at_10.15.31_AM_fgai4j.mp4';
-const VIDEO_2 = 'https://res.cloudinary.com/dydplsxdj/video/upload/v1769104462/WhatsApp_Video_2026-01-22_at_10.15.32_AM_hwlvb7.mp4';
+const VIDEO_1 = 'https://res.cloudinary.com/dop49krua/video/upload/v1769185955/upscaled-video_2_rcviw0.mp4';
+const VIDEO_2 = 'https://res.cloudinary.com/dop49krua/video/upload/v1769185551/upscaled-video_1_vwbj6j.mp4';
 
 // Element animation config with subtle random delays for organic feel
 const elementConfigs = [
@@ -91,20 +91,21 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
       )}
 
       {/* Content - Each element animates independently */}
-      <div className="relative z-10 text-center px-4 mt-20">
+      <div className="relative z-10 text-center px-3 sm:px-4 mt-16 sm:mt-20">
         {/* Title Box */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={getElementStyle(elementConfigs[0].delay)}
-          className="tech-border bg-card/30 backdrop-blur-sm px-6 py-3 mb-8 inline-block origin-center"
+          className="tech-border bg-card/30 backdrop-blur-sm px-3 sm:px-6 py-2 sm:py-3 mb-4 sm:mb-8 inline-block origin-center"
         >
           <span className="font-terminal text-sm md:text-base text-muted-foreground">
             <span className="font-terminal text-sm md:text-base text-muted-foreground">
               <img
                 src={eventTitleImage}
-                className="text-base md:text-lg lg:text-xl"
+                className="max-w-[200px] sm:max-w-[280px] md:max-w-[320px] h-auto"
+                alt="Event Title"
               />
             </span>
           </span>
@@ -116,9 +117,9 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={getElementStyle(elementConfigs[1].delay)}
-          className="tech-border bg-card/30 backdrop-blur-sm px-8 py-4 mb-8 max-w-xl mx-auto origin-center"
+          className="tech-border bg-card/30 backdrop-blur-sm px-4 sm:px-8 py-3 sm:py-4 mb-4 sm:mb-8 max-w-xl mx-auto origin-center"
         >
-          <h1 className="font-terminal text-xl md:text-2xl text-foreground tracking-wider">
+          <h1 className="font-terminal text-base sm:text-xl md:text-2xl text-foreground tracking-wider">
             Organized By CSE DEPARTMENT
           </h1>
         </motion.div>
@@ -129,7 +130,7 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={getElementStyle(elementConfigs[2].delay)}
-          className="tech-border bg-card/30 backdrop-blur-sm px-8 py-6 mb-6 inline-block origin-center"
+          className="tech-border bg-card/30 backdrop-blur-sm px-4 sm:px-8 py-4 sm:py-6 mb-4 sm:mb-6 inline-block origin-center"
         >
           <CountdownTimer />
         </motion.div>
@@ -140,8 +141,8 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={getElementStyle(elementConfigs[3].delay)}
-          className="tech-border bg-card/30 backdrop-blur-sm px-8 py-4 mb-8
-             w-[420px] mx-auto origin-center"
+          className="tech-border bg-card/30 backdrop-blur-sm px-4 sm:px-8 py-3 sm:py-4 mb-6 sm:mb-8
+             w-full max-w-[420px] mx-auto origin-center text-sm sm:text-base font-terminal text-foreground tracking-wider"
         >
           GATE OPENING IMMINENT.<br />
           HAWKINS LAB UNDER ATTACK. PROTECT THE PARTY.
@@ -168,7 +169,7 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
           animate={{ opacity: 0.5 }}
           transition={{ duration: 1, delay: 1.2 }}
           style={getElementStyle(elementConfigs[5].delay)}
-          className="mt-12 max-w-2xl mx-auto origin-center"
+          className="mt-6 sm:mt-12 max-w-md sm:max-w-2xl mx-auto origin-center hidden sm:block"
         >
           <svg className="w-full h-12" viewBox="0 0 400 50" fill="none">
             <path 

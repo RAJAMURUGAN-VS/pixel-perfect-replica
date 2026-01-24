@@ -65,7 +65,7 @@ export const technicalEvents: Event[] = [
       'Encourages innovative thinking in human–AI interaction'
     ],
     image: vibeAThonImage,
-    registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLSdbowx9oRuvTa31clxxQUlliuXdY6i4z0Atjs5N1G9ddkgzb/viewform',
+    registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLSfr0dRgZtsaU2kSn88MGqg4O7SepEeT2qlhIlfxgS3MRxZGoQ/viewform',
     category: 'technical',
     studentCoordinator: "RAJAMURUGAN VS",
     contact: "8015766399",

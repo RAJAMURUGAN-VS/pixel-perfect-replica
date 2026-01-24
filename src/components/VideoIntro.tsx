@@ -112,25 +112,25 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
               onClick={startPlayback}
               className="absolute inset-0 cursor-pointer z-20"
             >
-              {/* Static frame image */}
+              {/* Static frame image - uses object-cover to maintain aspect ratio */}
               <img
                 src={frameImage}
                 alt="Click to play"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
               
               {/* Play overlay */}
-              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center px-4">
                 <motion.div
                   initial={{ scale: 0.9 }}
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex flex-col items-center gap-4"
+                  className="flex flex-col items-center gap-3 sm:gap-4"
                 >
-                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center tech-border">
-                    <span className="text-5xl md:text-6xl ml-2">▶</span>
+                  <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center tech-border">
+                    <span className="text-3xl sm:text-5xl md:text-6xl ml-1 sm:ml-2">▶</span>
                   </div>
-                  <span className="font-terminal text-lg md:text-2xl text-[hsl(var(--neon-cyan))] glow-text tracking-wider">
+                  <span className="font-terminal text-sm sm:text-lg md:text-2xl text-[hsl(var(--neon-cyan))] glow-text tracking-wider text-center">
                     CLICK ANYWHERE TO PLAY
                   </span>
                 </motion.div>
@@ -159,9 +159,9 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
               onClick={handleSkip}
-              className="absolute bottom-8 right-8 tech-border px-6 py-3 bg-card/80 backdrop-blur-sm hover:bg-card transition-all z-30"
+              className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 tech-border px-4 py-2 sm:px-6 sm:py-3 bg-card/80 backdrop-blur-sm hover:bg-card transition-all z-30"
             >
-              <span className="font-terminal text-sm md:text-base text-foreground tracking-wider hover:text-accent transition-colors">
+              <span className="font-terminal text-xs sm:text-sm md:text-base text-foreground tracking-wider hover:text-accent transition-colors">
                 SKIP INTRO
               </span>
             </motion.button>
