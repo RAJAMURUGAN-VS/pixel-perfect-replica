@@ -42,10 +42,10 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
             className="h-10 w-10 object-contain"
           />
           <div className="leading-tight">
-            <h1 className="font-terminal text-sm md:text-base text-foreground tracking-wide">
+            <h1 className="font-[Poppins] text-sm md:text-base font-semibold text-foreground tracking-wide">
               R.M.D. Engineering College
             </h1>
-            <p className="font-terminal text-xs text-muted-foreground">
+            <p className="font-[Poppins] text-xs text-muted-foreground">
               (An Autonomous Institution)
             </p>
           </div>

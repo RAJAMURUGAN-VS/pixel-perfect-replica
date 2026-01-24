@@ -2,7 +2,6 @@
 const clawctfImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174649/clawctf_jnmzry.png';
 const paperPresentationImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174651/paper-presentation_n5uxau.png';
 const vibeAThonImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174649/vibe-a-thon_nfgt48.png';
-const strangerTunesImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174649/stranger-tunes_zwgzkm.png';
 const daVinciCodeImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174648/the-da-vinci-code_ufwzmk.jpg';
 const iplAuctionImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174648/ipl-auction_hq8q1r.jpg';
 
@@ -14,11 +13,30 @@ export interface Event {
   image: string;
   registrationLink: string;
   category: 'technical' | 'non-technical';
+  studentCoordinator: string;
+  contact: string;
 }
  
 export const technicalEvents: Event[] = [
   {
     id: 'tech-1',
+    title: 'Paper Presentation',
+    description: 'Paper Presentation provides a platform for participants to showcase research ideas, technical concepts, or innovative solutions. It evaluates analytical skills, depth of knowledge, and presentation clarity. Participants defend their work through structured explanation and Q&A. The event promotes research aptitude and technical communication. It fosters confidence and academic excellence.',
+    rules: [
+      'Individual or team participation',
+      'Research ideas, technical concepts, or innovative solutions',
+      'Structured explanation and Q&A required',
+      'Evaluates analytical skills and presentation clarity',
+      'Promotes research aptitude and technical communication'
+    ],
+    image: paperPresentationImage,
+    registrationLink: 'https://forms.gle/9yLSVw8iXFDCXrnS8',
+    category: 'technical',
+    studentCoordinator: "JAYA KUMAR S",
+    contact: "9123540151",
+  },
+  {
+    id: 'tech-2',
     title: 'ClawCTF',
     description: 'ClawCTF is a 2-hour Capture The Flag competition open to students from all colleges. Compete solo or in teams of up to 2, solve challenges across multiple cybersecurity categories, and earn points by capturing flags. Beginner to intermediate friendly, with static and dynamic scoring and AI tools allowed.',
     rules: [
@@ -31,22 +49,9 @@ export const technicalEvents: Event[] = [
     ],
     image: clawctfImage,
     registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLScPPhCodPBith9xpblxAMF5oGPuMMDcH8eiCyCBz9kn7MaV6A/viewform',
-    category: 'technical'
-  },
-  {
-    id: 'tech-2',
-    title: 'Paper Presentation',
-    description: 'Paper Presentation provides a platform for participants to showcase research ideas, technical concepts, or innovative solutions. It evaluates analytical skills, depth of knowledge, and presentation clarity. Participants defend their work through structured explanation and Q&A. The event promotes research aptitude and technical communication. It fosters confidence and academic excellence.',
-    rules: [
-      'Individual or team participation',
-      'Research ideas, technical concepts, or innovative solutions',
-      'Structured explanation and Q&A required',
-      'Evaluates analytical skills and presentation clarity',
-      'Promotes research aptitude and technical communication'
-    ],
-    image: paperPresentationImage,
-    registrationLink: 'https://forms.gle/9yLSVw8iXFDCXrnS8',
-    category: 'technical'
+    category: 'technical',
+    studentCoordinator: "KEERTHI K P",
+    contact: "9360174225",
   },
   {
     id: 'tech-3',
@@ -61,7 +66,9 @@ export const technicalEvents: Event[] = [
     ],
     image: vibeAThonImage,
     registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLSdbowx9oRuvTa31clxxQUlliuXdY6i4z0Atjs5N1G9ddkgzb/viewform',
-    category: 'technical'
+    category: 'technical',
+    studentCoordinator: "RAJAMURUGAN VS",
+    contact: "8015766399",
   }
 ];
 
@@ -71,15 +78,16 @@ export const nonTechnicalEvents: Event[] = [
     title: '🎬✨ Stranger Tunes',
     description: 'What happens when movies, music, and a touch of the Upside Down collide? Stranger Tunes is a high-energy, non-technical team event blending visual clues, iconic sounds, lyrical twists, and unexpected challenges inspired by pop culture and Kollywood. If you love guessing before others do, vibing to BGMs, and decoding surprises, this is your Hawkins moment.',
     rules: [
-      'Team event',
-      'High-energy non-technical competition',
-      'Visual clues, iconic sounds, and lyrical twists',
-      'Inspired by pop culture and Kollywood',
-      'Decode surprises and guess before others'
+      'On-spot registration is also available',
+      'Teams must consist of 2–3 members',
+      'Each team is required to bring either a mobile phone or a laptop to participate in the buzzer-based rounds.',
+      'Teams must wait for their turn to answer after pressing the buzzer',
     ],
-    image: strangerTunesImage,
+    image: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769259227/STRANGER_TUNES_LISTENING_TO_SONGS_okmpuc.png',
     registrationLink: 'https://forms.gle/SZcb7r1XyrjcKWTF6',
-    category: 'non-technical'
+    category: 'non-technical',
+    studentCoordinator: "KRUTHIKA S T",
+    contact: "9360308572",
   },
   {
     id: 'non-tech-2',
@@ -94,7 +102,9 @@ export const nonTechnicalEvents: Event[] = [
     ],
     image: daVinciCodeImage,
     registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLScol5ECjW8Sc2-Jz5QxwOyFSZlaxp-867MIwTKoHeSHTMQSvA/viewform',
-    category: 'non-technical'
+    category: 'non-technical',
+    studentCoordinator: "NIVETHA J",
+    contact: "6380388354",
   },
   {
     id: 'non-tech-3',
@@ -109,7 +119,9 @@ export const nonTechnicalEvents: Event[] = [
     ],
     image: iplAuctionImage,
     registrationLink: 'https://forms.gle/zf7i4VAfcVc82NKa7',
-    category: 'non-technical'
+    category: 'non-technical',
+    studentCoordinator: "KARUNAMOORTHI R",
+    contact: "9025681889",
   }
 ];
 

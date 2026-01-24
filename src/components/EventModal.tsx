@@ -143,6 +143,21 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   </div>
                 </motion.div>
 
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
+                >
+                  <h3 className="font-stranger text-xl md:text-2xl text-foreground mb-4 tracking-wider mt-8">
+                    Event Connect
+                  </h3>
+                  <div className="tech-border bg-background/50 p-6">
+                    <span className="text-accent mr-3 mt-1">▶</span>
+                    <span>{event.studentCoordinator}</span>
+                    <span className="ml-4">{event.contact}</span>
+                  </div>
+                </motion.div>
+
                 {/* Apply Button */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}

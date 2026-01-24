@@ -1,39 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import partyImage from '@/assets/con-1.jpg';
 
-interface SlideData {
-  title: string;
-  subtitle: string;
-  description: string;
-  image: string;
-}
 
-const slides: SlideData[] = [
-  {
-    title: '',
-    subtitle: '',
-    description: '',
-    image: partyImage,
-  },
-  {
-    title: '',
-    subtitle: '',
-    description: '',
-    image: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137598/card-1_eln5kv.jpg',
-  },
-  {
-    title: '',
-    subtitle: '',
-    description: '',
-    image: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137613/card-3_ucz5hr.jpg',
-  },
-  {
-    title: '',
-    subtitle: '',
-    description: '',
-    image: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137605/card-2_yvk7hr.jpg',
-  },
+const slides = [
+  'https://res.cloudinary.com/dydplsxdj/image/upload/v1769258170/con-1_gyfzow.jpg',
+  'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137598/card-1_eln5kv.jpg',
+  'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137613/card-3_ucz5hr.jpg',
+  'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137605/card-2_yvk7hr.jpg',
 ];
 
 const AboutSlider = () => {
@@ -47,7 +20,7 @@ const AboutSlider = () => {
   useEffect(() => {
     if (isPaused) return;
 
-    const interval = setInterval(nextSlide, 2000);
+    const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
   }, [isPaused, nextSlide]);
 
@@ -58,11 +31,8 @@ const AboutSlider = () => {
   };
 
   return (
-    <section className="relative pt-20 pb-[5px] px-4 md:px-8 overflow-hidden">
+    <section className="relative pt-4 pb-[5px] px-4 md:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <h2 className="font-stranger text-2xl md:text-3xl glow-text mb-12 tracking-wider text-center">
-          ABOUT
-        </h2>
 
         <div
           className="relative w-full max-w-[90%] mx-auto"
@@ -85,38 +55,12 @@ const AboutSlider = () => {
                   className="absolute inset-0"
                 >
                   <img
-                    src={slides[currentIndex].image}
-                    alt={slides[currentIndex].title}
+                    src={slides[currentIndex]}
+                    alt={slides[currentIndex]}
                     className="w-full h-full object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                  
-                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
-                    <motion.h3
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.2, duration: 0.5 }}
-                      className="font-stranger text-xl md:text-3xl text-accent mb-2 tracking-wider"
-                    >
-                      {slides[currentIndex].title}
-                    </motion.h3>
-                    <motion.p
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.3, duration: 0.5 }}
-                      className="font-terminal text-lg md:text-xl text-foreground mb-3 tracking-wider"
-                    >
-                      {slides[currentIndex].subtitle}
-                    </motion.p>
-                    <motion.p
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.4, duration: 0.5 }}
-                      className="font-terminal text-sm md:text-base text-muted-foreground tracking-wider max-w-xl"
-                    >
-                      {slides[currentIndex].description}
-                    </motion.p>
-                  </div>
+
                 </motion.div>
               </AnimatePresence>
             </div>

@@ -138,7 +138,7 @@ const AboutSection = () => {
                       venue: "CSE DEPARTMENT",
                     },
                     {
-                      name: "Vibe Coding",
+                      name: "Vibe-A-Thon",
                       studentCoordinator: "RAJAMURUGAN V S",
                       contact: "8015766399",
                       venue: "CSE DEPARTMENT",
