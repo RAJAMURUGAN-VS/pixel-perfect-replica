@@ -64,7 +64,7 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
               </motion.button>
 
               {/* Content */}
-              <div className="p-4 sm:p-6 md:p-8 lg:p-12 overflow-y-auto max-h-full">
+              <div className="pt-16 sm:pt-20 pb-4 sm:pb-6 px-4 sm:px-6 md:px-8 lg:px-12 overflow-y-auto max-h-full scrollbar-hide">
                 {/* Header */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
