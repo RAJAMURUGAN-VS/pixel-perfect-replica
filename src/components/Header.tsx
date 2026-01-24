@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react';
 import logo from '@/assets/RMDEC.png';
@@ -12,6 +12,16 @@ interface HeaderProps {
 
 const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleNavClick = (section: NavigationSection) => {
     if (onNavigate) {
@@ -31,9 +41,16 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
     <>
       <motion.header
         initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="fixed top-0 left-0 right-0 z-50 px-3 py-3 md:px-8 md:py-4"
+        animate={{ 
+          opacity: 1, 
+          y: 0,
+          backgroundColor: isScrolled ? 'hsl(var(--background) / 0.95)' : 'transparent',
+          backdropFilter: isScrolled ? 'blur(12px)' : 'blur(0px)'
+        }}
+        transition={{ duration: 0.3 }}
+        className={`fixed top-0 left-0 right-0 z-50 px-3 py-3 md:px-8 md:py-4 ${
+          isScrolled ? 'shadow-lg shadow-black/20' : ''
+        }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
 
