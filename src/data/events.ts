@@ -1,9 +1,9 @@
 // Cloudinary image URLs
-const clawctfImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174649/clawctf_jnmzry.png';
-const paperPresentationImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174651/paper-presentation_n5uxau.png';
-const vibeAThonImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174649/vibe-a-thon_nfgt48.png';
-const daVinciCodeImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174648/the-da-vinci-code_ufwzmk.jpg';
-const iplAuctionImage = 'https://res.cloudinary.com/dop49krua/image/upload/v1769174648/ipl-auction_hq8q1r.jpg';
+const paperPresentationImage = 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769272314/event-1_rdzbjd.jpg';
+const clawctfImage = 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769272314/event-2_i5dtfz.jpg';
+const vibeAThonImage = 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769272314/event-3_holwyt.jpg';
+const daVinciCodeImage = 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769272314/event-4_kedt5j.jpg';
+const iplAuctionImage = 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769272519/event-5_mzgrsc.jpg';
 
 export interface Event {
   id: string;
@@ -86,8 +86,8 @@ export const nonTechnicalEvents: Event[] = [
     image: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769259227/STRANGER_TUNES_LISTENING_TO_SONGS_okmpuc.png',
     registrationLink: 'https://forms.gle/SZcb7r1XyrjcKWTF6',
     category: 'non-technical',
-    studentCoordinator: "KRUTHIKA S T",
-    contact: "9360308572",
+    studentCoordinator: "NIVETHA J",
+    contact: "6380388354",
   },
   {
     id: 'non-tech-2',
@@ -103,8 +103,8 @@ export const nonTechnicalEvents: Event[] = [
     image: daVinciCodeImage,
     registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLScol5ECjW8Sc2-Jz5QxwOyFSZlaxp-867MIwTKoHeSHTMQSvA/viewform',
     category: 'non-technical',
-    studentCoordinator: "NIVETHA J",
-    contact: "6380388354",
+    studentCoordinator: "KIRUTHIKA S T",
+    contact: "9360308572",
   },
   {
     id: 'non-tech-3',

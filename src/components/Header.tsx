@@ -48,10 +48,10 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
               className="h-8 w-8 md:h-10 md:w-10 object-contain"
             />
             <div className="leading-tight">
-              <h1 className="font-terminal text-xs md:text-base text-foreground tracking-wide">
+              <h1 className="font-[Montserrat] text-sm md:text-base font-bold text-foreground tracking-wide">
                 R.M.D. Engineering College
               </h1>
-              <p className="font-terminal text-[10px] md:text-xs text-muted-foreground">
+              <p className="font-[Montserrat] text-xs text-muted-foreground">
                 (An Autonomous Institution)
               </p>
             </div>
@@ -86,7 +86,7 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
               <img
                 src={acmLogo}
                 alt="ACM Logo"
-                className="h-10 md:h-12 w-auto object-contain cursor-pointer hover:opacity-80 transition-opacity"
+                className="h-8 md:h-10 w-auto object-contain cursor-pointer hover:opacity-80 transition-opacity"
               />
             </motion.div>
           </nav>

@@ -144,15 +144,15 @@ const AboutSection = () => {
                       venue: "CSE DEPARTMENT",
                     },
                     {
-                      name: "The da vinci code",
-                      studentCoordinator: "KRUTHIKA S T",
-                      contact: "9360308572",
-                      venue: "CSE DEPARTMENT",
-                    },
-                    {
                       name: "Stranger Tunes",
                       studentCoordinator: "NIVETHA J",
                       contact: "6380388354",
+                      venue: "CSE DEPARTMENT",
+                    },
+                    {
+                      name: "The da vinci code",
+                      studentCoordinator: "KIRUTHIKA S T",
+                      contact: "9360308572",
                       venue: "CSE DEPARTMENT",
                     },
                     {
