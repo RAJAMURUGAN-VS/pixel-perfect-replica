@@ -10,8 +10,14 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loaderPhase, setLoaderPhase] = useState<'void' | 'streaks' | 'assemble' | 'waiting' | 'pulse' | 'exit'>('void');
+  const [isMobile, setIsMobile] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<Hls | null>(null);
+
+  // Detect mobile device
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   // Cinematic loader sequence
   useEffect(() => {
@@ -144,16 +150,18 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
               animate={{ opacity: loaderPhase === 'exit' ? 0 : 1 }}
               transition={{ duration: 0.6, delay: loaderPhase === 'exit' ? 0.4 : 0 }}
             >
-              {/* Cinematic Grain & Vignette */}
+              {/* Cinematic Grain & Vignette - Simplified on mobile */}
               <div className="absolute inset-0 z-40 pointer-events-none">
-                <div className="absolute inset-0 opacity-20 brightness-200 contrast-200 mix-blend-overlay" 
-                     style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }} />
+                {!isMobile && (
+                  <div className="absolute inset-0 opacity-20 brightness-200 contrast-200 mix-blend-overlay" 
+                       style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }} />
+                )}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_90%)]" />
               </div>
 
-              {/* Upside Down Spores/Particles */}
+              {/* Upside Down Spores/Particles - Reduced on mobile */}
               <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
-                {[...Array(20)].map((_, i) => (
+                {[...Array(isMobile ? 8 : 20)].map((_, i) => (
                   <motion.div
                     key={`spore-${i}`}
                     initial={{ 
@@ -172,6 +180,7 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
                       ease: "linear",
                       delay: Math.random() * 2 
                     }}
+                    style={{ willChange: 'transform, opacity' }}
                     className="absolute w-1 h-1 rounded-full bg-slate-400 blur-[1px]"
                   />
                 ))}
@@ -184,11 +193,11 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
                 transition={{ duration: 4, repeat: Infinity }}
               />
 
-              {/* Neon Streaks */}
+              {/* Neon Streaks - Reduced on mobile */}
               <AnimatePresence>
                 {loaderPhase === 'streaks' && (
                   <div className="absolute inset-0 z-20 pointer-events-none">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(isMobile ? 3 : 5)].map((_, i) => (
                       <motion.div
                         key={`h-streak-${i}`}
                         initial={{ x: '-100%', opacity: 0, scaleY: 1 }}
@@ -198,11 +207,15 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
                           delay: i * 0.3,
                           ease: [0.43, 0.13, 0.23, 0.96] 
                         }}
-                        className="absolute left-0 h-[2px] w-full bg-red-600 shadow-[0_0_20px_rgba(255,0,0,0.8)]"
-                        style={{ top: `${20 + Math.random() * 60}%` }}
+                        className="absolute left-0 h-[2px] w-full bg-red-600"
+                        style={{ 
+                          top: `${20 + Math.random() * 60}%`,
+                          willChange: 'transform',
+                          boxShadow: isMobile ? 'none' : '0 0 20px rgba(255,0,0,0.8)'
+                        }}
                       />
                     ))}
-                    {[...Array(3)].map((_, i) => (
+                    {!isMobile && [...Array(3)].map((_, i) => (
                       <motion.div
                         key={`v-streak-${i}`}
                         initial={{ y: '100%', opacity: 0 }}
@@ -212,8 +225,12 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
                           delay: 0.5 + i * 0.4,
                           ease: "easeInOut" 
                         }}
-                        className="absolute top-0 w-[1px] h-full bg-red-500 blur-[2px]"
-                        style={{ left: `${30 + Math.random() * 40}%` }}
+                        className="absolute top-0 w-[1px] h-full bg-red-500"
+                        style={{ 
+                          left: `${30 + Math.random() * 40}%`,
+                          willChange: 'transform',
+                          filter: 'blur(2px)'
+                        }}
                       />
                     ))}
                   </div>
@@ -223,24 +240,25 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
               {/* Main Title */}
               <div className="relative z-30 flex flex-col items-center justify-center">
                 <motion.div
-                  initial={{ opacity: 0, scale: 3, letterSpacing: '1.5em', filter: 'blur(20px)' }}
+                  initial={{ opacity: 0, scale: 3, letterSpacing: '1.5em' }}
                   animate={{ 
                     opacity: loaderPhase === 'void' || loaderPhase === 'streaks' ? 0 : 1,
                     scale: loaderPhase === 'pulse' ? 1.05 : loaderPhase === 'exit' ? 50 : 1,
-                    letterSpacing: loaderPhase === 'pulse' ? '0.25em' : '0.3em',
-                    filter: loaderPhase === 'pulse' ? 'blur(0px) brightness(1.5)' : 'blur(0px) brightness(1)'
+                    letterSpacing: loaderPhase === 'pulse' ? '0.25em' : '0.3em'
                   }}
                   transition={{ 
                     duration: loaderPhase === 'exit' ? 0.8 : 3,
                     ease: [0.43, 0.13, 0.23, 0.96]
                   }}
                   className="text-center"
+                  style={{ willChange: 'transform, opacity' }}
                 >
                   <h1 className="relative text-4xl sm:text-6xl md:text-8xl font-black text-transparent tracking-widest uppercase"
                       style={{ 
                         fontFamily: "'Cinzel', serif",
                         WebkitTextStroke: '2px #c51b1b',
-                        textShadow: '0 0 30px rgba(220, 38, 38, 0.5)'
+                        textShadow: isMobile ? '0 0 15px rgba(220, 38, 38, 0.5)' : '0 0 30px rgba(220, 38, 38, 0.5)',
+                        willChange: 'transform'
                       }}
                   >
                     GATE OPENING
@@ -261,6 +279,7 @@ const VideoIntro = ({ onComplete }: VideoIntroProps) => {
                       y: 0 
                     }}
                     transition={{ duration: 1, delay: 0.5 }}
+                    style={{ willChange: 'transform, opacity' }}
                     className="mt-4 sm:mt-6 flex items-center justify-center gap-4"
                   >
                     <div className="h-[1px] w-8 sm:w-12 bg-red-800 shadow-[0_0_10px_red]" />

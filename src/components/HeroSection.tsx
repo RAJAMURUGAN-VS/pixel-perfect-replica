@@ -11,8 +11,8 @@ interface HeroSectionProps {
   onInvestigate: () => void;
 }
 
-const VIDEO_1 = 'https://res.cloudinary.com/dop49krua/video/upload/v1769185955/upscaled-video_2_rcviw0.mp4';
-const VIDEO_2 = 'https://res.cloudinary.com/dop49krua/video/upload/v1769185551/upscaled-video_1_vwbj6j.mp4';
+const VIDEO_1 = '/hls/vid1/output2.m3u8';
+const VIDEO_2 = '/hls/vid2/video1.m3u8';
 
 // Element animation config with subtle random delays for organic feel
 const elementConfigs = [

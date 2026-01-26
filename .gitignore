@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Video chunks (large files)
+public/hls/**/*.ts
+*.ts.map
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
