@@ -31,8 +31,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden scanlines">
-      {/* Particle Effect */}
-      <ParticleBackground />
+      {/* Preload video for events section in background */}
+      <link rel="preload" as="fetch" href="/hls/merged/merged.m3u8" />
+      
+      {/* Particle Effect - Hide when in events section */}
+      {currentSection !== 'events' && <ParticleBackground />}
 
       {/* Main Content */}
       <div className="relative z-10">
@@ -41,7 +44,7 @@ const Index = () => {
           <Header onNavigate={handleNavigate} currentSection={currentSection} />
         )}
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode={currentSection === 'events' ? 'sync' : 'wait'}>
           {/* Home Section */}
           {currentSection === 'home' && (
             <motion.div
@@ -83,18 +86,12 @@ const Index = () => {
 
           {/* Events Section - with cinematic transition */}
           {currentSection === 'events' && (
-            <motion.div
-              key="events"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
+            <div key="events">
               <EventsSectionWrapper
                 isActive={currentSection === 'events'}
                 onNavigate={handleNavigate}
               />
-            </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </div>

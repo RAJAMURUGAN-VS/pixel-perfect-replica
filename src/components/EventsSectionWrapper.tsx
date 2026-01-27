@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import VideoBackground from './VideoBackground';
 import EventCards from './EventCards';
 import { NavigationSection } from '@/hooks/useNavigation';
+import heroImage from '@/assets/hero-background.jpg';
 
 interface EventsSectionWrapperProps {
   isActive: boolean;
@@ -11,8 +12,8 @@ interface EventsSectionWrapperProps {
 
 export type EventsPhase = 'idle' | 'phase1' | 'phase2' | 'phase3' | 'complete';
 
-const VIDEO_1 = '/hls/vid1/output2.m3u8';
-const VIDEO_2 = '/hls/vid2/video1.m3u8';
+// Single merged HLS stream with all chunks
+const VIDEO_MERGED = '/hls/merged/merged.m3u8';
 
 const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProps) => {
   const [phase, setPhase] = useState<EventsPhase>('idle');
@@ -41,15 +42,12 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
   useEffect(() => {
     if (isActive && !hasStartedRef.current) {
       hasStartedRef.current = true;
-      // Small delay to ensure smooth transition
-      const timeout = setTimeout(() => {
-        setIsAnimating(true);
-        setElapsedTime(0);
-        setPhase('phase1');
-        setIsVideoEnded(false);
-        setShowEventCards(false);
-      }, 100);
-      return () => clearTimeout(timeout);
+      // Immediate start - no delay
+      setIsAnimating(true);
+      setElapsedTime(0);
+      setPhase('phase1');
+      setIsVideoEnded(false);
+      setShowEventCards(false);
     }
 
     if (!isActive) {
@@ -108,28 +106,23 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
 
   return (
     <div className="min-h-screen relative">
-      <AnimatePresence mode="wait">
-        {!isComplete && (
-          <motion.div
-            key="transition-animation"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="fixed inset-0 z-40"
+      {!isComplete && (
+        <div className="fixed inset-0 z-40">
+          {/* Static Background Image - Shows before video starts */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${heroImage})`, zIndex: 0 }}
           >
-            {/* Phase 1 Video Background */}
-            <VideoBackground
-              src={VIDEO_1}
-              isActive={phase === 'phase1'}
-            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
+          </div>
 
-            {/* Phase 2 Video Background */}
-            <VideoBackground
-              src={VIDEO_2}
-              isActive={phase === 'phase2' || phase === 'phase3'}
-            />
+          {/* Single merged video that plays all chunks sequentially */}
+          <VideoBackground
+            src={VIDEO_MERGED}
+            isActive={phase === 'phase1' || phase === 'phase2' || phase === 'phase3'}
+          />
 
-            {/* Dark overlay */}
+          {/* Dark overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background/50 z-[1]" />
 
             {/* Animated transition elements */}
@@ -176,21 +169,18 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
                 SKIP
               </span>
             </motion.button>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
 
       {/* Event Cards - Show after sequence completes */}
-      <AnimatePresence>
-        {showEventCards && (
-          <EventCards
-            isVisible={showEventCards}
-            isVideoEnded={isVideoEnded}
-            onVideoEnd={onSecondVideoEnd}
-            onNavigate={onNavigate}
-          />
-        )}
-      </AnimatePresence>
+      {showEventCards && (
+        <EventCards
+          isVisible={showEventCards}
+          isVideoEnded={isVideoEnded}
+          onVideoEnd={onSecondVideoEnd}
+          onNavigate={onNavigate}
+        />
+      )}
     </div>
   );
 };

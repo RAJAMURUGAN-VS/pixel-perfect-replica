@@ -7,7 +7,7 @@ interface EventCardsProps {
   onVideoEnd: () => void;
 }
 
-const VIDEO_2 = 'https://res.cloudinary.com/dop49krua/video/upload/v1769185551/upscaled-video_1_vwbj6j.mp4';
+const VIDEO_2 = '/hls/merged/merged.m3u8';
 const FINAL_IMAGE = 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769003462/Gemini_Generated_Image_8a86wr8a86wr8a86_wd9xyu.png';
 
 const EventCards = ({ isVisible, isVideoEnded, onVideoEnd }: EventCardsProps) => {
