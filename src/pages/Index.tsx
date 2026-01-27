@@ -6,6 +6,7 @@ import HomeSection from '@/components/HomeSection';
 import AboutSectionPage from '@/components/AboutSectionPage';
 import ContactSection from '@/components/ContactSection';
 import EventsSectionWrapper from '@/components/EventsSectionWrapper';
+import CrewSection from '@/components/CrewSection';
 import VideoIntro from '@/components/VideoIntro';
 import { useNavigation, NavigationSection } from '@/hooks/useNavigation';
 
@@ -30,12 +31,12 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background relative overflow-x-hidden scanlines">
+    <div className={`min-h-screen bg-background relative scanlines ${currentSection !== 'crew' ? 'overflow-x-hidden' : ''}`}>
       {/* Preload video for events section in background */}
       <link rel="preload" as="fetch" href="/hls/merged/merged.m3u8" />
-      
-      {/* Particle Effect - Hide when in events section */}
-      {currentSection !== 'events' && <ParticleBackground />}
+
+      {/* Particle Effect - Hide when in events or crew section */}
+      {currentSection !== 'events' && currentSection !== 'crew' && <ParticleBackground />}
 
       {/* Main Content */}
       <div className="relative z-10">
@@ -82,6 +83,13 @@ const Index = () => {
             >
               <ContactSection />
             </motion.div>
+          )}
+
+          {/* Crew Section */}
+          {currentSection === 'crew' && (
+            <div key="crew">
+              <CrewSection />
+            </div>
           )}
 
           {/* Events Section - with cinematic transition */}

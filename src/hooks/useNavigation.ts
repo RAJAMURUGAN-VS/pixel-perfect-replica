@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-export type NavigationSection = 'home' | 'about' | 'events' | 'contact';
+export type NavigationSection = 'home' | 'about' | 'events' | 'contact' | 'crew';
 
 interface UseNavigationReturn {
   currentSection: NavigationSection;

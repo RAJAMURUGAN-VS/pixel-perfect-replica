@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
 import Header from './Header';
 import EventCategorySection from './EventCategorySection';
 import EventModal from './EventModal';
 import { Event } from '@/data/events';
 import { NavigationSection } from '@/hooks/useNavigation';
+import { TIMELINE } from '@/data/crew';
+import { TimelineEvent } from '@/data/crewTypes';
 
 interface EventCardsProps {
   isVisible: boolean;
@@ -16,6 +18,74 @@ interface EventCardsProps {
 const FINAL_IMAGE = 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769003462/Gemini_Generated_Image_8a86wr8a86wr8a86_wd9xyu.png';
 
 type ViewState = 'categories' | 'technical' | 'non-technical';
+
+// Timeline Item Component
+const TimelineItem = ({ event, index, isLast }: { event: TimelineEvent; index: number; isLast: boolean }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const isEven = index % 2 === 0;
+
+  return (
+    <div ref={ref} className={`relative flex items-center justify-between w-full ${isLast ? 'mb-0' : 'mb-20 md:mb-32'} ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+      {/* Dot */}
+      <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent z-10 border-4 border-background">
+        <motion.div
+          animate={{ scale: [1, 1.4, 1] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="absolute inset-0 rounded-full bg-accent/50 -z-10"
+        />
+      </div>
+
+      {/* Content Card */}
+      <motion.div
+        initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className={`w-full md:w-[45%] p-6 md:p-8 rounded-2xl tech-border bg-card/50 backdrop-blur-lg ${isEven ? 'text-left md:text-right' : 'text-left'}`}
+      >
+        <span className="text-accent font-terminal text-sm font-bold tracking-widest block mb-2">{event.date}</span>
+        <h3 className="text-2xl font-bold text-foreground mb-3">{event.title}</h3>
+        <p className="text-muted-foreground leading-relaxed text-sm md:text-base">{event.description}</p>
+      </motion.div>
+
+      {/* Spacer */}
+      <div className="hidden md:block w-[45%]" />
+    </div>
+  );
+};
+
+// Timeline Content with Scroll Progress
+const TimelineContent = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]  // Changed to detect when entering/leaving viewport
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0.2, 0.9], ["0%", "100%"]);  // Start at 20% scroll progress
+
+  return (
+    <div ref={containerRef} className="relative">
+      {/* Background Track */}
+      <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-foreground/5 -translate-x-1/2 z-0" />
+
+      {/* Animated Line */}
+      <motion.div
+        style={{ height: lineHeight }}
+        className="absolute left-1/2 top-0 w-1 bg-accent -translate-x-1/2 shadow-[0_0_20px_hsl(var(--accent))] z-[100]"
+      />
+
+      {TIMELINE.map((event, idx) => (
+        <TimelineItem
+          key={idx}
+          event={event}
+          index={idx}
+          isLast={idx === TIMELINE.length - 1}
+        />
+      ))}
+    </div>
+  );
+};
 
 const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCardsProps) => {
   const [currentView, setCurrentView] = useState<ViewState>('categories');
@@ -83,12 +153,12 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${FINAL_IMAGE})` }}
         />
- 
+
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background/60 z-[1]" />
 
         {/* Content */}
-        <div className="relative z-10 w-full h-full overflow-y-auto pt-4">
+        <div className="relative z-10 w-full h-full overflow-y-auto pt-4 hide-scrollbar">
           <AnimatePresence mode="wait">
             {currentView === 'categories' ? (
               <motion.div
@@ -140,6 +210,21 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
                     </motion.div>
                   ))}
                 </div>
+
+                {/* Timeline Section */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                  className="w-full mt-16 sm:mt-24 max-w-5xl mx-auto"
+                >
+                  <div className="text-center mb-16">
+                    <h2 className="text-2xl md:text-4xl font-bold text-foreground font-stranger mb-4">THE CHRONICLE</h2>
+                    <div className="w-24 h-1 bg-accent mx-auto" />
+                  </div>
+
+                  <TimelineContent />
+                </motion.div>
               </motion.div>
             ) : (
               <motion.div

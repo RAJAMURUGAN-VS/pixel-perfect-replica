@@ -34,6 +34,7 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
     { key: 'home', label: 'HOME' },
     { key: 'about', label: 'ABOUT' },
     { key: 'events', label: 'EVENTS' },
+    { key: 'crew', label: 'THE CREW' },
     { key: 'contact', label: 'CONTACT US' },
   ];
 
