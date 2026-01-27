@@ -11,9 +11,10 @@ const VideoBackground = ({ src, isActive, onEnded }: VideoBackgroundProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<Hls | null>(null);
 
+  // Initialize HLS on mount
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !isActive) return; // Only load when active
+    if (!video) return;
 
     // Check if browser supports HLS natively (Safari)
     if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -23,10 +24,10 @@ const VideoBackground = ({ src, isActive, onEnded }: VideoBackgroundProps) => {
       const hls = new Hls({
         enableWorker: true,
         lowLatencyMode: false,
-        backBufferLength: 30, // Reduced buffer
-        maxBufferLength: 30, // Reduced buffer
+        backBufferLength: 30,
+        maxBufferLength: 30,
         maxMaxBufferLength: 60,
-        maxBufferSize: 60 * 1000 * 1000, // 60MB max
+        maxBufferSize: 60 * 1000 * 1000,
         maxBufferHole: 0.5,
         highBufferWatchdogPeriod: 2,
         nudgeOffset: 0.1,
@@ -34,7 +35,7 @@ const VideoBackground = ({ src, isActive, onEnded }: VideoBackgroundProps) => {
         maxFragLookUpTolerance: 0.25,
         liveSyncDurationCount: 3,
         liveMaxLatencyDurationCount: 10,
-        startLevel: -1, // Auto quality selection
+        startLevel: -1,
         autoStartLoad: true
       });
       hls.loadSource(src);
@@ -54,40 +55,31 @@ const VideoBackground = ({ src, isActive, onEnded }: VideoBackgroundProps) => {
         hlsRef.current = null;
       }
     };
-  }, [src, isActive]); // Reinitialize when active state changes
+  }, [src]);
 
+  // Control playback based on isActive
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    
+
     if (isActive) {
       video.currentTime = 0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Autoplay failed, try again with user interaction
-          console.log('Autoplay prevented');
+        playPromise.catch((error) => {
+          console.error('VideoBackground: Play failed', error);
         });
       }
     } else {
       video.pause();
-      video.currentTime = 0;
-      // Clear video source when not active to free memory
-      if (!video.canPlayType('application/vnd.apple.mpegurl') && hlsRef.current) {
-        hlsRef.current.destroy();
-        hlsRef.current = null;
-      }
     }
-  }, [isActive]);
-
-  // Don't render if not active - saves GPU
-  if (!isActive) return null;
+  }, [isActive, src]);
 
   return (
     <video
       ref={videoRef}
       className="absolute inset-0 w-full h-full object-cover"
-      style={{ zIndex: 0, willChange: 'opacity' }}
+      style={{ zIndex: 0 }}
       muted
       playsInline
       preload="auto"

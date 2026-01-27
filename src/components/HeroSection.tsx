@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import heroImage from '@/assets/hero-background.jpg';
 import eventTitleImage from '@/assets/event-title.png';
 import CountdownTimer from './CountdownTimer';
-import VideoBackground from './VideoBackground';
 import { SequencePhase } from '@/hooks/useInvestigateSequence';
 
 interface HeroSectionProps {
@@ -10,9 +9,6 @@ interface HeroSectionProps {
   elapsedTime: number;
   onInvestigate: () => void;
 }
-
-const VIDEO_1 = '/hls/vid1/output2.m3u8';
-const VIDEO_2 = '/hls/vid2/video1.m3u8';
 
 // Element animation config with subtle random delays for organic feel
 const elementConfigs = [
@@ -74,16 +70,6 @@ const HeroSection = ({ phase, elapsedTime, onInvestigate }: HeroSectionProps) =>
       >
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
       </div>
-
-      {/* Video Backgrounds */}
-      <VideoBackground 
-        src={VIDEO_1} 
-        isActive={phase === 'phase1'} 
-      />
-      <VideoBackground 
-        src={VIDEO_2} 
-        isActive={phase === 'phase2' || phase === 'phase3'} 
-      />
 
       {/* Dark overlay for videos */}
       {isAnimating && (

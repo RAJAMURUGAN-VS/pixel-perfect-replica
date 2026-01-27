@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import VideoBackground from './VideoBackground';
 import Header from './Header';
 import EventCategorySection from './EventCategorySection';
 import EventModal from './EventModal';
@@ -14,7 +13,6 @@ interface EventCardsProps {
   onNavigate?: (section: NavigationSection) => void;
 }
 
-const VIDEO_2 = 'https://res.cloudinary.com/dop49krua/video/upload/v1769185551/upscaled-video_1_vwbj6j.mp4';
 const FINAL_IMAGE = 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769003462/Gemini_Generated_Image_8a86wr8a86wr8a86_wd9xyu.png';
 
 type ViewState = 'categories' | 'technical' | 'non-technical';
@@ -80,19 +78,9 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
         transition={{ duration: 0.8 }}
         className="fixed inset-0 min-h-screen flex items-start justify-center px-3 sm:px-4 md:px-8 z-10 pt-14 sm:pt-16 md:pt-5"
       >
-        {/* Second Video Background */}
-        <div className={`absolute inset-0 transition-opacity duration-1000 ${isVideoEnded ? 'opacity-0' : 'opacity-100'}`}>
-          <VideoBackground
-            src={VIDEO_2}
-            isActive={isVisible}
-            onEnded={onVideoEnd}
-          />
-        </div>
-
         {/* Final Background Image */}
         <div
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${isVideoEnded ? 'opacity-100' : 'opacity-0'
-            }`}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${FINAL_IMAGE})` }}
         />
  

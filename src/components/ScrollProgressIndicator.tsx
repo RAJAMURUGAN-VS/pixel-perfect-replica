@@ -1,0 +1,21 @@
+import { motion, useScroll, useSpring } from 'framer-motion';
+
+const ScrollProgressIndicator = () => {
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
+
+    return (
+        <div className="scroll-progress" role="progressbar" aria-label="Page scroll progress">
+            <motion.div
+                className="scroll-progress-bar"
+                style={{ scaleX, transformOrigin: '0%' }}
+            />
+        </div>
+    );
+};
+
+export default ScrollProgressIndicator;
