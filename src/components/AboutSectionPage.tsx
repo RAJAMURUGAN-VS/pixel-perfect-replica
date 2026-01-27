@@ -110,7 +110,7 @@ const AboutSection = () => {
           {/* Schedule */}
           <div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8 mb-4 sm:mb-8">
             <h3 className="font-terminal text-lg sm:text-xl md:text-2xl text-accent tracking-wider mb-3 sm:mb-4">
-              — SCHEDULE
+              — EVENTS
             </h3>
 
             <div className="overflow-x-auto -mx-2 sm:mx-0">

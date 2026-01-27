@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 
 const slides = [
-  'https://res.cloudinary.com/dydplsxdj/image/upload/v1769258170/con-1_gyfzow.jpg',
+  'https://res.cloudinary.com/dydplsxdj/image/upload/v1769501067/Screenshot_2026-01-27_124050_rxyvq7.png',
   'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137598/card-1_eln5kv.jpg',
   'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137613/card-3_ucz5hr.jpg',
-  'https://res.cloudinary.com/dydplsxdj/image/upload/v1769137605/card-2_yvk7hr.jpg',
+  'https://res.cloudinary.com/dydplsxdj/image/upload/v1769501045/IMG-20260123-WA0108.jpg_j8mzuh.jpg',
 ];
 
 const AboutSlider = () => {

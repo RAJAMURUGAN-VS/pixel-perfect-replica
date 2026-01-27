@@ -84,7 +84,7 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   </div>
 
                   {/* Category Badge */}
-                  <div className="mb-2 sm:mb-4">
+                  <div className="mb-4 sm:mb-4 mt-8">
                     <div className={`tech-border px-2 sm:px-4 py-1 sm:py-2 inline-block text-xs sm:text-sm font-terminal tracking-wider ${
                       event.category === 'technical' 
                         ? 'bg-accent/20 text-accent' 
@@ -95,7 +95,7 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                   </div>
 
                   {/* Title */}
-                  <h2 className="font-stranger text-xl sm:text-3xl md:text-4xl lg:text-5xl glow-text tracking-wider mb-2 sm:mb-4">
+                  <h2 className="font-stranger text-xl sm:text-3xl md:text-4xl lg:text-5xl glow-text tracking-wider mb-2 sm:mb-4 mt-8">
                     {event.title}
                   </h2>
                 </motion.div>
@@ -114,6 +114,12 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                     <p className="font-terminal text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed tracking-wider">
                       {event.description}
                     </p>
+                    <div className="flex items-center gap-2 mt-4 text-accent">
+                      <span>🔗</span>
+                      <a href='https://drive.google.com/file/d/1cAO941TtJCrtwuW-BQAEZL5d7nimiQ8_/view?usp=drivesdk' target="_blank" rel="noopener noreferrer" className="font-terminal text-sm sm:text-base md:text-lg leading-relaxed tracking-wider">
+                        Resource
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
 
@@ -153,9 +159,28 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                     Event Connect
                   </h3>
                   <div className="tech-border bg-background/50 p-6">
-                    <span className="text-accent mr-3 mt-1">▶</span>
-                    <span>{event.studentCoordinator}</span>
-                    <span className="ml-4">{event.contact}</span>
+                    <ul className="space-y-2 sm:space-y-3">
+                      {event.coordinatorDetails.map((each, index) => (
+                        <motion.li
+                          key={index}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
+                          className="font-terminal text-sm sm:text-base md:text-lg text-muted-foreground tracking-wider flex items-center"
+                        >
+                          <span className="text-accent mr-3 mt-1">▶</span>
+                          <span>{each.studentCoordinator}</span>
+                          <span className="ml-4">
+                            <a
+                              href={`tel:${each.contact.replace(/\s/g, '')}`}
+                              className="font-terminal text-sm sm:text-base text-muted-foreground hover:text-accent transition-colors"
+                            >
+                              {each.contact}
+                            </a>
+                          </span>
+                        </motion.li>
+                      ))}
+                    </ul>
                   </div>
                 </motion.div>
 

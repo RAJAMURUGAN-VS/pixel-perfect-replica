@@ -13,8 +13,10 @@ export interface Event {
   image: string;
   registrationLink: string;
   category: 'technical' | 'non-technical';
-  studentCoordinator: string;
-  contact: string;
+  coordinatorDetails: {
+    studentCoordinator: string;
+    contact: string;
+  }[];
 }
  
 export const technicalEvents: Event[] = [
@@ -32,8 +34,12 @@ export const technicalEvents: Event[] = [
     image: paperPresentationImage,
     registrationLink: 'https://forms.gle/9yLSVw8iXFDCXrnS8',
     category: 'technical',
-    studentCoordinator: "JAYA KUMAR S",
-    contact: "9123540151",
+    coordinatorDetails : [
+      {
+        studentCoordinator: "JAYA KUMAR S",
+        contact: "+91 9123540151",
+      }
+    ]
   },
   {
     id: 'tech-2',
@@ -50,8 +56,12 @@ export const technicalEvents: Event[] = [
     image: clawctfImage,
     registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLScPPhCodPBith9xpblxAMF5oGPuMMDcH8eiCyCBz9kn7MaV6A/viewform',
     category: 'technical',
-    studentCoordinator: "KEERTHI K P",
-    contact: "9360174225",
+    coordinatorDetails : [
+      {
+        studentCoordinator: "KEERTHI K P",
+        contact: "+91 9360174225",
+      }
+    ]
   },
   {
     id: 'tech-3',
@@ -67,8 +77,12 @@ export const technicalEvents: Event[] = [
     image: vibeAThonImage,
     registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLSfr0dRgZtsaU2kSn88MGqg4O7SepEeT2qlhIlfxgS3MRxZGoQ/viewform',
     category: 'technical',
-    studentCoordinator: "RAJAMURUGAN VS",
-    contact: "8015766399",
+    coordinatorDetails : [
+      {
+        studentCoordinator: "RAJAMURUGAN VS",
+        contact: "+91 8015766399",
+      }
+    ]
   }
 ];
 
@@ -86,8 +100,20 @@ export const nonTechnicalEvents: Event[] = [
     image: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769259227/STRANGER_TUNES_LISTENING_TO_SONGS_okmpuc.png',
     registrationLink: 'https://forms.gle/SZcb7r1XyrjcKWTF6',
     category: 'non-technical',
-    studentCoordinator: "VISHNU PRIYA P G",
-    contact: "790452518",
+    coordinatorDetails : [
+      {
+        studentCoordinator: "NIVETHA J",
+        contact: "+91 6380388354",
+      },
+      {
+        studentCoordinator: "VISHNU PRIYA P G",
+        contact: "+91 7904525218",
+      },
+      {
+        studentCoordinator: "PRAKASH BABU S",
+        contact: "+91 7358842804",
+      }
+    ]
   },
   {
     id: 'non-tech-2',
@@ -103,8 +129,12 @@ export const nonTechnicalEvents: Event[] = [
     image: daVinciCodeImage,
     registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLScol5ECjW8Sc2-Jz5QxwOyFSZlaxp-867MIwTKoHeSHTMQSvA/viewform',
     category: 'non-technical',
-    studentCoordinator: "KIRUTHIKA S T",
-    contact: "9360308572",
+    coordinatorDetails : [
+      {
+        studentCoordinator: "KIRUTHIKA S T",
+        contact: "+91 9360308572",
+      }
+    ]
   },
   {
     id: 'non-tech-3',
@@ -120,8 +150,12 @@ export const nonTechnicalEvents: Event[] = [
     image: iplAuctionImage,
     registrationLink: 'https://forms.gle/zf7i4VAfcVc82NKa7',
     category: 'non-technical',
-    studentCoordinator: "KARUNAMOORTHI R",
-    contact: "9025681889",
+    coordinatorDetails : [
+      {
+        studentCoordinator: "KARUNAMOORTHI R",
+        contact: "+91 9025681889",
+      }
+    ]
   }
 ];
 

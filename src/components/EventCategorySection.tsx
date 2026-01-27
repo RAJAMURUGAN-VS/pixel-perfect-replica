@@ -111,7 +111,7 @@ const EventCategorySection = ({ category, onBack, onEventClick }: EventCategoryS
                 <CardAction>
                   <Badge 
                     variant="secondary" 
-                    className="font-terminal text-xs sm:text-sm tracking-wider bg-accent/20 text-accent border-accent/30 hover:bg-accent/30"
+                    className="font-terminal text-xs sm:text-sm tracking-wider bg-accent/20 text-accent border-accent/30 hover:bg-accent/30 mb-3"
                   >
                     {category === 'technical' ? 'TECH' : 'NON-TECH'}
                   </Badge>

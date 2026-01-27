@@ -53,16 +53,24 @@ const ContactSection = () => {
 
   const contactPersons = [
     {
+      name: 'Sirimavilla Kaushik',
+      phone: '+91 9676096177',
+    },
+    {
+      name: 'Christopher',
+      phone: '+91 9710815558',
+    },
+    {
       name: 'Lakshmi Sri',
       phone: '+91 73057 55115',
     },
     {
-      name: 'Yeswanth Raj',
-      phone: '+91 96558 99020',
-    },
-    {
       name: 'Rakesh S',
       phone: '+91 90252 30709',
+    },
+    {
+      name: 'Yeswanth Raj',
+      phone: '+91 96558 99020',
     },
   ];
 
@@ -182,6 +190,38 @@ const ContactSection = () => {
                   )}
                 </form>
               </div>
+
+
+              {/* Contact Persons */}
+              <div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8 mt-6">
+                <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider">
+                  EVENT COORDINATORS
+                </h3>
+                <div className="space-y-3 sm:space-y-4">
+                  {contactPersons.map((person, index) => (
+                    <motion.div
+                      key={person.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                      className="flex items-start gap-3 sm:gap-4"
+                    >
+                      <span className="text-xl sm:text-2xl">📱</span>
+                      <div>
+                        <h4 className="font-terminal text-xs sm:text-sm text-accent tracking-wider mb-1">
+                          {person.name}
+                        </h4>
+                        <a
+                          href={`tel:${person.phone.replace(/\s/g, '')}`}
+                          className="font-terminal text-sm sm:text-base text-muted-foreground hover:text-accent transition-colors"
+                        >
+                          {person.phone}
+                        </a>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
 
             {/* Contact Info */}
@@ -221,53 +261,59 @@ const ContactSection = () => {
 
               {/* Map Placeholder */}
               {/* Map */}
-<div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8">
-  <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider">
-    DIMENSIONAL RIFT LOCATION
-  </h3>
-
-  <div className="aspect-video rounded overflow-hidden border border-border/30">
-    <iframe
-      title="RMD Engineering College Location"
-      src="https://www.google.com/maps?q=13.359259,80.142094&z=15&output=embed"
-      width="100%"
-      height="100%"
-      loading="lazy"
-      referrerPolicy="no-referrer-when-downgrade"
-      className="w-full h-full"
-    />
-  </div>
-</div>
-
-
-              {/* Contact Persons */}
               <div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8">
                 <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider">
-                  CONTACT PERSONS
+                  DIMENSIONAL RIFT LOCATION
+                </h3>
+
+                <div className="aspect-video rounded overflow-hidden border border-border/30">
+                  <iframe
+                    title="RMD Engineering College Location"
+                    src="https://www.google.com/maps?q=13.359259,80.142094&z=15&output=embed"
+                    width="100%"
+                    height="100%"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
+                  />
+                </div>
+              </div>
+
+
+              <div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8 mt-6">
+                <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider">
+                  Head of the Department - CSE
                 </h3>
                 <div className="space-y-3 sm:space-y-4">
-                  {contactPersons.map((person, index) => (
-                    <motion.div
-                      key={person.name}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-3 sm:gap-4"
+                  >
+                    <span className="text-xl sm:text-2xl">👤</span>
+                    <div>
+                      <h4 className="font-terminal text-xs sm:text-sm text-accent tracking-wider mb-1">
+                        Dr.P.EZHUMALAI
+                      </h4>
+                    </div>
+                  </motion.div>
+                </div>
+                <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider mt-8">
+                  FACULTY COORDINATOR
+                </h3>
+                <div className="space-y-3 sm:space-y-4">
+                  <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                      className="flex items-start gap-3 sm:gap-4"
+                      className="flex items-center gap-3 sm:gap-4"
                     >
-                      <span className="text-xl sm:text-2xl">📱</span>
+                      <span className="text-xl sm:text-2xl">👤</span>
                       <div>
                         <h4 className="font-terminal text-xs sm:text-sm text-accent tracking-wider mb-1">
-                          {person.name}
+                          Dr.A.GNANASEKAR
                         </h4>
-                        <a
-                          href={`tel:${person.phone.replace(/\s/g, '')}`}
-                          className="font-terminal text-sm sm:text-base text-muted-foreground hover:text-accent transition-colors"
-                        >
-                          {person.phone}
-                        </a>
                       </div>
                     </motion.div>
-                  ))}
                 </div>
               </div>
 
