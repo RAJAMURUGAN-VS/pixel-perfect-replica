@@ -30,12 +30,13 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
     setIsMobileMenuOpen(false);
   };
 
-  const navItems: { key: NavigationSection; label: string }[] = [
+  const navItems: { key: NavigationSection | 'bus'; label: string; isExternal?: boolean; href?: string }[] = [
     { key: 'home', label: 'HOME' },
     { key: 'about', label: 'ABOUT' },
     { key: 'events', label: 'EVENTS' },
     { key: 'crew', label: 'THE CREW' },
     { key: 'contact', label: 'CONTACT US' },
+    { key: 'bus', label: 'BUS ROUTES', isExternal: true, href: '/rmdbus.pdf' },
   ];
 
   return (
@@ -77,22 +78,39 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-4" aria-label="Main navigation">
             {navItems.map((item, index) => (
-              <motion.button
-                key={item.key}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
-                whileHover={{ scale: 1.05, color: 'hsl(var(--accent))' }}
-                onClick={() => handleNavClick(item.key)}
-                className={`font-terminal text-base md:text-lg tracking-wider transition-colors ${currentSection === item.key
-                  ? 'text-accent'
-                  : 'text-foreground/80 hover:text-foreground'
-                  }`}
-                aria-label={`Navigate to ${item.label} section`}
-                aria-current={currentSection === item.key ? 'page' : undefined}
-              >
-                {item.label}
-              </motion.button>
+              item.isExternal ? (
+                <motion.a
+                  key={item.key}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
+                  whileHover={{ scale: 1.05, color: 'hsl(var(--accent))' }}
+                  className="font-terminal text-base md:text-lg tracking-wider transition-colors text-foreground/80 hover:text-foreground"
+                  aria-label={`Open ${item.label} in new tab`}
+                >
+                  {item.label}
+                </motion.a>
+              ) : (
+                <motion.button
+                  key={item.key}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
+                  whileHover={{ scale: 1.05, color: 'hsl(var(--accent))' }}
+                  onClick={() => handleNavClick(item.key as NavigationSection)}
+                  className={`font-terminal text-base md:text-lg tracking-wider transition-colors ${currentSection === item.key
+                    ? 'text-accent'
+                    : 'text-foreground/80 hover:text-foreground'
+                    }`}
+                  aria-label={`Navigate to ${item.label} section`}
+                  aria-current={currentSection === item.key ? 'page' : undefined}
+                >
+                  {item.label}
+                </motion.button>
+              )
             ))}
 
             <motion.div
@@ -160,19 +178,35 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
                 className="relative z-10 flex flex-col items-center justify-center min-h-screen gap-6 p-8"
               >
                 {navItems.map((item, index) => (
-                  <motion.button
-                    key={item.key}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + index * 0.1, duration: 0.4 }}
-                    onClick={() => handleNavClick(item.key)}
-                    className={`font-stranger text-2xl tracking-wider transition-colors ${currentSection === item.key
-                      ? 'text-accent glow-text'
-                      : 'text-foreground/80 hover:text-accent'
-                      }`}
-                  >
-                    {item.label}
-                  </motion.button>
+                  item.isExternal ? (
+                    <motion.a
+                      key={item.key}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 + index * 0.1, duration: 0.4 }}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="font-stranger text-2xl tracking-wider transition-colors text-foreground/80 hover:text-accent"
+                    >
+                      {item.label}
+                    </motion.a>
+                  ) : (
+                    <motion.button
+                      key={item.key}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 + index * 0.1, duration: 0.4 }}
+                      onClick={() => handleNavClick(item.key as NavigationSection)}
+                      className={`font-stranger text-2xl tracking-wider transition-colors ${currentSection === item.key
+                        ? 'text-accent glow-text'
+                        : 'text-foreground/80 hover:text-accent'
+                        }`}
+                    >
+                      {item.label}
+                    </motion.button>
+                  )
                 ))}
               </motion.nav>
             </motion.div>

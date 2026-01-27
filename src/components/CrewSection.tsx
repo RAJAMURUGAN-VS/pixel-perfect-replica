@@ -1,14 +1,14 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { LEADERSHIP, TEAM_CATEGORIES, TIMELINE } from '@/data/crew';
-import { TeamCategory, TeamMember, TimelineEvent } from '@/data/crewTypes';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { LEADERSHIP, TEAM_CATEGORIES } from '@/data/crew';
+import { TeamCategory, TeamMember } from '@/data/crewTypes';
 
 /**
  * 1. HERO SECTION
  */
 const HeroSection = () => {
     return (
-        <section className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center bg-background">
+        <section className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center">
             {/* Background Ambient Glow */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/10 blur-[120px] rounded-full" />
@@ -67,7 +67,7 @@ const LeadershipCard = ({ name, role, tagline }: TeamMember) => {
 
 const LeadershipSection = () => {
     return (
-        <section className="py-24 px-6 md:px-24 bg-background">
+        <section className="py-24 px-6 md:px-24">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-stranger">THE ARCHITECTS</h2>
@@ -135,7 +135,7 @@ const CategoryScrollSection = ({ category, index }: { category: TeamCategory; in
     const x = useTransform(scrollYProgress, [0, 1], ["5%", "-60%"]);
 
     return (
-        <section ref={targetRef} className="relative h-[400vh] bg-background">
+        <section ref={targetRef} className="relative h-[400vh]">
             <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
                 <motion.div style={{ x }} className="flex items-center h-full min-w-max pl-[5vw]">
                     {/* Category Header */}
@@ -167,90 +167,14 @@ const CategoryScrollSection = ({ category, index }: { category: TeamCategory; in
     );
 };
 
-/**
- * 4. TIMELINE SECTION
- */
-const TimelineItem = ({ event, index, isLast }: { event: TimelineEvent; index: number; isLast: boolean }) => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.5 });
-    const isEven = index % 2 === 0;
 
-    return (
-        <div ref={ref} className={`relative flex items-center justify-between w-full ${isLast ? 'mb-0' : 'mb-20 md:mb-32'} ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-            {/* Dot */}
-            <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent z-10 border-4 border-background">
-                <motion.div
-                    animate={{ scale: [1, 1.4, 1] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="absolute inset-0 rounded-full bg-accent/50 -z-10"
-                />
-            </div>
-
-            {/* Content Card */}
-            <motion.div
-                initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className={`w-full md:w-[45%] p-6 md:p-8 rounded-2xl tech-border bg-card/50 backdrop-blur-lg ${isEven ? 'text-left md:text-right' : 'text-left'}`}
-            >
-                <span className="text-accent font-terminal text-sm font-bold tracking-widest block mb-2">{event.date}</span>
-                <h3 className="text-2xl font-bold text-foreground mb-3">{event.title}</h3>
-                <p className="text-muted-foreground leading-relaxed text-sm md:text-base">{event.description}</p>
-            </motion.div>
-
-            {/* Spacer */}
-            <div className="hidden md:block w-[45%]" />
-        </div>
-    );
-};
-
-const TimelineSection = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end start"]  // Detect when entering/leaving viewport
-    });
-
-    const lineHeight = useTransform(scrollYProgress, [0.2, 0.9], ["0%", "100%"]);  // Start at 20% scroll progress
-
-    return (
-        <section className="relative py-24 px-6 md:px-24 bg-background overflow-hidden">
-            <div className="max-w-5xl mx-auto relative">
-                <div className="text-center mb-24">
-                    <h2 className="text-3xl md:text-5xl font-bold text-foreground font-stranger mb-4">THE CHRONICLE</h2>
-                    <div className="w-24 h-1 bg-accent mx-auto" />
-                </div>
-
-                <div ref={containerRef} className="relative mt-20">
-                    {/* Background Track */}
-                    <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-foreground/5 -translate-x-1/2 z-0" />
-
-                    {/* Animated Line */}
-                    <motion.div
-                        style={{ height: lineHeight }}
-                        className="absolute left-1/2 top-0 w-1 bg-accent -translate-x-1/2 shadow-[0_0_20px_hsl(var(--accent))] z-[100]"
-                    />
-
-                    {TIMELINE.map((event, idx) => (
-                        <TimelineItem
-                            key={idx}
-                            event={event}
-                            index={idx}
-                            isLast={idx === TIMELINE.length - 1}
-                        />
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-};
 
 /**
  * 5. CLOSING SECTION
  */
 const ClosingSection = () => {
     return (
-        <section className="h-screen w-full flex flex-col items-center justify-center bg-background text-center px-6">
+        <section className="h-screen w-full flex flex-col items-center justify-center text-center px-6">
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -294,7 +218,7 @@ const CrewSection = () => {
             <LeadershipSection />
 
             {/* Separator */}
-            <div className="px-6 md:px-24 py-12 bg-background">
+            <div className="px-6 md:px-24 py-12">
                 <h2 className="text-xl font-bold text-accent/80 font-terminal mb-1 tracking-widest">THE ROSTER</h2>
                 <h3 className="text-4xl md:text-6xl font-extrabold text-foreground font-stranger shadow-black drop-shadow-lg">CORE COMMAND</h3>
             </div>
@@ -304,7 +228,6 @@ const CrewSection = () => {
                 <CategoryScrollSection key={category.title} category={category} index={index} />
             ))}
 
-            <TimelineSection />
             <ClosingSection />
         </div>
     );

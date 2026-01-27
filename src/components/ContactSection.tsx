@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import heroImage from '@/assets/hero-background.jpg';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -76,14 +75,6 @@ const ContactSection = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background" />
-      </div>
-
       {/* Content */}
       <div className="relative z-10 pt-20 sm:pt-24 pb-8 sm:pb-12 px-3 sm:px-4 md:px-8">
         <motion.div

@@ -3,81 +3,65 @@ import { motion } from 'framer-motion';
 import heroImage from '@/assets/hero-background.jpg';
 import eventTitleImage from '@/assets/event-title.png';
 import CountdownTimer from './CountdownTimer';
-import VideoBackground from './VideoBackground';
-import Hls from 'hls.js';
 
 interface HomeSectionProps {
   onNavigateToEvents: () => void;
 }
 
-// Video source - same as used in EventsSectionWrapper
-const VIDEO_MERGED = '/hls/merged/merged.m3u8';
+// Transition video - loops in background
+const TRANSITION_VIDEO = 'https://d2gfxmzi2tqh5n.cloudfront.net/upscaled-video%20(1).mp4';
+
+// Transition duration in ms before navigating to events
+const TRANSITION_DURATION = 4000;
 
 const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
   const [showVideo, setShowVideo] = useState(false);
-  const [isVideoEnded, setIsVideoEnded] = useState(false);
-  const prefetchVideoRef = useRef<HTMLVideoElement>(null);
-  const hlsRef = useRef<Hls | null>(null);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const navigationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Prefetch video chunks on component mount
+  // Prefetch video on mount for instant playback
   useEffect(() => {
-    const video = prefetchVideoRef.current;
-    if (!video) return;
+    const video = document.createElement('video');
+    video.preload = 'auto';
+    video.src = TRANSITION_VIDEO;
+    video.load();
+  }, []);
 
-    // Check if browser supports HLS natively (Safari)
-    if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = VIDEO_MERGED;
-    } else if (Hls.isSupported()) {
-      // Use HLS.js for other browsers with optimized settings for prefetching
-      const hls = new Hls({
-        enableWorker: true,
-        lowLatencyMode: false,
-        backBufferLength: 30,
-        maxBufferLength: 30,
-        maxMaxBufferLength: 60,
-        maxBufferSize: 60 * 1000 * 1000,
-        autoStartLoad: true, // Start loading immediately
-        startLevel: -1,
-      });
-
-      hls.loadSource(VIDEO_MERGED);
-      hls.attachMedia(video);
-      hlsRef.current = hls;
-
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        // Preload first few segments by seeking to start
-        video.currentTime = 0;
-      });
-
-      hls.on(Hls.Events.ERROR, (event, data) => {
-        if (data.fatal) {
-          console.error('HLS prefetch error:', data);
-        }
-      });
+  // Handle navigation after transition
+  useEffect(() => {
+    if (showVideo && !isNavigating) {
+      // Set a timeout to navigate after the transition duration
+      navigationTimeoutRef.current = setTimeout(() => {
+        setIsNavigating(true);
+        onNavigateToEvents();
+      }, TRANSITION_DURATION);
     }
 
     return () => {
-      if (hlsRef.current) {
-        hlsRef.current.destroy();
-        hlsRef.current = null;
+      if (navigationTimeoutRef.current) {
+        clearTimeout(navigationTimeoutRef.current);
       }
     };
-  }, []);
+  }, [showVideo, isNavigating, onNavigateToEvents]);
 
   const handleInvestigate = useCallback(() => {
     setShowVideo(true);
-    setIsVideoEnded(false);
+    setIsNavigating(false);
+    
+    // Start video playback immediately
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(console.error);
+    }
   }, []);
 
-  const handleVideoEnd = useCallback(() => {
-    setIsVideoEnded(true);
-    // Automatically navigate to events page when video ends
-    onNavigateToEvents();
-  }, [onNavigateToEvents]);
-
   const handleSkip = useCallback(() => {
+    if (navigationTimeoutRef.current) {
+      clearTimeout(navigationTimeoutRef.current);
+    }
     setShowVideo(false);
-    setIsVideoEnded(false);
+    setIsNavigating(true);
     // Navigate directly to events page when skipping
     onNavigateToEvents();
   }, [onNavigateToEvents]);
@@ -99,10 +83,15 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
       {/* Video Background - Plays when investigate is clicked */}
       {showVideo && (
         <div className="absolute inset-0" style={{ zIndex: 5 }}>
-          <VideoBackground
-            src={VIDEO_MERGED}
-            isActive={showVideo && !isVideoEnded}
-            onEnded={handleVideoEnd}
+          <video
+            ref={videoRef}
+            className="absolute inset-0 w-full h-full object-cover"
+            src={TRANSITION_VIDEO}
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload="auto"
           />
           {/* Dark overlay on video */}
           <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background/50" style={{ zIndex: 8 }} />
@@ -237,7 +226,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
       </div>
 
       {/* Skip Button - Shows when video is playing */}
-      {showVideo && !isVideoEnded && (
+      {showVideo && !isNavigating && (
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -253,16 +242,6 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
           </span>
         </motion.button>
       )}
-
-      {/* Hidden video element for prefetching */}
-      <video
-        ref={prefetchVideoRef}
-        className="hidden"
-        muted
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-      />
     </section>
   );
 };

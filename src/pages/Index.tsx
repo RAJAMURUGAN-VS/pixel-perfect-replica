@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ParticleBackground from '@/components/ParticleBackground';
 import Header from '@/components/Header';
@@ -9,6 +9,9 @@ import EventsSectionWrapper from '@/components/EventsSectionWrapper';
 import CrewSection from '@/components/CrewSection';
 import VideoIntro from '@/components/VideoIntro';
 import { useNavigation, NavigationSection } from '@/hooks/useNavigation';
+
+// Background video for non-home pages
+const BACKGROUND_VIDEO = 'https://d2gfxmzi2tqh5n.cloudfront.net/upscaled-video%20(1).mp4';
 
 const Index = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -32,8 +35,22 @@ const Index = () => {
 
   return (
     <div className={`min-h-screen bg-background relative scanlines ${currentSection !== 'crew' ? 'overflow-x-hidden' : ''}`}>
-      {/* Preload video for events section in background */}
-      <link rel="preload" as="fetch" href="/hls/merged/merged.m3u8" />
+      {/* Looping Video Background - Shows on all pages except home */}
+      {currentSection !== 'home' && (
+        <div className="fixed inset-0 z-0">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src={BACKGROUND_VIDEO}
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload="auto"
+          />
+          {/* Dark overlay on video for readability */}
+          <div className="absolute inset-0 bg-background/70" />
+        </div>
+      )}
 
       {/* Particle Effect - Hide when in events or crew section */}
       {currentSection !== 'events' && currentSection !== 'crew' && <ParticleBackground />}
