@@ -61,7 +61,7 @@ const VideoBackground = ({ src, isActive, onEnded }: VideoBackgroundProps) => {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    
+
     if (isActive) {
       video.currentTime = 0;
       const playPromise = video.play();

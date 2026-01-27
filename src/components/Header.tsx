@@ -41,16 +41,15 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
     <>
       <motion.header
         initial={{ opacity: 0, y: -20 }}
-        animate={{ 
-          opacity: 1, 
+        animate={{
+          opacity: 1,
           y: 0,
           backgroundColor: isScrolled ? 'hsl(var(--background) / 0.95)' : 'transparent',
           backdropFilter: isScrolled ? 'blur(12px)' : 'blur(0px)'
         }}
         transition={{ duration: 0.3 }}
-        className={`fixed top-0 left-0 right-0 z-50 px-3 py-3 md:px-8 md:py-4 ${
-          isScrolled ? 'shadow-lg shadow-black/20' : ''
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 px-3 py-3 md:px-8 md:py-4 ${isScrolled ? 'shadow-lg shadow-black/20' : ''
+          }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
 
@@ -75,7 +74,7 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-4">
+          <nav className="hidden md:flex items-center gap-4" aria-label="Main navigation">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.key}
@@ -85,9 +84,11 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
                 whileHover={{ scale: 1.05, color: 'hsl(var(--accent))' }}
                 onClick={() => handleNavClick(item.key)}
                 className={`font-terminal text-base md:text-lg tracking-wider transition-colors ${currentSection === item.key
-                    ? 'text-accent'
-                    : 'text-foreground/80 hover:text-foreground'
+                  ? 'text-accent'
+                  : 'text-foreground/80 hover:text-foreground'
                   }`}
+                aria-label={`Navigate to ${item.label} section`}
+                aria-current={currentSection === item.key ? 'page' : undefined}
               >
                 {item.label}
               </motion.button>
@@ -123,56 +124,60 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="tech-border bg-card/80 backdrop-blur-sm p-2 text-foreground"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
-      </motion.header>
+      </motion.header >
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 md:hidden"
-          >
-            {/* Backdrop */}
-            <div 
-              className="absolute inset-0 bg-background/95 backdrop-blur-md"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-            
-            {/* Menu Content */}
-            <motion.nav
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="relative z-10 flex flex-col items-center justify-center min-h-screen gap-6 p-8"
+        {
+          isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-40 md:hidden"
             >
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.key}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + index * 0.1, duration: 0.4 }}
-                  onClick={() => handleNavClick(item.key)}
-                  className={`font-stranger text-2xl tracking-wider transition-colors ${currentSection === item.key
+              {/* Backdrop */}
+              <div
+                className="absolute inset-0 bg-background/95 backdrop-blur-md"
+                onClick={() => setIsMobileMenuOpen(false)}
+              />
+
+              {/* Menu Content */}
+              <motion.nav
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="relative z-10 flex flex-col items-center justify-center min-h-screen gap-6 p-8"
+              >
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.key}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + index * 0.1, duration: 0.4 }}
+                    onClick={() => handleNavClick(item.key)}
+                    className={`font-stranger text-2xl tracking-wider transition-colors ${currentSection === item.key
                       ? 'text-accent glow-text'
                       : 'text-foreground/80 hover:text-accent'
-                    }`}
-                >
-                  {item.label}
-                </motion.button>
-              ))}
-            </motion.nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                      }`}
+                  >
+                    {item.label}
+                  </motion.button>
+                ))}
+              </motion.nav>
+            </motion.div>
+          )
+        }
+      </AnimatePresence >
     </>
   )
 }

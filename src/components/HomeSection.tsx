@@ -78,14 +78,20 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
   const handleSkip = useCallback(() => {
     setShowVideo(false);
     setIsVideoEnded(false);
-  }, []);
+    // Navigate directly to events page when skipping
+    onNavigateToEvents();
+  }, [onNavigateToEvents]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      aria-label="Hero section"    >
       {/* Static Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})`, zIndex: 0 }}
+        role="img"
+        aria-label="Hero background image"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
       </div>
@@ -109,16 +115,16 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{
-            opacity: showVideo ? 0.3 : 1,
-            y: showVideo ? -10 : 0,
-            rotateX: showVideo ? 180 : 0,
-            scale: showVideo ? 0.95 : 1,
-            filter: showVideo ? 'blur(2px)' : 'blur(0px)'
+            opacity: showVideo ? [1, 0.6, 0.3, 0] : 1,
+            y: showVideo ? [0, -5, -10, -15] : 0,
+            scale: showVideo ? [1, 0.98, 0.95, 0.9] : 1,
+            filter: showVideo ? ['blur(0px)', 'blur(1px)', 'blur(2px)', 'blur(4px)'] : 'blur(0px)'
           }}
           transition={{
-            duration: showVideo ? 1.2 : 0.8,
+            duration: showVideo ? 3.5 : 0.8,
             delay: showVideo ? 0 : 0.2,
-            ease: [0.25, 0.46, 0.45, 0.94]
+            ease: [0.25, 0.46, 0.45, 0.94],
+            times: showVideo ? [0, 0.3, 0.6, 1] : undefined
           }}
           className="tech-border bg-card/30 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 mb-4 sm:mb-8 inline-block origin-center"
         >
@@ -135,16 +141,16 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{
-            opacity: showVideo ? 0.2 : 1,
-            y: showVideo ? 15 : 0,
-            rotateY: showVideo ? 15 : 0,
-            scale: showVideo ? 0.92 : 1,
-            filter: showVideo ? 'blur(3px)' : 'blur(0px)'
+            opacity: showVideo ? [1, 0.5, 0.25, 0] : 1,
+            y: showVideo ? [0, 5, 10, 15] : 0,
+            scale: showVideo ? [1, 0.97, 0.93, 0.88] : 1,
+            filter: showVideo ? ['blur(0px)', 'blur(1.5px)', 'blur(3px)', 'blur(5px)'] : 'blur(0px)'
           }}
           transition={{
-            duration: showVideo ? 1.5 : 0.8,
+            duration: showVideo ? 3.8 : 0.8,
             delay: showVideo ? 0.1 : 0.4,
-            ease: [0.25, 0.46, 0.45, 0.94]
+            ease: [0.25, 0.46, 0.45, 0.94],
+            times: showVideo ? [0, 0.3, 0.6, 1] : undefined
           }}
           className="tech-border bg-card/30 backdrop-blur-sm px-4 sm:px-8 py-3 sm:py-4 mb-4 sm:mb-8 max-w-xl mx-auto origin-center"
         >
@@ -157,16 +163,16 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{
-            opacity: showVideo ? 0.25 : 1,
-            y: showVideo ? -20 : 0,
-            rotateZ: showVideo ? -5 : 0,
-            scale: showVideo ? 0.9 : 1,
-            filter: showVideo ? 'blur(4px)' : 'blur(0px)'
+            opacity: showVideo ? [1, 0.55, 0.3, 0] : 1,
+            y: showVideo ? [0, -3, -8, -12] : 0,
+            scale: showVideo ? [1, 0.96, 0.91, 0.85] : 1,
+            filter: showVideo ? ['blur(0px)', 'blur(2px)', 'blur(3.5px)', 'blur(6px)'] : 'blur(0px)'
           }}
           transition={{
-            duration: showVideo ? 1.4 : 0.8,
+            duration: showVideo ? 4 : 0.8,
             delay: showVideo ? 0.2 : 0.6,
-            ease: [0.25, 0.46, 0.45, 0.94]
+            ease: [0.25, 0.46, 0.45, 0.94],
+            times: showVideo ? [0, 0.3, 0.6, 1] : undefined
           }}
           className="tech-border bg-card/30 backdrop-blur-sm px-4 sm:px-8 py-4 sm:py-6 mb-4 sm:mb-6 inline-block origin-center"
         >
@@ -177,16 +183,16 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{
-            opacity: showVideo ? 0.15 : 1,
-            y: showVideo ? 25 : 0,
-            rotateX: showVideo ? -15 : 0,
-            scale: showVideo ? 0.88 : 1,
-            filter: showVideo ? 'blur(5px)' : 'blur(0px)'
+            opacity: showVideo ? [1, 0.45, 0.2, 0] : 1,
+            y: showVideo ? [0, 8, 15, 20] : 0,
+            scale: showVideo ? [1, 0.95, 0.9, 0.82] : 1,
+            filter: showVideo ? ['blur(0px)', 'blur(2.5px)', 'blur(4px)', 'blur(7px)'] : 'blur(0px)'
           }}
           transition={{
-            duration: showVideo ? 1.6 : 0.8,
+            duration: showVideo ? 4.2 : 0.8,
             delay: showVideo ? 0.3 : 0.8,
-            ease: [0.25, 0.46, 0.45, 0.94]
+            ease: [0.25, 0.46, 0.45, 0.94],
+            times: showVideo ? [0, 0.3, 0.6, 1] : undefined
           }}
           className="tech-border bg-card/30 backdrop-blur-sm px-4 sm:px-8 py-3 sm:py-4 mb-4 sm:mb-8
              w-full max-w-[420px] mx-auto origin-center font-terminal text-sm sm:text-base"
@@ -205,6 +211,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
             whileTap={{ scale: 0.98 }}
             onClick={handleInvestigate}
             className="btn-investigate origin-center text-sm sm:text-base px-6 sm:px-8 py-2 sm:py-3"
+            aria-label="Start investigation and play video"
           >
             INVESTIGATE
           </motion.button>
@@ -239,6 +246,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
           onClick={handleSkip}
           className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 tech-border px-4 py-2 sm:px-6 sm:py-3 bg-card/80 backdrop-blur-sm hover:bg-card transition-all"
           style={{ zIndex: 50 }}
+          aria-label="Skip video and go to events"
         >
           <span className="font-terminal text-xs sm:text-sm md:text-base text-foreground tracking-wider hover:text-accent transition-colors">
             SKIP
@@ -253,6 +261,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         muted
         playsInline
         preload="auto"
+        aria-hidden="true"
       />
     </section>
   );

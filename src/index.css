@@ -58,6 +58,12 @@
     --background: 220 30% 5%;
     --foreground: 0 0% 95%;
   }
+  
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
 }
 
 @layer base {
@@ -68,6 +74,18 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'VT323', monospace;
+  }
+  
+  /* Improved focus styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 3px;
+    transition: outline-offset 0.2s ease;
+  }
+  
+  button:focus-visible,
+  a:focus-visible {
+    outline-offset: 4px;
   }
 }
 
@@ -138,6 +156,29 @@
     text-transform: uppercase;
     transition: all 0.3s ease;
     box-shadow: var(--shadow-accent);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Shine effect on hover */
+  .btn-investigate::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .btn-investigate:hover::before {
+    left: 100%;
   }
 
   .btn-investigate:hover {
@@ -146,6 +187,11 @@
     box-shadow: 
       var(--shadow-accent),
       inset 0 0 20px hsl(var(--accent) / 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .btn-investigate:active {
+    transform: translateY(0);
   }
 
   @keyframes flicker {
@@ -172,6 +218,11 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
   }
+  
+  @keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+  }
 
   .animate-flicker {
     animation: flicker 3s infinite;
@@ -183,6 +234,10 @@
 
   .animate-float {
     animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
   }
 
   .scanlines::after {
@@ -207,5 +262,38 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;  /* Chrome, Safari and Opera */
+  }
+  
+  /* Loading skeleton */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 0%,
+      hsl(var(--muted) / 0.7) 50%,
+      hsl(var(--muted)) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+  
+  /* Scroll progress indicator */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: transparent;
+    z-index: 9999;
+  }
+  
+  .scroll-progress-bar {
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--accent)),
+      hsl(var(--neon-cyan))
+    );
+    box-shadow: 0 0 10px hsl(var(--accent) / 0.8);
   }
 }

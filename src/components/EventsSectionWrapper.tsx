@@ -1,5 +1,5 @@
-import { NavigationSection } from '@/hooks/useNavigation';
 import EventCards from './EventCards';
+import { NavigationSection } from '@/hooks/useNavigation';
 
 interface EventsSectionWrapperProps {
   isActive: boolean;
@@ -11,7 +11,6 @@ const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProp
 
   return (
     <div className="min-h-screen relative">
-      {/* Event Cards - Show directly without video transition */}
       <EventCards
         isVisible={isActive}
         isVideoEnded={true}
