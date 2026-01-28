@@ -3,11 +3,19 @@ export interface TeamMember {
     name: string;
     role: string;
     tagline?: string;
+    imageUrl?: string;
+}
+
+export interface TeamGroup {
+    id: string;
+    title: string;
+    members: TeamMember[];
 }
 
 export interface TeamCategory {
+    id: string;
     title: string;
-    members: TeamMember[];
+    groups: TeamGroup[];
     direction: 'left' | 'right';
 }
 

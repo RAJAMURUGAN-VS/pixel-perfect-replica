@@ -112,8 +112,8 @@ export const nonTechnicalEvents: Event[] = [
         contact: "+91 7904525218",
       },
       {
-        studentCoordinator: "PRAKASH BABU S",
-        contact: "+91 7358842804",
+        studentCoordinator: "Nancy D",
+        contact: "+91 9042428097",
       }
     ]
   },

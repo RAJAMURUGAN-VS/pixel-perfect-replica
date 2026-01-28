@@ -7,7 +7,7 @@ import { Event } from '@/data/events';
 import { NavigationSection } from '@/hooks/useNavigation';
 import { TIMELINE } from '@/data/crew';
 import { TimelineEvent } from '@/data/crewTypes';
- 
+
 interface EventCardsProps {
   isVisible: boolean;
   isVideoEnded: boolean;
@@ -70,7 +70,7 @@ const TimelineContent = () => {
       {/* Animated Line */}
       <motion.div
         style={{ height: lineHeight }}
-        className="absolute left-1/2 top-0 w-1 bg-accent -translate-x-1/2 shadow-[0_0_20px_hsl(var(--accent))] z-[100]"
+        className="absolute left-1/2 top-0 w-1 bg-accent -translate-x-1/2 shadow-[0_0_20px_hsl(var(--accent))] z-0"
       />
 
       {TIMELINE.map((event, idx) => (
@@ -134,106 +134,133 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
   };
 
   return (
-    <>
-
+    <div className="relative min-h-screen">
       {/* Header - Always visible in events section */}
       <Header onNavigate={handleNavigate} currentSection="events" />
 
-      <motion.section
-        id="events"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="fixed inset-0 min-h-screen flex items-start justify-center px-3 sm:px-4 md:px-8 z-10 pt-14 sm:pt-16 md:pt-5"
-      >
 
-        {/* Content */}
-        <div className="relative z-10 w-full h-full overflow-y-auto pt-4 hide-scrollbar">
-          <AnimatePresence mode="wait">
-            {currentView === 'categories' ? (
-              <motion.div
-                key="categories"
+
+      {/* Main Content Section */}
+      <section className="relative py-24 px-6 md:px-24">
+        <AnimatePresence mode="wait">
+          {currentView === 'categories' ? (
+            <motion.div
+              key="categories"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-7xl mx-auto"
+            >
+              <motion.h2
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="max-w-4xl mx-auto w-full flex flex-col items-center justify-center min-h-[calc(100vh-120px)]"
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="font-stranger text-3xl md:text-4xl glow-text mb-12 text-center tracking-wider"
               >
-                <motion.h2
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="font-stranger text-xl sm:text-2xl md:text-3xl glow-text mb-6 sm:mb-12 text-center tracking-wider"
-                >
-                  CHOOSE YOUR PATH
-                </motion.h2>
+                CHOOSE YOUR PATH
+              </motion.h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 w-full px-2 sm:px-0">
-                  {cards.map((card, index) => (
-                    <motion.div
-                      key={card.title}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 0.8,
-                        delay: 0.4 + index * 0.2,
-                        ease: [0.25, 0.46, 0.45, 0.94] as const,
-                      }}
-                      whileHover={{
-                        scale: 1.02,
-                        boxShadow: '0 0 30px hsl(var(--neon-cyan) / 0.5)',
-                      }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => handleCategoryClick(card.category)}
-                      className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8 cursor-pointer transition-all duration-300 group relative"
-                    >
-                      <h3 className="font-stranger text-xl sm:text-2xl md:text-3xl text-accent mb-2 sm:mb-4 tracking-wider group-hover:glow-text transition-all duration-300">
-                        {card.title}
-                      </h3>
-                      <p className="font-terminal text-sm sm:text-base md:text-lg text-muted-foreground tracking-wider">
-                        {card.description}
-                      </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-32">
+                {cards.map((card, index) => (
+                  <motion.div
+                    key={card.title}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.4 + index * 0.2,
+                      ease: [0.25, 0.46, 0.45, 0.94] as const,
+                    }}
+                    whileHover={{
+                      scale: 1.02,
+                      boxShadow: '0 0 30px hsl(var(--neon-cyan) / 0.5)',
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleCategoryClick(card.category)}
+                    className="tech-border bg-card/80 backdrop-blur-sm p-8 md:p-12 cursor-pointer transition-all duration-300 group relative"
+                  >
+                    <h3 className="font-stranger text-2xl md:text-4xl text-accent mb-4 tracking-wider group-hover:glow-text transition-all duration-300">
+                      {card.title}
+                    </h3>
+                    <p className="font-terminal text-base md:text-lg text-muted-foreground tracking-wider">
+                      {card.description}
+                    </p>
 
-                      {/* Decorative corner elements */}
-                      <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-neon-cyan opacity-50 group-hover:opacity-100 transition-opacity" />
-                      <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-neon-cyan opacity-50 group-hover:opacity-100 transition-opacity" />
-                    </motion.div>
-                  ))}
+                    {/* Decorative corner elements */}
+                    <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-neon-cyan opacity-50 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-neon-cyan opacity-50 group-hover:opacity-100 transition-opacity" />
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Timeline Section */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="w-full mt-24 max-w-5xl mx-auto"
+              >
+                <div className="text-center mb-16">
+                  <h2 className="text-3xl md:text-4xl font-bold text-foreground font-stranger mb-4">THE CHRONICLE</h2>
+                  <div className="w-24 h-1 bg-accent mx-auto" />
                 </div>
 
-                {/* Timeline Section */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                  className="w-full mt-16 sm:mt-24 max-w-5xl mx-auto"
-                >
-                  <div className="text-center mb-16">
-                    <h2 className="text-2xl md:text-4xl font-bold text-foreground font-stranger mb-4">THE CHRONICLE</h2>
-                    <div className="w-24 h-1 bg-accent mx-auto" />
-                  </div>
+                <TimelineContent />
+              </motion.div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key={currentView}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+            >
+              <EventCategorySection
+                category={currentView}
+                onBack={handleBack}
+                onEventClick={handleEventClick}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </section>
 
-                  <TimelineContent />
-                </motion.div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key={currentView}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
-              >
-                <EventCategorySection
-                  category={currentView}
-                  onBack={handleBack}
-                  onEventClick={handleEventClick}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.section>
+      {/* Closing Section - Adds scroll space for timeline animation */}
+      {currentView === 'categories' && (
+        <section className="h-screen w-full flex flex-col items-center justify-center text-center px-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 2 }}
+            viewport={{ once: true }}
+            className="max-w-2xl"
+          >
+            <p className="text-xl md:text-3xl text-muted-foreground font-light leading-relaxed mb-6">
+              The future is written in code.
+            </p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 2 }}
+              className="text-2xl md:text-4xl text-foreground font-stranger font-bold uppercase tracking-[0.2em]"
+            >
+              Are you ready?
+            </motion.p>
+
+            {/* Flicker Accent */}
+            <motion.div
+              animate={{ opacity: [1, 0.4, 1, 1, 0.2, 1] }}
+              transition={{ repeat: Infinity, duration: 4, times: [0, 0.1, 0.2, 0.8, 0.9, 1] }}
+              className="mt-12 w-1 h-8 bg-accent mx-auto"
+            />
+          </motion.div>
+
+          {/* Fade to Black */}
+          <div className="fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+        </section>
+      )}
 
       {/* Event Modal */}
       <EventModal
@@ -241,7 +268,7 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
-    </>
+    </div>
   );
 };
 

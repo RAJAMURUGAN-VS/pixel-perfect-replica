@@ -27,3 +27,5 @@ public/hls/**/*.ts
 *.sln
 *.sw?
 *.workspace
+# Reference folders
+rendezvous-2k26---connect*
