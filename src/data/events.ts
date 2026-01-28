@@ -68,11 +68,13 @@ export const technicalEvents: Event[] = [
     title: 'Vibe-a-Thon',
     description: 'Vibe-a-Thon is a competitive event where participants design precise and effective prompts to guide AI systems toward accurate, optimized outputs. It tests logical thinking, clarity of instruction, and problem-solving ability. Participants must balance creativity with technical precision. The event emphasizes understanding AI behavior and prompt engineering strategies. It encourages innovative thinking in human–AI interaction.',
     rules: [
-      'Design precise and effective AI prompts',
-      'Tests logical thinking and problem-solving ability',
-      'Balance creativity with technical precision',
-      'Understanding AI behavior and prompt engineering',
-      'Encourages innovative thinking in human–AI interaction'
+      'All work must be done in a GitHub repository',
+      'Teams must actively develop and commit their work',
+      'Minimum of 4 commits required at regular intervals',
+      'Direct Git clones are not allowed',
+      'Inter-team collaboration is strictly prohibited',
+      'Repository link must be shared for evaluation',
+      'Any rule violation leads to disqualification'
     ],
     image: vibeAThonImage,
     registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLSfr0dRgZtsaU2kSn88MGqg4O7SepEeT2qlhIlfxgS3MRxZGoQ/viewform',

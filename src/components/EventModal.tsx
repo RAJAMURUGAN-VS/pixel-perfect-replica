@@ -114,12 +114,16 @@ const EventModal = ({ isOpen, onClose, event }: EventModalProps) => {
                     <p className="font-terminal text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed tracking-wider">
                       {event.description}
                     </p>
-                    <div className="flex items-center gap-2 mt-4 text-accent">
-                      <span>🔗</span>
-                      <a href='https://drive.google.com/file/d/1cAO941TtJCrtwuW-BQAEZL5d7nimiQ8_/view?usp=drivesdk' target="_blank" rel="noopener noreferrer" className="font-terminal text-sm sm:text-base md:text-lg leading-relaxed tracking-wider">
-                        Resource
-                      </a>
-                    </div>
+                    {
+                      event.id==='non-tech-1' && (
+                        <div className="flex items-center gap-2 mt-4 text-accent">
+                          <span>🔗</span>
+                          <a href='https://drive.google.com/file/d/1cAO941TtJCrtwuW-BQAEZL5d7nimiQ8_/view?usp=drivesdk' target="_blank" rel="noopener noreferrer" className="font-terminal text-sm sm:text-base md:text-lg leading-relaxed tracking-wider">
+                            Resource
+                          </a>
+                        </div>
+                      )
+                    }
                   </div>
                 </motion.div>
 
