@@ -179,14 +179,55 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
 
 export const TEAM_CATEGORIES: TeamCategory[] = [
     {
+        id: 'cat_dev',
+        title: 'DEVELOPERS',
+        direction: 'left',
+        groups: [
+            {
+                id: 'grp_dev',
+                title: 'WEB DEVELOPERS',
+                members: [
+                    {
+                        id: 'dev1',
+                        name: 'Sri Nithilan R',
+                        role: 'Developer',
+                        tagline: 'Building the digital experience.',
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769692128/IMG-20250608-WA0001_1_uak7qm.jpg'
+                    },
+                    {
+                        id: 'dev2',
+                        name: 'RAJAMURUGAN VS',
+                        role: 'Developer',
+                        tagline: 'Crafting seamless interfaces.',
+                        imageUrl: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769703897/Screenshot_2026-01-29_214552_dxzbpf.png'
+                    },
+                    {
+                        id: 'dev3',
+                        name: 'Sidhanth',
+                        role: 'Developer',
+                        tagline: 'Crafting seamless interfaces.',
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690839/developer-_Sidhanth_tewdeh.jpg'
+                    },
+                ]
+            }
+        ]
+    },
+    {
         id: 'cat_design',
-        title: 'DESIGN & POSTER',
+        title: 'DESIGN & POSTER MAKING',
         direction: 'left',
         groups: [
             {
                 id: 'grp_design',
                 title: 'CREATIVE TEAM',
                 members: [
+                    {
+                        id: 'ds1',
+                        name: 'Sirisha S',
+                        role: 'Design Team',
+                        tagline: 'Visualizing creative concepts.',
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690834/Design_and_poster_making-sirisha_s_vbmr5d.jpg'
+                    },
                     {
                         id: 'ds2',
                         name: 'Swetha J',
@@ -199,25 +240,32 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
         ]
     },
     {
-        id: 'cat_social',
-        title: 'SOCIAL & OUTREACH',
+        id: 'cat_editorial',
+        title: 'EDITORIAL TEAM',
         direction: 'right',
         groups: [
             {
-                id: 'grp_social',
-                title: 'SOCIAL MEDIA',
+                id: 'grp_editorial',
+                title: 'CONTENT CREATORS',
                 members: [
                     {
-                        id: 'sm1',
-                        name: 'Vishnu Priya P G',
-                        role: 'Outreach & Social Media',
-                        tagline: 'Connecting our community.',
-                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690832/event_coordinator_Social_Media_Outreach-stranger_tunes-VISHNU_PRIYA_P_G_pn5mki.jpg'
-                    }
+                        id: 'ed1',
+                        name: 'Shanmugam J',
+                        role: 'Editorial Team',
+                        tagline: 'Crafting compelling narratives.',
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690835/Editorial_Team-SHANMUGAM_J_guozra.jpg'
+                    },
+                    {
+                        id: 'ed2',
+                        name: 'Vasanth',
+                        role: 'Editorial Team',
+                        tagline: 'Shaping the story.',
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690837/Editorial_Team-VASANTH_ofkgic.webp'
+                    },
                 ]
             }
         ]
-    }
+    },
 ];
 
 export const TIMELINE: TimelineEvent[] = [
