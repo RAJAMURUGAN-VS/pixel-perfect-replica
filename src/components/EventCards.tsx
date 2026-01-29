@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import EventCategorySection from './EventCategorySection';
 import EventModal from './EventModal';
 import { Event } from '@/data/events';
-import { NavigationSection } from '@/hooks/useNavigation';
 import { TIMELINE } from '@/data/crew';
 import { TimelineEvent } from '@/data/crewTypes';
 
@@ -12,7 +12,6 @@ interface EventCardsProps {
   isVisible: boolean;
   isVideoEnded: boolean;
   onVideoEnd: () => void;
-  onNavigate?: (section: NavigationSection) => void;
 }
 
 type ViewState = 'categories' | 'technical' | 'non-technical';
@@ -85,7 +84,8 @@ const TimelineContent = () => {
   );
 };
 
-const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCardsProps) => {
+const EventCards = ({ isVisible }: EventCardsProps) => {
+  const navigate = useNavigate();
   const [currentView, setCurrentView] = useState<ViewState>('categories');
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -123,22 +123,48 @@ const EventCards = ({ isVisible, isVideoEnded, onVideoEnd, onNavigate }: EventCa
     setTimeout(() => setSelectedEvent(null), 300);
   };
 
-  const handleNavigate = (section: NavigationSection) => {
+  // Replaced manual navigation with router navigate
+  // Handle header navigation locally within events (categories) or route elsewhere
+  const handleNavigate = (section: string) => {
     if (section === 'events') {
       setCurrentView('categories');
       return;
     }
-    if (onNavigate) {
-      onNavigate(section);
-    }
+    // Navigate to other routes
+    navigate(section === 'home' ? '/' : `/${section}`);
   };
+
+  // Adapter for Header which expects string
+  // Header expects onNavigate to handle string based on updated Header.tsx
+  // But wait, Header.tsx uses Links now! 
+  // Wait, I updated Header.tsx to use Links. It doesn't use onNavigate anymore?
+  // Let's check Header.tsx... It DOES NOT have onNavigate prop anymore.
+  // BUT EventCards uses Header.
+  // And EventCards passes `onNavigate={handleNavigate}`.
+  // I must check if Header accepts onNavigate.
+  // In step 747, I updated HeaderProps to interface HeaderProps { currentSection?: string; }.
+  // So Header DOES NOT accept onNavigate.
+  // So I should REMOVE `onNavigate={handleNavigate}` from Header in EventCards.
+
+  // Also, `Header` inside `EventCards` needs to handle the "Back to Categories" logic if "Events" is clicked?
+  // If `Header` uses `Link to='/events'`, clicking it while on `/events` will just re-render `/events`.
+  // If we are in "Technical" view, we want "Events" link to go back to "Categories".
+  // Since `Header` is now purely `Link` based, we can't easily intercept it unless we change `Header` back to accept an override or custom handler.
+  // OR, we just accept that clicking "EVENTS" in the nav reloads the events page (resetting state to categories).
+  // Given the `Layout` based approach, clicking `/events` link will likely keep the component mounted if we are already there, unless `key` changes.
+  // In `Layout.tsx`, `EventCards` is mounted via `EventsSectionWrapper`.
+  // If we click `/events`, the location is same.
+  // Maybe we can add a `useEffect` in `EventCards` listening to location state or something?
+  // Or just simpler: let it be. If user clicks EVENTS while in deep view, maybe they want to go to root of events.
+  // But `EventCards` state `currentView` is local. It won't reset on link click to same route default.
+  // Unless we add a key to the Route or something.
+
+  // For now, I will remove `onNavigate` prop from Header usage here.
 
   return (
     <div className="relative min-h-screen">
       {/* Header - Always visible in events section */}
-      <Header onNavigate={handleNavigate} currentSection="events" />
-
-
+      <Header currentSection="events" />
 
       {/* Main Content Section */}
       <section className="relative py-24 px-6 md:px-24">

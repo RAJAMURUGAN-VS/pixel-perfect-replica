@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import logo from '@/assets/RMDEC.png';
 import acmLogo from '@/assets/acm.png';
-import { NavigationSection } from '@/hooks/useNavigation';
 
 interface HeaderProps {
-  onNavigate?: (section: NavigationSection) => void;
-  currentSection?: NavigationSection;
+  currentSection?: string;
 }
 
-const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
+const Header = ({ currentSection = 'home' }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -23,19 +22,12 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (section: NavigationSection) => {
-    if (onNavigate) {
-      onNavigate(section);
-    }
-    setIsMobileMenuOpen(false);
-  };
-
-  const navItems: { key: NavigationSection | 'bus'; label: string; isExternal?: boolean; href?: string }[] = [
-    { key: 'home', label: 'HOME' },
-    { key: 'about', label: 'ABOUT' },
-    { key: 'events', label: 'EVENTS' },
-    { key: 'crew', label: 'THE CREW' },
-    { key: 'contact', label: 'CONTACT US' },
+  const navItems: { key: string; label: string; isExternal?: boolean; href?: string; to?: string }[] = [
+    { key: 'home', label: 'HOME', to: '/' },
+    { key: 'about', label: 'ABOUT', to: '/about' },
+    { key: 'events', label: 'EVENTS', to: '/events' },
+    { key: 'crew', label: 'THE CREW', to: '/crew' },
+    { key: 'contact', label: 'CONTACT US', to: '/contact' },
     { key: 'bus', label: 'BUS ROUTES', isExternal: true, href: '/rmdbus.pdf' },
   ];
 
@@ -56,9 +48,9 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
 
           {/* Left Side: Logo & College Text */}
-          <div
+          <Link
+            to="/"
             className="flex items-center gap-2 md:gap-3 cursor-pointer"
-            onClick={() => handleNavClick('home')}
           >
             <img
               src={logo}
@@ -73,7 +65,7 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
                 (An Autonomous Institution)
               </p>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-4" aria-label="Main navigation">
@@ -94,22 +86,20 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
                   {item.label}
                 </motion.a>
               ) : (
-                <motion.button
-                  key={item.key}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
-                  whileHover={{ scale: 1.05, color: 'hsl(var(--accent))' }}
-                  onClick={() => handleNavClick(item.key as NavigationSection)}
-                  className={`font-terminal text-base md:text-lg tracking-wider transition-colors ${currentSection === item.key
-                    ? 'text-accent'
-                    : 'text-foreground/80 hover:text-foreground'
-                    }`}
-                  aria-label={`Navigate to ${item.label} section`}
-                  aria-current={currentSection === item.key ? 'page' : undefined}
-                >
-                  {item.label}
-                </motion.button>
+                <Link to={item.to!}>
+                  <motion.span
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
+                    whileHover={{ scale: 1.05, color: 'hsl(var(--accent))' }}
+                    className={`font-terminal text-base md:text-lg tracking-wider transition-colors block ${currentSection === item.key
+                      ? 'text-accent'
+                      : 'text-foreground/80 hover:text-foreground'
+                      }`}
+                  >
+                    {item.label}
+                  </motion.span>
+                </Link>
               )
             ))}
 
@@ -193,19 +183,19 @@ const Header = ({ onNavigate, currentSection = 'home' }: HeaderProps) => {
                       {item.label}
                     </motion.a>
                   ) : (
-                    <motion.button
-                      key={item.key}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 + index * 0.1, duration: 0.4 }}
-                      onClick={() => handleNavClick(item.key as NavigationSection)}
-                      className={`font-stranger text-2xl tracking-wider transition-colors ${currentSection === item.key
-                        ? 'text-accent glow-text'
-                        : 'text-foreground/80 hover:text-accent'
-                        }`}
-                    >
-                      {item.label}
-                    </motion.button>
+                    <Link to={item.to!} onClick={() => setIsMobileMenuOpen(false)}>
+                      <motion.span
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 + index * 0.1, duration: 0.4 }}
+                        className={`font-stranger text-2xl tracking-wider transition-colors block ${currentSection === item.key
+                          ? 'text-accent glow-text'
+                          : 'text-foreground/80 hover:text-accent'
+                          }`}
+                      >
+                        {item.label}
+                      </motion.span>
+                    </Link>
                   )
                 ))}
               </motion.nav>

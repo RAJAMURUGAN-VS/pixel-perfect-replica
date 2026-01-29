@@ -3,19 +3,17 @@ import { NavigationSection } from '@/hooks/useNavigation';
 
 interface EventsSectionWrapperProps {
   isActive: boolean;
-  onNavigate?: (section: NavigationSection) => void;
 }
 
-const EventsSectionWrapper = ({ isActive, onNavigate }: EventsSectionWrapperProps) => {
-  if (!isActive) return null;
+const EventsSectionWrapper = ({ isActive }: EventsSectionWrapperProps) => {
+  // if (!isActive) return null; // Controlled by Router now
 
   return (
     <div className="min-h-screen relative">
       <EventCards
-        isVisible={isActive}
+        isVisible={true}
         isVideoEnded={true}
         onVideoEnd={() => { }}
-        onNavigate={onNavigate}
       />
     </div>
   );

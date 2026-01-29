@@ -4,9 +4,7 @@ import heroImage from '@/assets/hero-background.jpg';
 import eventTitleImage from '@/assets/event-title.png';
 import CountdownTimer from './CountdownTimer';
 
-interface HomeSectionProps {
-  onNavigateToEvents: () => void;
-}
+import { useNavigate } from 'react-router-dom';
 
 // Transition video - loops in background
 const TRANSITION_VIDEO = 'https://d2gfxmzi2tqh5n.cloudfront.net/upscaled-video%20(1).mp4';
@@ -14,7 +12,8 @@ const TRANSITION_VIDEO = 'https://d2gfxmzi2tqh5n.cloudfront.net/upscaled-video%2
 // Transition duration in ms before navigating to events
 const TRANSITION_DURATION = 4000;
 
-const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
+const HomeSection = () => {
+  const navigate = useNavigate();
   const [showVideo, setShowVideo] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -34,7 +33,7 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
       // Set a timeout to navigate after the transition duration
       navigationTimeoutRef.current = setTimeout(() => {
         setIsNavigating(true);
-        onNavigateToEvents();
+        navigate('/events');
       }, TRANSITION_DURATION);
     }
 
@@ -43,12 +42,12 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
         clearTimeout(navigationTimeoutRef.current);
       }
     };
-  }, [showVideo, isNavigating, onNavigateToEvents]);
+  }, [showVideo, isNavigating, navigate]);
 
   const handleInvestigate = useCallback(() => {
     setShowVideo(true);
     setIsNavigating(false);
-    
+
     // Start video playback immediately
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
@@ -63,8 +62,8 @@ const HomeSection = ({ onNavigateToEvents }: HomeSectionProps) => {
     setShowVideo(false);
     setIsNavigating(true);
     // Navigate directly to events page when skipping
-    onNavigateToEvents();
-  }, [onNavigateToEvents]);
+    navigate('/events');
+  }, [navigate]);
 
   return (
     <section
