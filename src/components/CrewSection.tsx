@@ -288,8 +288,18 @@ const ProfileCard = ({ name, role, index, total, scrollYProgress, imageUrl, tagl
     const scale = useTransform(scrollYProgress, [0, 0.12], [0.9 + (index * 0.02), 1]);
 
     const displayImage = imageUrl || `https://api.dicebear.com/9.x/initials/svg?seed=${name}&backgroundColor=111111&textColor=888888&fontSize=45`;
+    // if(name === 'RAJAMURUGAN VS'){
+    // const prefix = name === 'RAJAMURUGAN VS'? 'RAJA': (name.split(' ')[0] || '').slice(0, 3).toUpperCase();
+    // const idDisplay = `ID: ${prefix}-00${index}`;
+    // }else{
+    //const idDisplay = `ID: ${name.split(' ')[0].substring(0, 3).toUpperCase()}-00${index}`;
+    let idDisplay;
 
-    const idDisplay = `ID: ${name.split(' ')[0].substring(0, 3).toUpperCase()}-00${index}`;
+if (name === "RAJAMURUGAN VS") {
+    idDisplay = `ID: RAJA-00${index}`;
+} else {
+    idDisplay = `ID: ${name.split(' ')[0].substring(0, 3).toUpperCase()}-00${index}`;
+}
 
     return (
         <motion.div

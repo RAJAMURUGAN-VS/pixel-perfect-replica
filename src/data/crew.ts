@@ -7,14 +7,14 @@ export const FACULTY: TeamMember[] = [
         name: 'Dr.P.Ezhumalai', 
         role: 'HOD', 
         tagline: 'Head of Department - CSE',
-        imageUrl: '/crew-images/faculty%20coordinator-hod-Dr.P.Ezhumalai.jpg'
+        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690833/faculty_coordinator-hod-Dr.P.Ezhumalai_tjxgpi.jpg'
     },
     { 
         id: 'f2', 
         name: 'Gnanasekar', 
         role: 'Faculty Coordinator', 
         tagline: 'Guiding the symposium with expertise.',
-        imageUrl: '/crew-images/faculty%20coordinator-%20Gnanasekar.jpeg'
+        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690833/faculty_coordinator-_Gnanasekar_krpiui.jpg'
     },
 ];
 
@@ -25,14 +25,14 @@ export const LEADERSHIP: TeamMember[] = [
         name: 'Christopher A', 
         role: 'President', 
         tagline: 'Leading the vision of the symposium.',
-        imageUrl: '/crew-images/president-CHRISTOPHER%20A.jpeg'
+        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690835/president-CHRISTOPHER_A_vcmbzk.jpg'
     },
     { 
         id: 'l2', 
         name: 'Sirimavilla Kaushik', 
         role: 'Vice President', 
         tagline: 'Supporting excellence in execution.',
-        imageUrl: '/crew-images/vice%20president-Kaushik.jpeg'
+        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690838/vice_president-Kaushik_znth0t.jpg'
     },
     { 
         id: 'l3', 
@@ -46,7 +46,7 @@ export const LEADERSHIP: TeamMember[] = [
         name: 'Charan Sai', 
         role: 'Joint Secretary', 
         tagline: 'Driving collaborative initiatives.',
-        imageUrl: '/crew-images/joint%20secratary-charan%20sai.jpeg'
+        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690836/joint_secratary-charan_sai_zllhpb.jpg'
     },
    
 ];
@@ -58,21 +58,21 @@ export const LEADERSHIP2: TeamMember[] = [
         name: 'Boopathi', 
         role: 'Joint Secretary', 
         tagline: 'Ensuring smooth coordination.',
-        imageUrl: '/crew-images/joint%20secratary-Boopathi.jpeg'
+        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690838/joint_secratary-Boopathi_yqp20j.jpg'
     },
     {
         id: 'l6', 
         name: 'Yeswanth Raj C A', 
         role: 'Treasurer', 
         tagline: 'Managing resources effectively.',
-        imageUrl: '/crew-images/Treasurer-YESWANTHRAJ%20C%20A.jpg'
+        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690837/Treasurer-YESWANTHRAJ_C_A_cbogpd.jpg'
     },
     { 
         id: 'l7', 
         name: 'Rakesh', 
         role: 'Treasurer', 
         tagline: 'Managing resources effectively.',
-        imageUrl: '/crew-images/Treasurer-Rakesh.jpg'
+        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690838/Treasurer-Rakesh_hqiefj.jpg'
     },
 ];
 
@@ -85,7 +85,7 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
                 id: 'ctf1', 
                 name: 'Keerthi K P', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/Event%20coordinator-clawCTF-KEERTHI%20K%20P.jpg'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690840/Event_coordinator-clawCTF-KEERTHI_K_P_hekw8i.jpg'
             },
         ]
     },
@@ -96,43 +96,43 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
                 id: 'tunes1', 
                 name: 'Badmalakshmi V', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/event%20coordinator-stranger%20tunes-BADMALAKSHMI%20V.jpeg'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690836/event_coordinator-stranger_tunes-BADMALAKSHMI_V_f8srtt.jpg'
             },
             { 
                 id: 'tunes2', 
                 name: 'Vishnu Priya P G', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/event%20coordinator,Social%20Media%20&%20Outreach-stranger%20tunes-VISHNU%20PRIYA%20P%20G.jpg'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690832/event_coordinator_Social_Media_Outreach-stranger_tunes-VISHNU_PRIYA_P_G_pn5mki.jpg'
             },
             { 
                 id: 'tunes3', 
                 name: 'Nishitha D', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/Event%20coordinator-stranger%20tunes-NISHITHA%20D.jpeg'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690833/Event_coordinator-stranger_tunes-NISHITHA_D_jo8hpu.jpg'
             },
             { 
                 id: 'tunes4', 
                 name: 'Nivetha J', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/Event%20coordinator-stranger%20tunes-NIVETHA%20J.png'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690835/Event_coordinator-stranger_tunes-NIVETHA_J_l5cm2s.png'
             },
             { 
                 id: 'tunes5', 
                 name: 'Prakash Babu S', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/Event%20coordinator-stranger%20tunes-PRAKASH%20BABU%20S.jpg'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690834/Event_coordinator-stranger_tunes-PRAKASH_BABU_S_ytii7y.jpg'
             },
             { 
                 id: 'tunes6', 
                 name: 'Kaarthik A', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/Event%20coordinator-stranger%20tunes-Kaarthik%20A.jpg'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690837/Event_coordinator-stranger_tunes-Kaarthik_A_vk4gja.jpg'
             },
             { 
                 id: 'tunes7', 
                 name: 'Nancy D', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/Event%20coordinator-stranger%20tumes-NANCY%20D.jpeg'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690837/Event_coordinator-stranger_tumes-NANCY_D_p8p1es.jpg'
             },
         ]
     },
@@ -143,25 +143,25 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
                 id: 'ipl1', 
                 name: 'Karunamoorthi R', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/Event%20cooedinator-%20ipl%20Auction-KARUNAMOORTHI%20R.jpeg'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690835/Event_cooedinator-_ipl_Auction-KARUNAMOORTHI_R_agbdqk.jpg'
             },
             { 
                 id: 'ipl2', 
                 name: 'Mohammad Rafeeq S', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/Event%20coordinator-ipl%20auction-%20MOHAMMAD%20RAFEEQ%20S.jpg'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690832/Event_coordinator-ipl_auction-_MOHAMMAD_RAFEEQ_S_edl8pe.jpg'
             },
             { 
                 id: 'ipl3', 
                 name: 'Sujin S', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/Event%20coordinator-ipl%20auction-%20sujin%20s.jpeg'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690834/Event_coordinator-ipl_auction-_sujin_s_eod5nt.jpg'
             },
             { 
                 id: 'ipl4', 
                 name: 'Prawin Balaji A', 
                 role: 'Event Coordinator',
-                imageUrl: '/crew-images/Event%20coordinator-ipl%20auction-PRAWIN%20BALAJI%20A.png'
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690834/Event_coordinator-ipl_auction-PRAWIN_BALAJI_A_zn9c7j.png'
             },
         ]
     },
@@ -182,21 +182,21 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
                         name: 'Sri Nithilan R', 
                         role: 'Developer',
                         tagline: 'Building the digital experience.',
-                        imageUrl: '/crew-images/developer-%20Sri%20Nithilan%20R.jpg'
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769692128/IMG-20250608-WA0001_1_uak7qm.jpg'
                     },
                     { 
                         id: 'dev2', 
-                        name: 'Rajamurugan', 
+                        name: 'RAJAMURUGAN VS', 
                         role: 'Developer',
                         tagline: 'Crafting seamless interfaces.',
-                        imageUrl: '/crew-images/Developer-%20Rajamurugan.jpeg'
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690834/Developer-_Rajamurugan_waeug8.jpg'
                     },
                     { 
                         id: 'dev3', 
                         name: 'Sidhanth', 
                         role: 'Developer',
                         tagline: 'Crafting seamless interfaces.',
-                        imageUrl: '/crew-images/developer-%20Sidhanth.jpg'
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690839/developer-_Sidhanth_tewdeh.jpg'
                     },
                 ]
             }
@@ -216,14 +216,14 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
                         name: 'Sirisha S', 
                         role: 'Design Team',
                         tagline: 'Visualizing creative concepts.',
-                        imageUrl: '/crew-images/Design%20and%20poster%20making-sirisha%20s.jpeg'
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690834/Design_and_poster_making-sirisha_s_vbmr5d.jpg'
                     },
                     { 
                         id: 'ds2', 
                         name: 'Swetha J', 
                         role: 'Design Team',
                         tagline: 'Bringing ideas to life.',
-                        imageUrl: '/crew-images/Design%20team%20and%20poster%20making-SWETHA%20J.jpg'
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690837/Design_team_and_poster_making-SWETHA_J_tfbliw.jpg'
                     },
                 ]
             }
@@ -243,14 +243,14 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
                         name: 'Shanmugam J', 
                         role: 'Editorial Team',
                         tagline: 'Crafting compelling narratives.',
-                        imageUrl: '/crew-images/Editorial%20Team-SHANMUGAM%20J.jpg'
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690835/Editorial_Team-SHANMUGAM_J_guozra.jpg'
                     },
                     { 
                         id: 'ed2', 
                         name: 'Vasanth', 
                         role: 'Editorial Team',
                         tagline: 'Shaping the story.',
-                        imageUrl: '/crew-images/Editorial%20Team-VASANTH.webp'
+                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690837/Editorial_Team-VASANTH_ofkgic.webp'
                     },
                 ]
             }

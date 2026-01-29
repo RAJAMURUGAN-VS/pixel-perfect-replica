@@ -52,16 +52,12 @@ const ContactSection = () => {
 
   const contactPersons = [
     {
-      name: 'Sirimavilla Kaushik',
-      phone: '+91 9676096177',
-    },
-    {
-      name: 'Christopher',
-      phone: '+91 9710815558',
-    },
-    {
       name: 'Lakshmi Sri',
       phone: '+91 73057 55115',
+    },
+    {
+      name: 'Charan Sai',
+      phone: '+91 96558 99020',
     },
     {
       name: 'Rakesh S',
@@ -70,6 +66,10 @@ const ContactSection = () => {
     {
       name: 'Yeswanth Raj',
       phone: '+91 96558 99020',
+    },
+    {
+      name: 'Boopthi',
+      phone: '+91 99412 24503',
     },
   ];
 
@@ -186,7 +186,7 @@ const ContactSection = () => {
               {/* Contact Persons */}
               <div className="tech-border bg-card/80 backdrop-blur-sm p-4 sm:p-6 md:p-8 mt-6">
                 <h3 className="font-stranger text-lg sm:text-xl text-accent mb-4 sm:mb-6 tracking-wider">
-                  EVENT COORDINATORS
+                  GENERAL ENQUIRY
                 </h3>
                 <div className="space-y-3 sm:space-y-4">
                   {contactPersons.map((person, index) => (
