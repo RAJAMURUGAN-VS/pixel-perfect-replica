@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion';
 import { LEADERSHIP, LEADERSHIP2, TEAM_CATEGORIES, FACULTY, EVENT_COORDINATORS } from '@/data/crew';
 import { TeamCategory, TeamGroup, TeamMember } from '@/data/crewTypes';
@@ -11,6 +11,23 @@ const SPRING_OPTIONS = {
     damping: 25,
     mass: 0.6,
     restDelta: 0.001
+};
+
+// Hook for responsive logic
+const useIsMobile = () => {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+    return isMobile;
+};
+
+// Helper to calculate robust pan distances
+const getPanDistance = (isMobile: boolean, groupCount: number) => {
+    return "-100%";
 };
 
 /**
@@ -254,10 +271,10 @@ const EventCoordinatorsSection = () => {
             </div>
 
             {EVENT_COORDINATORS.map((event) => (
-                <EventCoordinatorTicker 
-                    key={event.eventName} 
-                    eventName={event.eventName} 
-                    members={event.members} 
+                <EventCoordinatorTicker
+                    key={event.eventName}
+                    eventName={event.eventName}
+                    members={event.members}
                 />
             ))}
         </section>
@@ -271,21 +288,22 @@ interface ProfileCardProps extends TeamMember {
     index: number;
     total: number;
     scrollYProgress: MotionValue<number>;
+    isMobile: boolean;
 }
 
-const ProfileCard = ({ name, role, index, total, scrollYProgress, imageUrl, tagline }: ProfileCardProps) => {
-    const cardWidth = 300;
-    const gap = 30;
+const ProfileCard = ({ name, role, index, total, scrollYProgress, imageUrl, tagline, isMobile }: ProfileCardProps) => {
+    const cardWidth = isMobile ? 260 : 300;
+    const gap = isMobile ? 15 : 30;
     const expandedOffset = index * (cardWidth + gap);
     const stackedOffset = index * 10;
 
-    const xPos = useTransform(scrollYProgress, [0, 0.12], [stackedOffset, expandedOffset]);
+    const xPos = useTransform(scrollYProgress, [0, 0.15], [stackedOffset, expandedOffset]);
 
     const randomTilt = (index % 2 === 0 ? 3 : -3) * ((index % 3) + 0.5);
-    const rotate = useTransform(scrollYProgress, [0, 0.12], [randomTilt, 0]);
+    const rotate = useTransform(scrollYProgress, [0, 0.15], [randomTilt, 0]);
 
-    const opacity = useTransform(scrollYProgress, [0, 0.08], [1 - (index * 0.15), 1]);
-    const scale = useTransform(scrollYProgress, [0, 0.12], [0.9 + (index * 0.02), 1]);
+    const opacity = useTransform(scrollYProgress, [0, 0.1], [1 - (index * 0.15), 1]);
+    const scale = useTransform(scrollYProgress, [0, 0.15], [0.9 + (index * 0.02), 1]);
 
     const displayImage = imageUrl || `https://api.dicebear.com/9.x/initials/svg?seed=${name}&backgroundColor=111111&textColor=888888&fontSize=45`;
     // if(name === 'RAJAMURUGAN VS'){
@@ -295,16 +313,16 @@ const ProfileCard = ({ name, role, index, total, scrollYProgress, imageUrl, tagl
     //const idDisplay = `ID: ${name.split(' ')[0].substring(0, 3).toUpperCase()}-00${index}`;
     let idDisplay;
 
-if (name === "RAJAMURUGAN VS") {
-    idDisplay = `ID: RAJA-00${index}`;
-} else {
-    idDisplay = `ID: ${name.split(' ')[0].substring(0, 3).toUpperCase()}-00${index}`;
-}
+    if (name === "RAJAMURUGAN VS") {
+        idDisplay = `ID: RAJA-00${index}`;
+    } else {
+        idDisplay = `ID: ${name.split(' ')[0].substring(0, 3).toUpperCase()}-00${index}`;
+    }
 
     return (
         <motion.div
-            style={{ x: xPos, rotate: rotate, zIndex: total - index, scale, opacity, willChange: "transform" }}
-            className="absolute top-0 left-0 w-[300px] h-[450px] rounded-xl bg-[#0a0a0a] border border-white/10 overflow-hidden shadow-2xl origin-bottom-left group"
+            style={{ x: xPos, rotate: rotate, zIndex: total - index, scale, opacity, width: cardWidth, willChange: "transform" }}
+            className={`absolute top-0 left-0 h-[400px] md:h-[450px] rounded-xl bg-[#0a0a0a] border border-white/10 overflow-hidden shadow-2xl origin-bottom-left group`}
         >
             {/* Holographic Edge/Glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-red-900/20 pointer-events-none z-30" />
@@ -367,19 +385,19 @@ if (name === "RAJAMURUGAN VS") {
 /**
  * 8. GROUP DECK
  */
-const GroupDeck = ({ group, scrollYProgress }: { group: TeamGroup; scrollYProgress: MotionValue<number> }) => {
-    const cardWidth = 300;
-    const gap = 30;
+const GroupDeck = ({ group, scrollYProgress, isMobile }: { group: TeamGroup; scrollYProgress: MotionValue<number>; isMobile: boolean }) => {
+    const cardWidth = isMobile ? 260 : 300;
+    const gap = isMobile ? 15 : 30;
     const totalMembers = group.members.length;
 
     const stackedWidth = cardWidth + 60;
     const expandedWidth = (totalMembers * (cardWidth + gap)) + 20;
 
-    const width = useTransform(scrollYProgress, [0, 0.12], [stackedWidth, expandedWidth]);
+    const width = useTransform(scrollYProgress, [0, 0.15], [stackedWidth, expandedWidth]);
 
     return (
-        <motion.div style={{ width, willChange: "width" }} className="relative flex-shrink-0 h-[500px] mr-32 md:mr-48">
-            <h4 className="absolute -top-16 left-0 text-xl md:text-3xl font-stranger font-bold text-white/80 whitespace-nowrap tracking-wider flex items-center gap-3">
+        <motion.div style={{ width, willChange: "width" }} className="relative flex-shrink-0 h-[450px] md:h-[500px] mr-12 md:mr-48">
+            <h4 className="absolute -top-12 md:-top-16 left-0 text-xl md:text-3xl font-stranger font-bold text-white/80 whitespace-nowrap tracking-wider flex items-center gap-3">
                 <span className="w-8 h-[2px] bg-red-600 inline-block" /> {group.title}
             </h4>
             <div className="relative w-full h-full">
@@ -389,6 +407,7 @@ const GroupDeck = ({ group, scrollYProgress }: { group: TeamGroup; scrollYProgre
                         index={i}
                         total={totalMembers}
                         scrollYProgress={scrollYProgress}
+                        isMobile={isMobile}
                         {...member}
                     />
                 ))}
@@ -401,19 +420,28 @@ const GroupDeck = ({ group, scrollYProgress }: { group: TeamGroup; scrollYProgre
  * 9. CATEGORY HEADER
  */
 const CategoryHeader = ({ title, index }: { title: string; index: number }) => (
-    <div className="relative flex-shrink-0 flex flex-col justify-center h-[500px] w-[320px] md:w-[450px] pl-8 pr-6 mr-16 z-10 border-l-2 border-white/5 bg-gradient-to-r from-white/[0.02] to-transparent backdrop-blur-sm">
-        <span className="absolute -top-12 left-0 font-stranger text-[10rem] md:text-[16rem] font-bold text-white/[0.04] select-none leading-none z-0 pointer-events-none">
+    <div className="relative flex-shrink-0 flex flex-col justify-center h-[400px] md:h-[500px] w-[16vw] md:w-[450px] pl-2 md:pl-8 pr-2 md:pr-6 mr-4 md:mr-16 z-10 border-l-2 border-white/5 bg-gradient-to-r from-white/[0.02] to-transparent backdrop-blur-sm">
+        <span className="absolute -top-12 left-0 font-stranger text-[4rem] md:text-[8rem] lg:text-[16rem] font-bold text-white/[0.04] select-none leading-none z-0 pointer-events-none">
             0{index + 1}
         </span>
 
-        <div className="relative z-10">
-            <div className="w-24 h-2 bg-red-600 mb-8 shadow-[0_0_20px_rgba(220,38,38,0.5)]" />
-            <h3 className="text-4xl md:text-6xl font-stranger font-bold text-white leading-tight tracking-wide drop-shadow-2xl">
+        {/* Desktop Content */}
+        <div className="hidden md:block relative z-10">
+            <div className="w-16 md:w-24 h-2 bg-red-600 mb-6 md:mb-8 shadow-[0_0_20px_rgba(220,38,38,0.5)]" />
+            <h3 className="text-3xl md:text-6xl font-stranger font-bold text-white leading-tight tracking-wide drop-shadow-2xl">
                 {title}
             </h3>
             <p className="mt-4 text-gray-400 text-sm font-mono tracking-widest opacity-60">
                 // AUTHORIZED PERSONNEL ONLY
             </p>
+        </div>
+
+        {/* Mobile Vertical Content */}
+        <div className="md:hidden relative z-10 h-full flex flex-col items-center justify-center">
+            <div className="h-16 w-1 bg-red-600 mb-4 shadow-[0_0_20px_rgba(220,38,38,0.5)]" />
+            <h3 className="text-xl font-stranger font-bold text-white tracking-widest [writing-mode:vertical-rl] rotate-180 whitespace-nowrap opacity-80">
+                {title}
+            </h3>
         </div>
     </div>
 );
@@ -424,9 +452,14 @@ const CategoryHeader = ({ title, index }: { title: string; index: number }) => (
 const CategoryScrollSection = ({ category, index }: { category: TeamCategory; index: number }) => {
     const targetRef = useRef<HTMLDivElement>(null);
     const numberOfGroups = category.groups.length;
+    const isMobile = useIsMobile();
 
-    const isSingleGroup = numberOfGroups === 1;
-    const dynamicHeight = `${isSingleGroup ? 250 : 400 + (numberOfGroups * 100)}vh`;
+    // CONDITIONAL HEIGHT:
+    // Ensure enough vertical scroll space for the animation to feel natural
+    const heightMultiplier = isMobile ? 150 : 100;
+    const baseHeight = isMobile ? 300 : 400;
+
+    const dynamicHeight = `${baseHeight + (numberOfGroups * heightMultiplier)}vh`;
 
     const { scrollYProgress } = useScroll({
         target: targetRef,
@@ -435,14 +468,9 @@ const CategoryScrollSection = ({ category, index }: { category: TeamCategory; in
 
     const smoothProgress = useSpring(scrollYProgress, SPRING_OPTIONS);
 
-    let panPercentage = 0;
-    if (numberOfGroups === 1) panPercentage = 25;
-    else if (numberOfGroups === 2) panPercentage = 50;
-    else if (numberOfGroups === 3) panPercentage = 75;
-    else panPercentage = 96;
-
-    const endPan = `-${panPercentage}%`;
-    const containerX = useTransform(smoothProgress, [0.1, 1], ["0%", endPan]);
+    // DYNAMIC PANNING:
+    const panDistance = getPanDistance(isMobile, numberOfGroups);
+    const containerX = useTransform(smoothProgress, [0.20, 1.0], ["0%", panDistance]);
 
     return (
         <section ref={targetRef} style={{ height: dynamicHeight }} className="relative bg-[#050505]">
@@ -456,22 +484,23 @@ const CategoryScrollSection = ({ category, index }: { category: TeamCategory; in
                     {/* Groups (Decks) Container */}
                     <motion.div
                         style={{ x: containerX, willChange: "transform" }}
-                        className="flex items-center h-[550px] pr-[10vw]"
+                        className="flex items-center h-[500px] pr-[20vw] md:pr-[20vw]"
                     >
                         {category.groups.map((group) => (
                             <GroupDeck
                                 key={group.id}
                                 group={group}
                                 scrollYProgress={smoothProgress}
+                                isMobile={isMobile}
                             />
                         ))}
                     </motion.div>
                 </div>
 
                 {/* Progress Bar */}
-                <div className="absolute bottom-12 right-12 flex flex-col items-end gap-2">
-                    <span className="text-xs font-mono text-red-500/50">SECTION PROGRESS</span>
-                    <div className="w-32 h-1 bg-white/10 rounded-full overflow-hidden">
+                <div className="absolute bottom-6 right-6 md:bottom-12 md:right-12 flex flex-col items-end gap-2">
+                    <span className="text-[10px] md:text-xs font-mono text-red-500/50">SECTION PROGRESS</span>
+                    <div className="w-24 md:w-32 h-1 bg-white/10 rounded-full overflow-hidden">
                         <motion.div
                             style={{ scaleX: smoothProgress }}
                             className="h-full bg-red-600 origin-left"
