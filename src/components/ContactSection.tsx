@@ -52,6 +52,14 @@ const ContactSection = () => {
 
   const contactPersons = [
     {
+      name: 'Sirimavilla Kaushik',
+      phone: '+91 9676096177',
+    },
+    {
+      name: 'Christopher',
+      phone: '+91 9710815558',
+    },
+    {
       name: 'Lakshmi Sri',
       phone: '+91 73057 55115',
     },

@@ -22,17 +22,17 @@ export const FACULTY: TeamMember[] = [
 export const LEADERSHIP: TeamMember[] = [
     { 
         id: 'l1', 
-        name: 'Christopher A', 
+        name: 'Sirimavilla Kaushik', 
         role: 'President', 
         tagline: 'Leading the vision of the symposium.',
-        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690835/president-CHRISTOPHER_A_vcmbzk.jpg'
+        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690838/vice_president-Kaushik_znth0t.jpg'
     },
     { 
         id: 'l2', 
-        name: 'Sirimavilla Kaushik', 
+        name: 'Christopher A', 
         role: 'Vice President', 
         tagline: 'Supporting excellence in execution.',
-        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690838/vice_president-Kaushik_znth0t.jpg'
+        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690835/president-CHRISTOPHER_A_vcmbzk.jpg'
     },
     { 
         id: 'l3', 
@@ -189,7 +189,7 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
                         name: 'RAJAMURUGAN VS', 
                         role: 'Developer',
                         tagline: 'Crafting seamless interfaces.',
-                        imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690834/Developer-_Rajamurugan_waeug8.jpg'
+                        imageUrl: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769703897/Screenshot_2026-01-29_214552_dxzbpf.png'
                     },
                     { 
                         id: 'dev3', 
