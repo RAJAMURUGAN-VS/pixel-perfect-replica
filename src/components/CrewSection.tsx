@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useInView, MotionValue, useSpring } from 'framer-motion';
-import { LEADERSHIP, TEAM_CATEGORIES } from '@/data/crew';
+import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion';
+import { LEADERSHIP, LEADERSHIP2, TEAM_CATEGORIES, FACULTY, EVENT_COORDINATORS } from '@/data/crew';
 import { TeamCategory, TeamGroup, TeamMember } from '@/data/crewTypes';
 
 /**
@@ -55,15 +55,16 @@ const HeroSection = () => {
 };
 
 /**
- * 2. LEADERSHIP SECTION
+ * 2. LEADERSHIP CARD
  */
-const LeadershipCard = ({ name, role, tagline, imageUrl }: TeamMember) => {
+const LeadershipCard = ({ name, role, tagline, imageUrl, size = 'normal' }: TeamMember & { size?: 'large' | 'normal' }) => {
     const bgImage = imageUrl || `https://api.dicebear.com/9.x/initials/svg?seed=${name}&backgroundColor=1a1a1a&textColor=555555&fontSize=40`;
+    const cardHeight = size === 'large' ? 'h-[350px] md:h-[420px]' : 'h-[300px] md:h-[380px]';
 
     return (
         <motion.div
             whileHover={{ y: -10 }}
-            className="group relative h-[420px] rounded-xl overflow-hidden bg-[#050505] border border-white/10 shadow-2xl cursor-pointer"
+            className={`group relative ${cardHeight} rounded-xl overflow-hidden bg-[#050505] border border-white/10 shadow-2xl cursor-pointer`}
         >
             {/* Image Container with Zoom Effect */}
             <div className="absolute inset-0 overflow-hidden">
@@ -82,19 +83,18 @@ const LeadershipCard = ({ name, role, tagline, imageUrl }: TeamMember) => {
                 {/* Localized gradient for text area */}
                 <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black via-black/80 to-transparent opacity-90" />
 
-                <div className="relative p-6 transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
+                <div className="relative p-4 md:p-6 transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
                     {/* ID / Badge */}
                     <div className="flex items-center gap-3 mb-2 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
                         <div className="h-[2px] w-6 bg-red-600" />
-                        <span className="text-[10px] font-mono text-red-500 uppercase tracking-widest">LEADERSHIP</span>
+                        <span className="text-[10px] font-mono text-red-500 uppercase tracking-widest">{role}</span>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-white font-stranger mb-1 drop-shadow-lg">{name}</h3>
-                    <p className="text-white/80 font-bold text-xs tracking-widest uppercase mb-3">{role}</p>
+                    <h3 className="text-xl md:text-2xl font-bold text-white font-stranger mb-1 drop-shadow-lg">{name}</h3>
 
                     {/* Tagline reveals on hover */}
                     <div className="overflow-hidden transition-all duration-500 max-h-0 group-hover:max-h-24 opacity-0 group-hover:opacity-100">
-                        <p className="text-gray-300 text-sm leading-relaxed line-clamp-3 pb-2 border-t border-white/10 pt-2">
+                        <p className="text-gray-300 text-sm leading-relaxed line-clamp-2 pb-2 border-t border-white/10 pt-2">
                             {tagline}
                         </p>
                     </div>
@@ -107,18 +107,54 @@ const LeadershipCard = ({ name, role, tagline, imageUrl }: TeamMember) => {
     );
 };
 
+/**
+ * 3. HIERARCHICAL LEADERSHIP SECTION
+ */
 const LeadershipSection = () => {
     return (
-        <section className="py-24 px-6 md:px-24 bg-[#050505]">
+        <section className="py-16 md:py-24 px-4 md:px-24 bg-[#050505]">
             <div className="max-w-7xl mx-auto">
-                <div className="mb-16">
+                {/* Section Title */}
+                <div className="mb-12 md:mb-16 text-center">
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-stranger">OPERATIONS & IN-CHARGE TEAM</h2>
-                    <div className="w-20 h-1 bg-red-600" />
+                    <div className="w-20 h-1 bg-red-600 mx-auto" />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {LEADERSHIP.map((leader) => (
-                        <LeadershipCard key={leader.id} {...leader} />
-                    ))}
+
+                {/* Faculty Row - Top of Hierarchy */}
+                <div className="mb-12">
+                    <h3 className="text-lg md:text-xl font-stranger text-red-500 mb-6 text-center tracking-widest">FACULTY COORDINATORS</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
+                        {FACULTY.map((faculty) => (
+                            <LeadershipCard key={faculty.id} {...faculty} size="large" />
+                        ))}
+                    </div>
+                </div>
+
+                {/* First Row - President, VP, Secretary, Joint Secretary */}
+                <div className="mb-8">
+                    <h3 className="text-lg md:text-xl font-stranger text-red-500 mb-6 text-center tracking-widest">STUDENT COUNCIL</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                        {LEADERSHIP.map((leader) => (
+                            <LeadershipCard key={leader.id} {...leader} />
+                        ))}
+                    </div>
+                </div>
+
+                {/* Second Row - Joint Secretary and Treasurers (centered) */}
+                {/* <div className="flex justify-center">
+                    <div className="grid grid-cols-3 gap-4 md:gap-6 max-w-3xl">
+                        {LEADERSHIP2.map((leader) => (
+                            <LeadershipCard key={leader.id} {...leader} />
+                        ))}
+                    </div>
+                </div> */}
+                <div className="mb-8">
+                    <h3 className="flex justify-center text-lg md:text-xl font-stranger text-red-500 mb-6 text-center tracking-widest">STUDENT COUNCIL</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                        {LEADERSHIP2.map((leader) => (
+                            <LeadershipCard key={leader.id} {...leader} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
@@ -126,7 +162,110 @@ const LeadershipSection = () => {
 };
 
 /**
- * 3. PROFILE CARD - ID CARD DESIGN
+ * 4. TICKER CARD FOR EVENT COORDINATORS
+ */
+const TickerCard = ({ name, role, imageUrl }: TeamMember) => {
+    const bgImage = imageUrl || `https://api.dicebear.com/9.x/initials/svg?seed=${name}&backgroundColor=111111&textColor=888888&fontSize=45`;
+
+    return (
+        <div className="flex-shrink-0 w-[200px] md:w-[240px] h-[280px] md:h-[320px] rounded-xl overflow-hidden bg-[#0a0a0a] border border-white/10 shadow-xl mx-3 group hover:border-red-600/30 transition-all duration-300">
+            {/* Image */}
+            <div className="relative h-[65%] overflow-hidden">
+                <img
+                    src={bgImage}
+                    alt={name}
+                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
+            </div>
+
+            {/* Content */}
+            <div className="p-4">
+                <h4 className="text-white font-stranger text-lg font-bold truncate">{name}</h4>
+                <p className="text-red-500 text-xs font-mono uppercase tracking-wider">{role}</p>
+            </div>
+        </div>
+    );
+};
+
+/**
+ * 5. EVENT COORDINATOR TICKER ROW
+ */
+const EventCoordinatorTicker = ({ eventName, members }: { eventName: string; members: TeamMember[] }) => {
+    // Duplicate members for seamless loop (only if more than 1 member)
+    const duplicatedMembers = [...members, ...members, ...members, ...members];
+    const isSingleMember = members.length === 1;
+
+    return (
+        <div className="mb-12">
+            {/* Event Name Header */}
+            <div className="flex items-center gap-4 mb-6 px-4 md:px-24">
+                <div className="h-[2px] w-8 bg-red-600" />
+                <h4 className="text-xl md:text-2xl font-stranger text-white tracking-wider">{eventName}</h4>
+                <div className="h-[2px] flex-1 bg-white/10" />
+            </div>
+
+            {/* Static display for single member, ticker for multiple */}
+            {isSingleMember ? (
+                <div className="flex justify-center px-4 md:px-24">
+                    {members.map((member) => (
+                        <TickerCard key={member.id} {...member} />
+                    ))}
+                </div>
+            ) : (
+                <div className="relative overflow-hidden">
+                    {/* Gradient Masks */}
+                    <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
+
+                    <motion.div
+                        className="flex"
+                        animate={{
+                            x: [0, -(members.length * 260)],
+                        }}
+                        transition={{
+                            x: {
+                                repeat: Infinity,
+                                repeatType: "loop",
+                                duration: members.length * 5,
+                                ease: "linear",
+                            },
+                        }}
+                    >
+                        {duplicatedMembers.map((member, index) => (
+                            <TickerCard key={`${member.id}-${index}`} {...member} />
+                        ))}
+                    </motion.div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+/**
+ * 6. EVENT COORDINATORS SECTION
+ */
+const EventCoordinatorsSection = () => {
+    return (
+        <section className="py-16 md:py-24 bg-[#050505]">
+            <div className="mb-12 md:mb-16 px-4 md:px-24">
+                <h2 className="text-2xl md:text-3xl font-bold text-red-600/80 font-stranger mb-1 tracking-widest">EVENT OPERATIONS</h2>
+                <h3 className="text-3xl md:text-5xl font-extrabold text-white font-stranger">EVENT COORDINATORS</h3>
+            </div>
+
+            {EVENT_COORDINATORS.map((event) => (
+                <EventCoordinatorTicker 
+                    key={event.eventName} 
+                    eventName={event.eventName} 
+                    members={event.members} 
+                />
+            ))}
+        </section>
+    );
+};
+
+/**
+ * 7. PROFILE CARD - ID CARD DESIGN
  */
 interface ProfileCardProps extends TeamMember {
     index: number;
@@ -134,9 +273,7 @@ interface ProfileCardProps extends TeamMember {
     scrollYProgress: MotionValue<number>;
 }
 
-const ProfileCard = ({ name, role, index, total, scrollYProgress, imageUrl }: ProfileCardProps) => {
-    const isThemeCard = role === 'EVENT THEME';
-
+const ProfileCard = ({ name, role, index, total, scrollYProgress, imageUrl, tagline }: ProfileCardProps) => {
     const cardWidth = 300;
     const gap = 30;
     const expandedOffset = index * (cardWidth + gap);
@@ -145,28 +282,26 @@ const ProfileCard = ({ name, role, index, total, scrollYProgress, imageUrl }: Pr
     const xPos = useTransform(scrollYProgress, [0, 0.12], [stackedOffset, expandedOffset]);
 
     const randomTilt = (index % 2 === 0 ? 3 : -3) * ((index % 3) + 0.5);
-    const rotate = useTransform(scrollYProgress, [0, 0.12], [isThemeCard ? 0 : randomTilt, 0]);
+    const rotate = useTransform(scrollYProgress, [0, 0.12], [randomTilt, 0]);
 
     const opacity = useTransform(scrollYProgress, [0, 0.08], [1 - (index * 0.15), 1]);
     const scale = useTransform(scrollYProgress, [0, 0.12], [0.9 + (index * 0.02), 1]);
 
     const displayImage = imageUrl || `https://api.dicebear.com/9.x/initials/svg?seed=${name}&backgroundColor=111111&textColor=888888&fontSize=45`;
 
-    const idDisplay = isThemeCard
-        ? "EVENT"
-        : `ID: ${name.split(' ')[0].substring(0, 3).toUpperCase()}-00${index}`;
+    const idDisplay = `ID: ${name.split(' ')[0].substring(0, 3).toUpperCase()}-00${index}`;
 
     return (
         <motion.div
             style={{ x: xPos, rotate: rotate, zIndex: total - index, scale, opacity, willChange: "transform" }}
-            className="absolute top-0 left-0 w-[300px] h-[450px] rounded-xl bg-[#0a0a0a] border border-white/10 overflow-hidden shadow-2xl origin-bottom-left"
+            className="absolute top-0 left-0 w-[300px] h-[450px] rounded-xl bg-[#0a0a0a] border border-white/10 overflow-hidden shadow-2xl origin-bottom-left group"
         >
             {/* Holographic Edge/Glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-red-900/20 pointer-events-none z-30" />
 
             {/* Top Bar (ID Card Style) */}
             <div className="absolute top-0 left-0 right-0 z-40">
-                <div className={`h-1 w-full ${isThemeCard ? 'bg-red-600' : 'bg-red-600/80'}`} />
+                <div className="h-1 w-full bg-red-600/80" />
                 <div className="flex justify-between items-center px-4 py-2">
                     <div className="w-16 h-1 bg-white/20 rounded-full" />
                     <div className="flex gap-1">
@@ -181,26 +316,31 @@ const ProfileCard = ({ name, role, index, total, scrollYProgress, imageUrl }: Pr
                 <img
                     src={displayImage}
                     alt={name}
-                    className={`w-full h-full object-cover filter transition-all duration-500 ${isThemeCard ? 'brightness-75 hover:brightness-100 grayscale-0' : 'grayscale hover:grayscale-0'}`}
+                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent" />
             </div>
 
             {/* Content Area */}
-            <div className="relative z-20 h-full p-6 flex flex-col justify-end group">
+            <div className="relative z-20 h-full p-6 flex flex-col justify-end">
                 <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                     <div className="flex items-center gap-2 mb-2">
-                        <span className={`text-[10px] font-mono tracking-widest uppercase border px-1 py-0.5 rounded ${isThemeCard ? 'text-white border-white/50 bg-red-600/80' : 'text-red-500 border-red-900/50'}`}>
+                        <span className="text-[10px] font-mono tracking-widest uppercase border px-1 py-0.5 rounded text-red-500 border-red-900/50">
                             {idDisplay}
                         </span>
                     </div>
-                    <h4 className="font-bold text-white font-stranger leading-none mb-2 drop-shadow-lg ${isThemeCard ? 'text-3xl' : 'text-2xl'}">{name}</h4>
+                    <h4 className="font-bold text-white font-stranger text-2xl leading-none mb-2 drop-shadow-lg">{name}</h4>
                     <div className="flex items-center gap-3">
                         <div className="h-[1px] w-8 bg-red-500" />
-                        <p className={`text-xs font-bold uppercase tracking-wider ${isThemeCard ? 'text-white' : 'text-gray-300'}`}>
+                        <p className="text-xs font-bold uppercase tracking-wider text-gray-300">
                             {role}
                         </p>
                     </div>
+                    {tagline && (
+                        <p className="text-gray-400 text-xs mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            {tagline}
+                        </p>
+                    )}
                 </div>
 
                 {/* Tech Decoration Lines */}
@@ -215,7 +355,7 @@ const ProfileCard = ({ name, role, index, total, scrollYProgress, imageUrl }: Pr
 };
 
 /**
- * 4. GROUP DECK
+ * 8. GROUP DECK
  */
 const GroupDeck = ({ group, scrollYProgress }: { group: TeamGroup; scrollYProgress: MotionValue<number> }) => {
     const cardWidth = 300;
@@ -248,7 +388,7 @@ const GroupDeck = ({ group, scrollYProgress }: { group: TeamGroup; scrollYProgre
 };
 
 /**
- * 5. CATEGORY HEADER
+ * 9. CATEGORY HEADER
  */
 const CategoryHeader = ({ title, index }: { title: string; index: number }) => (
     <div className="relative flex-shrink-0 flex flex-col justify-center h-[500px] w-[320px] md:w-[450px] pl-8 pr-6 mr-16 z-10 border-l-2 border-white/5 bg-gradient-to-r from-white/[0.02] to-transparent backdrop-blur-sm">
@@ -262,22 +402,19 @@ const CategoryHeader = ({ title, index }: { title: string; index: number }) => (
                 {title}
             </h3>
             <p className="mt-4 text-gray-400 text-sm font-mono tracking-widest opacity-60">
-        // AUTHORIZED PERSONNEL ONLY
+                // AUTHORIZED PERSONNEL ONLY
             </p>
         </div>
     </div>
 );
 
 /**
- * 6. CATEGORY SCROLL SECTION
+ * 10. CATEGORY SCROLL SECTION
  */
 const CategoryScrollSection = ({ category, index }: { category: TeamCategory; index: number }) => {
     const targetRef = useRef<HTMLDivElement>(null);
     const numberOfGroups = category.groups.length;
 
-    // CONDITIONAL HEIGHT (Version 9 Logic):
-    // Single group categories get short scroll (250vh) to avoid sensitivity
-    // Multi-group categories get longer scroll for smooth panning
     const isSingleGroup = numberOfGroups === 1;
     const dynamicHeight = `${isSingleGroup ? 250 : 400 + (numberOfGroups * 100)}vh`;
 
@@ -288,13 +425,11 @@ const CategoryScrollSection = ({ category, index }: { category: TeamCategory; in
 
     const smoothProgress = useSpring(scrollYProgress, SPRING_OPTIONS);
 
-    // CALIBRATED PAN PERCENTAGES (Version 9 Logic):
-    // Fixed tiers based on group count for predictable behavior
     let panPercentage = 0;
-    if (numberOfGroups === 1) panPercentage = 25;      // Slight pan for single groups
+    if (numberOfGroups === 1) panPercentage = 25;
     else if (numberOfGroups === 2) panPercentage = 50;
     else if (numberOfGroups === 3) panPercentage = 75;
-    else panPercentage = 96;                           // Full pan for 6+ groups
+    else panPercentage = 96;
 
     const endPan = `-${panPercentage}%`;
     const containerX = useTransform(smoothProgress, [0.1, 1], ["0%", endPan]);
@@ -338,11 +473,8 @@ const CategoryScrollSection = ({ category, index }: { category: TeamCategory; in
     );
 };
 
-
-
-
 /**
- * 8. CLOSING SECTION
+ * 11. CLOSING SECTION
  */
 const ClosingSection = () => {
     return (
@@ -385,6 +517,7 @@ const CrewSection = () => {
         <div className="relative">
             <HeroSection />
             <LeadershipSection />
+            <EventCoordinatorsSection />
 
             <div className="px-6 md:px-24 py-12 bg-[#050505]">
                 <h2 className="text-xl font-bold text-red-600/80 font-stranger mb-1 tracking-widest">CLASSIFIED FILES</h2>
@@ -394,7 +527,6 @@ const CrewSection = () => {
             {TEAM_CATEGORIES.map((category, index) => (
                 <CategoryScrollSection key={category.id} category={category} index={index} />
             ))}
-
 
             <ClosingSection />
 
