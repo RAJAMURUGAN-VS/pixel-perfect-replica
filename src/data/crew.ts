@@ -36,7 +36,7 @@ export const LEADERSHIP: TeamMember[] = [
     },
     {
         id: 'l3',
-        name: 'Lakshmi Shri',
+        name: 'Lakshmi Sri',
         role: 'Secretary',
         tagline: 'Coordinating seamless operations.',
         imageUrl: '/crew-images/sceretary-Lakshmi%20shri.jpeg'
