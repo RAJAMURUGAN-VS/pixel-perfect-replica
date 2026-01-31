@@ -86,6 +86,18 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
                 role: 'Event Coordinator',
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690840/Event_coordinator-clawCTF-KEERTHI_K_P_hekw8i.jpg'
             },
+            {
+                id: 'ctf2',
+                name: 'Joshni Rohina J',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790387/pic_-_JOSHNI_ROHINA_J_CSE_DEPT_io3uak.jpg'
+            },
+            {
+                id: 'ctf3',
+                name: 'Sharvesh',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769792445/WhatsApp_Image_2026-01-30_at_09.52.03_dbg7ju.jpg'
+            },
         ]
     },
     {
@@ -133,6 +145,18 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
                 role: 'Event Coordinator',
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690837/Event_coordinator-stranger_tumes-NANCY_D_p8p1es.jpg'
             },
+            {
+                id: 'tunes8',
+                name: 'Jeshwin Sharun A S',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790294/Screenshot_20260129_211603_2_-_JESHWIN_SHARUN_A_S_CSE_DEPT_wewybl.jpg'
+            },
+            {
+                id: 'tunes9',
+                name: 'Girivardhan Murugan',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790293/Screenshot_20260130-165624_-_Girivardhan_Murugan_iydl8o.png'
+            },
         ]
     },
     {
@@ -162,6 +186,18 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
                 role: 'Event Coordinator',
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690834/Event_coordinator-ipl_auction-PRAWIN_BALAJI_A_zn9c7j.png'
             },
+            {
+                id: 'ipl5',
+                name: 'Avinash A',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790343/IMG-20260129-WA0003_-_AVINASH_A_CSE_DEPT_ijazpd.jpg'
+            },
+            {
+                id: 'ipl6',
+                name: 'Lohith V',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790343/IMG-20250920-WA0067_-_LOHITH_V_CSE_DEPT_snwffs.jpg'
+            },
         ]
     },
     {
@@ -172,9 +208,120 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
                 name: 'Swetha J',
                 role: 'Event Coordinator',
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690837/Design_team_and_poster_making-SWETHA_J_tfbliw.jpg'
-            }
+            },
+            {
+                id: 'vb2',
+                name: 'Harish R',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790291/imagee_-_HARISH_R_CSE_DEPT_kfx5dx.jpg'
+            },
         ]
-    }
+    },
+    {
+        eventName: 'ARTIST',
+        members: [
+            {
+                id: 'art1',
+                name: 'Pokuru Srinu',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790291/Copy_of_IMG_1184_-_POKURU_SRINU_CSE_DEPT_yiiuxp.jpg'
+            },
+            {
+                id: 'art2',
+                name: 'Shaik Mohammed Khadhar',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790342/IMG_20251107_105116_678_-_SHAIK_MOHAMMED_KHADHAR_CSE_DEPT_wyawti.jpg'
+            },
+        ]
+    },
+    {
+        eventName: 'THE DAVINCI CODE',
+        members: [
+            {
+                id: 'dvc1',
+                name: 'Janani P',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790291/WhatsApp_Image_2026-01-30_at_7.03.26_PM_-_JANANI_P_CSE_DEPT_wflcbo.jpg'
+            },
+            {
+                id: 'dvc2',
+                name: 'Kiruthika S T',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790291/Kiruthika_-_KIRUTHIKA_S_T_CSE_DEPT_z6wde8.png'
+            },
+            {
+                id: 'dvc3',
+                name: 'Divya Dharshini S',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790293/DIVYA_DHARSHINI_S_-_DIVYA_DHARSHINI_S_CSE_DEPT_nwinfi.jpg'
+            },
+        ]
+    },
+    {
+        eventName: 'PAPER PRESENTATION',
+        members: [
+            // {
+            //     id: 'pp1',
+            //     name: 'Harsha Vardhan S',
+            //     role: 'Event Coordinator',
+            //     imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790293/IMG_3255_-_HARSHA_VARDHAN_S_CSE_DEPT_soyn2w.heic'
+            // },
+            {
+                id: 'pp2',
+                name: 'Thanesh R K',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790295/IMG_20260129_230115_-_THANESH_R_K_CSE_DEPT_xrlnqo.png'
+            },
+            {
+                id: 'pp3',
+                name: 'Navya Sri S',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790342/Adobe_Scan_May_22_2023_1_-_NAVYA_SRI_S_CSE_DEPT_x5ew9x.jpg'
+            },
+            {
+                id: 'pp4',
+                name: 'Tarun T A',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790296/SGCAM_20260104_104429383_-_TARUN_T_A_CSE_DEPT_vxdhzb.jpg'
+            },
+            {
+                id: 'pp5',
+                name: 'Hashwanth C',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790298/IMG_20260129_210708_-_HASHWANTH_C_CSE_DEPT_x5d9fu.jpg'
+            },
+            {
+                id: 'pp6',
+                name: 'Kaaviya S',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790295/PICTURE_-_KAAVIYA_S_CSE_DEPT_jlrua7.jpg'
+            },
+            {
+                id: 'pp7',
+                name: 'Yuvaraj B',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790295/IMG-20250915-WA0014_-_YUVARAJ_B_CSE_DEPT_flwtxh.jpg'
+            },
+            {
+                id: 'pp8',
+                name: 'Harshitha KG',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790340/HarshithaKG_-_Harshitha_KG_wvfjrz.jpg'
+            },
+            {
+                id: 'pp9',
+                name: 'Jayakumar S',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790341/IMG_20250510_160703_-_JAYAKUMAR_S_CSE_DEPT_t7q82u.jpg'
+            },
+            {
+                id: 'pp10',
+                name: 'Bhuvana Sri S',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790343/1000154009-Picsart-AiImageEnhancer_-_BHUVANA_SRI_S_CSE_DEPT_u2wxpn.jpg'
+            },
+        ]
+    },
 ];
 
 export const TEAM_CATEGORIES: TeamCategory[] = [

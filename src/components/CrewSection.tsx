@@ -209,9 +209,9 @@ const TickerCard = ({ name, role, imageUrl }: TeamMember) => {
  * 5. EVENT COORDINATOR TICKER ROW
  */
 const EventCoordinatorTicker = ({ eventName, members }: { eventName: string; members: TeamMember[] }) => {
-    // Duplicate members for seamless loop (only if more than 1 member)
+    // Duplicate members for seamless loop (only if more than 5 members)
     const duplicatedMembers = [...members, ...members, ...members, ...members];
-    const isSingleMember = members.length === 1;
+    const isSmallGroup = members.length <= 5;
 
     return (
         <div className="mb-12">
@@ -222,9 +222,9 @@ const EventCoordinatorTicker = ({ eventName, members }: { eventName: string; mem
                 <div className="h-[2px] flex-1 bg-white/10" />
             </div>
 
-            {/* Static display for single member, ticker for multiple */}
-            {isSingleMember ? (
-                <div className="flex justify-center px-4 md:px-24">
+            {/* Static display for 5 or fewer members, ticker for more */}
+            {isSmallGroup ? (
+                <div className="flex flex-wrap justify-center gap-4 px-4 md:px-24">
                     {members.map((member) => (
                         <TickerCard key={member.id} {...member} />
                     ))}
