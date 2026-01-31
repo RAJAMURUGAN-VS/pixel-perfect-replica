@@ -198,6 +198,12 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
                 role: 'Event Coordinator',
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790343/IMG-20250920-WA0067_-_LOHITH_V_CSE_DEPT_snwffs.jpg'
             },
+            {
+                id: 'ipl7',
+                name: 'Selva Kumar',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769826496/IMG_5357_-_SELVAKUMAR_M_CSE_DEPT_tnpixr.jpg'
+            },
         ]
     },
     {
@@ -354,6 +360,13 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
                         role: 'Developer',
                         tagline: 'Crafting seamless interfaces.',
                         imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690839/developer-_Sidhanth_tewdeh.jpg'
+                    },
+                                        {
+                        id: 'dev4',
+                        name: 'DHANESH KUMAR S',
+                        role: 'Developer',
+                        tagline: 'solution evangelist and crafting seamless interfaces.',
+                        imageUrl: 'https://res.cloudinary.com/df2gd97od/image/upload/v1769873674/Gemini_Generated_Image_e2fdose2fdose2fd_dkmmdf.png'
                     },
                 ]
             }

@@ -110,11 +110,11 @@ const LeadershipCard = ({ name, role, tagline, imageUrl, size = 'normal' }: Team
                 {/* Vignette for depth */}
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-black/40 opacity-90 transition-opacity duration-500 group-hover:opacity-70 pointer-events-none" />
 
-                {/* UPDATED IMAGE: No grayscale, cinematic color grading */}
+                {/* Image with grayscale-to-color hover effect */}
                 <img
                     src={bgImage}
                     alt={name}
-                    className="w-full h-full object-cover transition-all duration-700 ease-out filter saturate-50 brightness-75 contrast-125 group-hover:saturate-100 group-hover:brightness-100 group-hover:contrast-100 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-all duration-700 ease-out filter grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110"
                 />
             </div>
 
@@ -211,7 +211,7 @@ const TickerCard = ({ name, role, imageUrl }: TeamMember) => {
                 <img
                     src={bgImage}
                     alt={name}
-                    className="w-full h-full object-cover filter saturate-50 brightness-75 contrast-125 group-hover:saturate-100 group-hover:brightness-100 group-hover:contrast-100 transition-all duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover filter grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
             </div>
@@ -361,11 +361,11 @@ const ProfileCard = ({ name, role, index, total, scrollYProgress, imageUrl, tagl
                 {/* Neon Tint Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-black via-transparent to-red-900/30 mix-blend-overlay z-10 pointer-events-none opacity-70 group-hover:opacity-30 transition-opacity duration-500" />
 
-                {/* UPDATED: No grayscale, cinematic filter */}
+                {/* Image with grayscale-to-color hover effect */}
                 <img
                     src={displayImage}
                     alt={name}
-                    className="w-full h-full object-cover transition-all duration-500 filter saturate-50 brightness-75 contrast-125 group-hover:saturate-100 group-hover:brightness-100 group-hover:contrast-100"
+                    className="w-full h-full object-cover transition-all duration-500 filter grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
@@ -565,6 +565,9 @@ const CrewSection = () => {
         <div className="relative">
             <HeroSection />
             <LeadershipSection />
+            {TEAM_CATEGORIES.map((category, index) => (
+                <CategoryScrollSection key={category.id} category={category} index={index} />
+            ))}
             <EventCoordinatorsSection />
 
             <div className="px-6 md:px-24 py-12 bg-[#050505]">
@@ -572,9 +575,6 @@ const CrewSection = () => {
                 <h3 className="text-4xl md:text-6xl font-extrabold text-white font-stranger shadow-black drop-shadow-lg">DEPARTMENT HEADS</h3>
             </div>
 
-            {TEAM_CATEGORIES.map((category, index) => (
-                <CategoryScrollSection key={category.id} category={category} index={index} />
-            ))}
 
             <ClosingSection />
 
