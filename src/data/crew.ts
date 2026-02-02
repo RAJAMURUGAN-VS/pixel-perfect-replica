@@ -87,16 +87,16 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690840/Event_coordinator-clawCTF-KEERTHI_K_P_hekw8i.jpg'
             },
             {
+                id: 'ctf3',
+                name: 'Sharvesh',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1770043014/d807d704-69f9-4203-a28e-c6be41966fe6_apump8.jpg'
+            },
+            {
                 id: 'ctf2',
                 name: 'Joshni Rohina J',
                 role: 'Event Coordinator',
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790387/pic_-_JOSHNI_ROHINA_J_CSE_DEPT_io3uak.jpg'
-            },
-            {
-                id: 'ctf3',
-                name: 'Sharvesh',
-                role: 'Event Coordinator',
-                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769792445/WhatsApp_Image_2026-01-30_at_09.52.03_dbg7ju.jpg'
             },
         ]
     },
@@ -211,12 +211,24 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
         members: [
             {
                 id: 'vb1',
+                name: 'RAJAMURUGAN VS',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769703897/Screenshot_2026-01-29_214552_dxzbpf.png'
+            },
+            {
+                id: 'vb2',
                 name: 'Swetha J',
                 role: 'Event Coordinator',
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690837/Design_team_and_poster_making-SWETHA_J_tfbliw.jpg'
             },
             {
-                id: 'vb2',
+                id: 'vb3',
+                name: 'Sirisha S',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690834/Design_and_poster_making-sirisha_s_vbmr5d.jpg'
+            },
+            {
+                id: 'vb4',
                 name: 'Harish R',
                 role: 'Event Coordinator',
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790291/imagee_-_HARISH_R_CSE_DEPT_kfx5dx.jpg'
@@ -421,6 +433,26 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
                         role: 'Editorial Team',
                         tagline: 'Shaping the story.',
                         imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690837/Editorial_Team-VASANTH_ofkgic.webp'
+                    },
+                ]
+            }
+        ]
+    },
+    {
+        id: 'cat_social',
+        title: 'Social Media Handler',
+        direction: 'right',
+        groups: [
+            {
+                id: 'grp_editorial',
+                title: 'Social Media Curator',
+                members: [
+                    {
+                        id: 'smh1',
+                        name: 'Divilash Sriram',
+                        role: 'Social Media Team',
+                        tagline: 'Crafting compelling narratives.',
+                        imageUrl: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1770041619/IMG_2700_-_SRIRAM_DIVILASH_CSE_DEPT_gk0fpa.jpg'
                     },
                 ]
             }
