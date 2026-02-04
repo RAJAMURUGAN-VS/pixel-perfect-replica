@@ -229,6 +229,12 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
             },
             {
                 id: 'vb4',
+                name: 'DHANESH KUMAR S',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/df2gd97od/image/upload/v1769873674/Gemini_Generated_Image_e2fdose2fdose2fd_dkmmdf.png'
+            },
+            {
+                id: 'vb5',
                 name: 'Harish R',
                 role: 'Event Coordinator',
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790291/imagee_-_HARISH_R_CSE_DEPT_kfx5dx.jpg'
@@ -255,6 +261,12 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
     {
         eventName: 'THE DAVINCI CODE',
         members: [
+            {
+                id: 'dvc0',
+                name: 'J. Senthil Raj',
+                role: 'Event Coordinator',
+                imageUrl: 'https://6971c32f0fbe657fd5e60948.imgix.net/WhatsApp%20Image%202026-02-04%20at%2010.07.04%20PM.jpeg'
+            },
             {
                 id: 'dvc1',
                 name: 'Janani P',
@@ -363,14 +375,14 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
                         id: 'dev2',
                         name: 'RAJAMURUGAN VS',
                         role: 'Developer',
-                        tagline: 'Crafting seamless interfaces.',
+                        tagline: 'Built to Build.',
                         imageUrl: 'https://res.cloudinary.com/dydplsxdj/image/upload/v1769703897/Screenshot_2026-01-29_214552_dxzbpf.png'
                     },
                     {
                         id: 'dev3',
                         name: 'Sidhanth',
                         role: 'Developer',
-                        tagline: 'Crafting seamless interfaces.',
+                        tagline: 'Eyes on the build.',
                         imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690839/developer-_Sidhanth_tewdeh.jpg'
                     },
                                         {

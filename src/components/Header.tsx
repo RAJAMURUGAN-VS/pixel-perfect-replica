@@ -28,7 +28,7 @@ const Header = ({ currentSection = 'home' }: HeaderProps) => {
     { key: 'events', label: 'EVENTS', to: '/events' },
     { key: 'crew', label: 'THE CREW', to: '/crew' },
     { key: 'contact', label: 'CONTACT US', to: '/contact' },
-    { key: 'bus', label: 'BUS ROUTES', isExternal: true, href: '/rmdbus.pdf' },
+    { key: 'bus', label: 'BUS ROUTES', isExternal: true, href: '/rmdbus.pdf', download: true },
   ];
 
   return (
@@ -74,14 +74,13 @@ const Header = ({ currentSection = 'home' }: HeaderProps) => {
                 <motion.a
                   key={item.key}
                   href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  download
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
                   whileHover={{ scale: 1.05, color: 'hsl(var(--accent))' }}
                   className="font-terminal text-base md:text-lg tracking-wider transition-colors text-foreground/80 hover:text-foreground"
-                  aria-label={`Open ${item.label} in new tab`}
+                  aria-label={`Download ${item.label}`}
                 >
                   {item.label}
                 </motion.a>
@@ -172,8 +171,7 @@ const Header = ({ currentSection = 'home' }: HeaderProps) => {
                     <motion.a
                       key={item.key}
                       href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      download
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 + index * 0.1, duration: 0.4 }}
