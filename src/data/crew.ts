@@ -210,6 +210,18 @@ export const EVENT_COORDINATORS: { eventName: string; members: TeamMember[] }[] 
                 role: 'Event Coordinator',
                 imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769790343/1000154009-Picsart-AiImageEnhancer_-_BHUVANA_SRI_S_CSE_DEPT_u2wxpn.jpg'
             },
+            {
+                id: 'pp11',
+                name: 'ASMATH FHAYIKA A',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1770343045/1000306222.jpg_owfrdc.jpg'
+            },
+            {
+                id: 'pp12',
+                name: 'HARSINI G S',
+                role: 'Event Coordinator',
+                imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1770343045/IMG-20260205-WA0018.jpg_rvyisd.jpg'
+            }
         ]
     },
     {
@@ -470,7 +482,7 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
                 members: [
                     {
                         id: 'ed1',
-                        name: 'Jagadeesh S',
+                        name: 'SHANMUGAM J',
                         role: 'Editorial Team',
                         tagline: 'Crafting compelling narratives.',
                         imageUrl: 'https://res.cloudinary.com/dop49krua/image/upload/v1769690835/Editorial_Team-SHANMUGAM_J_guozra.jpg'

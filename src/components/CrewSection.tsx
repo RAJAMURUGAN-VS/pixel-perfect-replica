@@ -125,10 +125,10 @@ const LeadershipCard = ({ name, role, tagline, imageUrl, size = 'normal' }: Team
 
                 <div className="relative p-4 md:p-6 transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
                     {/* ID / Badge */}
-                    <div className="flex items-center gap-3 mb-2 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+                    {/* <div className="flex items-center gap-3 mb-2 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
                         <div className="h-[2px] w-6 bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.8)]" />
-                        <span className="text-[10px] font-mono text-red-500 uppercase tracking-widest">LEADERSHIP</span>
-                    </div>
+                        <span className="text-[10px] font-mono text-red-500 uppercase tracking-widest"></span>
+                    </div> */}
 
                     <h3 className="text-xl md:text-2xl font-bold text-white font-stranger mb-1 drop-shadow-lg">{name}</h3>
                     <p className="text-white/80 font-bold text-xs tracking-widest uppercase mb-3 text-red-100">{role}</p>
@@ -183,7 +183,6 @@ const LeadershipSection = () => {
 
                 {/* Second Row - Joint Secretary and Treasurers */}
                 <div className="mb-8">
-                    <h3 className="flex justify-center text-lg md:text-xl font-stranger text-red-500 mb-6 text-center tracking-widest">STUDENT COUNCIL</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                         {LEADERSHIP2.map((leader) => (
                             <LeadershipCard key={leader.id} {...leader} />
@@ -219,7 +218,6 @@ const TickerCard = ({ name, role, imageUrl }: TeamMember) => {
             {/* Content */}
             <div className="p-4">
                 <h4 className="text-white font-stranger text-lg font-bold truncate">{name}</h4>
-                <p className="text-red-500 text-xs font-mono uppercase tracking-wider">{role}</p>
             </div>
         </div>
     );
